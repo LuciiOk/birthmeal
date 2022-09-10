@@ -4,10 +4,6 @@ import { MongoClient } from 'mongodb';
 const API_KEY = '12345634';
 const API_KEY_PROD = 'PROD1212121SA';
 
-//  const taskCollection = database.collection('tasks');
-//  const tasks = await taskCollection.find().toArray();
-//  console.log(tasks);
-
 @Global()
 @Module({
   providers: [
