@@ -1,11 +1,10 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "./src/screens/HomeScreen";
-import OnboardingScreen from "./src/screens/OnboardingScreen";
 import { useFonts } from "expo-font";
+import { navigationRef } from "./src/utils/RootNavigation";
 
-const Stack = createNativeStackNavigator();
+import StackNavigator from "./src/navigators/StackNavigator";
+
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -20,11 +19,8 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+    <NavigationContainer ref={navigationRef}>
+      <StackNavigator />
     </NavigationContainer>
   );
 }
