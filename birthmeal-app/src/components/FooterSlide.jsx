@@ -17,6 +17,10 @@ const FooterSlide = ({ index: i, onNext, onSkip }) => {
     });
   };
 
+  const goToLogin = () => {
+    navigator.navigate("Login");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.indicators}>
@@ -28,12 +32,17 @@ const FooterSlide = ({ index: i, onNext, onSkip }) => {
         ))}
       </View>
       <View style={styles.buttonsContainer}>
-        {i === slides.length - 1 && <ButtonSlide text="Get Started" action={goToHome}/>}
+        {i === slides.length - 1 && (
+          <>
+            <ButtonSlide text="Login" action={goToLogin} />
+            <ButtonSlide text="Get Started" action={goToHome} />
+          </>
+        )}
         {i !== slides.length - 1 && (
           <>
-            <ButtonSlide text={"SKIP"} action={onSkip}/>
+            <ButtonSlide text="SKIP" action={onSkip}/>
             <View style={{ width: 15 }} />
-            <ButtonSlide text={"NEXT"} action={onNext} />
+            <ButtonSlide text="NEXT" action={onNext} />
           </>
         )}
       </View>

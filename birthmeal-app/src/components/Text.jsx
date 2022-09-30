@@ -3,35 +3,44 @@ import { StyleSheet, Text as T } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
-const Text = ({ text, bold, light, title, opaque }) => {
+const Text = ({ text, bold, light, title, opaque, semiBold, styles }) => {
   const textStyles = [
-    styles.text,
-    bold && styles.bold,
-    light && styles.light,
-    title && styles.title,
-    opaque && styles.opaque,
+    stylesT.text,
+    bold && stylesT.bold,
+    light && stylesT.light,
+    title && stylesT.title,
+    opaque && stylesT.opaque,
+    semiBold && stylesT.semiBold,
   ];
 
-  return <T style={textStyles}>{text}</T>;
+  return <T 
+    style={[textStyles, styles]}
+  >{text}</T>;
 };
 
-const styles = StyleSheet.create({
+const stylesT = StyleSheet.create({
   text: {
     fontFamily: "Lato",
     fontSize: 14,
     color: COLORS.dark,
   },
   bold: {
-    fontWeight: "bold",
+    fontFamily: "Lato-Bold",
+    fontWeight: "800",
   },
   light: {
-    fontWeight: "300",
+    fontFamily: "Lato-Light",
+    fontWeight: "400",
   },
   title: {
     fontSize: 18,
   },
   opaque: {
-    opacity: 0.75,
+    opacity: 0.95,
+  },
+  semiBold: {
+    fontFamily: "Lato-semibold",
+    fontWeight: "600",
   },
 });
 
@@ -41,6 +50,8 @@ Text.propTypes = {
   light: PropTypes.bool,
   title: PropTypes.bool,
   opaque: PropTypes.bool,
+  semiBold: PropTypes.bool,
+  styles: PropTypes.object,
 };
 
 export default Text;
