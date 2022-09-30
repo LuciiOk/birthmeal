@@ -3,10 +3,10 @@ export const COLORS = {
   black: "#000000",
   gray: "#f8f9fa",
   grayDark: "#343a40",
-  primary: "#469597",
-  primaryDark: "#0069d9",
+  primary: "#ec8c69",
+  primaryDark: "#ff0844",
   secondary: "#6c757d",
-  secondaryDark: "#545b62",
+  secondaryDark: "#6c757d",
   success: "#28a745",
   info: "#17a2b8",
   warning: "#ffc107",
@@ -14,3 +14,5 @@ export const COLORS = {
   light: "#f8f9fa",
   dark: "#343a40",
 };
+
+// "#f6d365", "#fda085"
