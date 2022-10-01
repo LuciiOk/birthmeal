@@ -20,7 +20,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text text="Places" title bold />
+      <Text text="Lugares" title bold />
       <FlatList
         data={STABLISHMENTS}
         renderItem={({ item }) => <StablishmentCard stablishment={item} />}

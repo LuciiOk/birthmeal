@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "birthmeal-app",
-    "slug": "birthmeal-app",
+    "name": "Birthmeal",
+    "slug": "Birthmeal",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/images/Burger-logo2.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/Burger-app-sin-fondo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#fda085"
+      "backgroundColor": "#A9005F"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,13 +22,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
-        "backgroundColor": "#fda085"
+        "foregroundImage": "./assets/images/Burger-logo2.png",
+        "backgroundColor": "#A9005F"
       },
-      "package": "com.anonymous.birthmealapp"
+      "package": "com.anonymous.birthmealapp",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDsadPAbIgJa8JNvCGwPWVBY0NUn5MKcoE"
+        }
+      }
     },
     "web": {
-      "favicon": "./assets/logo.png"
+      "favicon": "./assets/images/Burger-logo.png"
     }
   }
 }

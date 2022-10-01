@@ -1,4 +1,4 @@
-package com.birthmealapp;
+package com.anonymous.birthmealapp;
 
 import android.os.Build;
 import android.os.Bundle;

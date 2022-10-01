@@ -1,4 +1,4 @@
-package com.birthmealapp.newarchitecture.components;
+package com.anonymous.birthmealapp.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

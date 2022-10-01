@@ -65,8 +65,8 @@ const StablishmentDetail = (props) => {
           </View>
           <Separator />
           <View style={styles.info}>
+            <Text text="Ir al sitio web" semiBold />
             <TouchableOpacity onPress={redirect}>
-              <Text text="Ir al sitio web" semiBold />
               <Text text="www.birthmeal.cl" light opaque />
               <FontAwesome
                 name="angle-right"
@@ -95,11 +95,11 @@ const StablishmentDetail = (props) => {
           <Text text="Valoración" title bold />
           {/* show 5 stars */}
           <View style={styles.starsContainer}>
-            <IonicIcon name="star" size={24} color="#FFD700" />
-            <IonicIcon name="star" size={24} color="#FFD700" />
-            <IonicIcon name="star" size={24} color="#FFD700" />
-            <IonicIcon name="star-outline" size={24} color="#FFD700" />
-            <IonicIcon name="star-outline" size={24} color="#FFD700" />
+            <IonicIcon name="star" size={24} color={COLORS.primary} />
+            <IonicIcon name="star" size={24} color={COLORS.primary} />
+            <IonicIcon name="star" size={24} color={COLORS.primary} />
+            <IonicIcon name="star-outline" size={24} color={COLORS.primary} />
+            <IonicIcon name="star-outline" size={24} color={COLORS.primary} />
           </View>
         </View>
       </View>
@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 20,
   },
   imageContainer: {
     width: "100%",
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
   detailsContainer: {
     width: "100%",
     height: "50%",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingTop: 10,
   },
   infoContainer: {

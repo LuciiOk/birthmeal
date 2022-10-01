@@ -7,6 +7,7 @@ import OnboardingScreen from "../screens/OnboardingScreen";
 import StablishmentDetail from "../screens/StablishmentDetail";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
+import LocationsScreen from "../screens/LocationsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const StackNavigator = () => {
       </Stack.Group>
       <Stack.Group screenOptions={{ headerShown: true }}>
         <Stack.Screen name="Details" component={StablishmentDetail} />
+        <Stack.Screen name="Locations" component={LocationsScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
