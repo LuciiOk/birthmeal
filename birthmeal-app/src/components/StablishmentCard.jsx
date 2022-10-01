@@ -11,13 +11,16 @@ const StablishmentCard = ({ stablishment }) => {
 
   const redirecTo = () => {
     navigator.navigate("Details", {
+      // set stablishment title on header
+      title: stablishment.title,
+      name: stablishment.name,
       stablishment
     })
   };
 
   return (
     <TouchableOpacity style={styles.container} onPress={redirecTo}>
-      <Image style={styles.image} source={{ uri: stablishment.image }}/>
+      <Image style={styles.image} source={stablishment.imageUrl }/>
       <View style={styles.textContainer}>
         <Text text={stablishment.title} title bold/>
         <Text text={stablishment.description} opaque/>

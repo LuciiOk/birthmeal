@@ -21,7 +21,7 @@ const TabIcon = ({ focused, icon }) => {
 
 const TabNavigator = () => {
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   useEffect(() => {
     StatusBar.setBarStyle('dark-content');

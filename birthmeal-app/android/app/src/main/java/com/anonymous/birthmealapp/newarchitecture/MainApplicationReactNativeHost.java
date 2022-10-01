@@ -1,4 +1,4 @@
-package com.birthmealapp.newarchitecture;
+package com.anonymous.birthmealapp.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.birthmealapp.BuildConfig;
-import com.birthmealapp.newarchitecture.components.MainComponentsRegistry;
-import com.birthmealapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.anonymous.birthmealapp.BuildConfig;
+import com.anonymous.birthmealapp.newarchitecture.components.MainComponentsRegistry;
+import com.anonymous.birthmealapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

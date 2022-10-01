@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     width: width * 0.7,
     height: "45%",
     resizeMode: "contain",
-    backgroundColor: "white",
     borderRadius: 20,
     marginVertical: 20,
   },
