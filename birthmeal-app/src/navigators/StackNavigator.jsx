@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -8,27 +8,31 @@ import StablishmentDetail from "../screens/StablishmentDetail";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import LocationsScreen from "../screens/LocationsScreen";
+import useOnboarding from "../hooks/useOnboarding";
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
+  const isFirstLaunch = useOnboarding();
 
   return (
-    <Stack.Navigator>
-      <Stack.Group screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="Home" component={TabNavigator} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-      </Stack.Group>
-      <Stack.Group screenOptions={{ headerShown: true }}>
-        <Stack.Screen name="Details" component={StablishmentDetail} />
-        <Stack.Screen name="Locations" component={LocationsScreen} />
-      </Stack.Group>
-    </Stack.Navigator>
+    isFirstLaunch !== null && (
+      <Stack.Navigator>
+        <Stack.Group screenOptions={{ headerShown: false }}>
+          {isFirstLaunch && (
+            <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+          )}
+          <Stack.Screen name="Home" component={TabNavigator} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+        </Stack.Group>
+        <Stack.Group screenOptions={{ headerShown: true }}>
+          <Stack.Screen name="Details" component={StablishmentDetail} />
+          <Stack.Screen name="Locations" component={LocationsScreen} />
+        </Stack.Group>
+      </Stack.Navigator>
+    )
   );
 };
-
-
 
 export default StackNavigator;
