@@ -20,9 +20,9 @@ const useOnboarding = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return isFirstLaunch;
-}
+};
 
 export default useOnboarding;

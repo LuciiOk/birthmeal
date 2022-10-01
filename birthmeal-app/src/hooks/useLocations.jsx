@@ -1,9 +1,7 @@
-// hook for select location
-
 import React from "react";
 
-const useLocations = () => {
-  const [selectedLocation, setSelectedLocation] = React.useState(null);
+const useLocations = (initialValue) => {
+  const [selectedLocation, setSelectedLocation] = React.useState(initialValue);
 
   const setLocation = (location) => {
     setSelectedLocation(location);

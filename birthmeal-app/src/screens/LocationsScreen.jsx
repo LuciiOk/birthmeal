@@ -1,11 +1,14 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+
 import MapView from "react-native-maps";
+import PropTypes from "prop-types";
+
 import Map from "../components/Map";
 import LocationContainer from "../containers/LocationContainer";
 import useLocations from "../hooks/useLocations";
 
-const LocationsScreen = () => {
+const LocationsScreen = ({ locations }) => {
   const locationList = [
     {
       id: 1,
@@ -30,13 +33,13 @@ const LocationsScreen = () => {
     },
   ];
 
-  const [selectedLocation, setLocation] = useLocations();
+  const [selectedLocation, setLocation] = useLocations(locationList[0]);
 
   return (
     <View style={styles.container}>
       <Map
-        latitude={selectedLocation ? selectedLocation.latitude : null}
-        longitude={selectedLocation ? selectedLocation.longitude : null}
+        latitude={selectedLocation.latitude}
+        longitude={selectedLocation.longitude}
       >
         {locationList.map((location) => (
           <MapView.Marker
@@ -64,5 +67,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+LocationsScreen.propTypes = {
+  locations: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      address: PropTypes.string.isRequired,
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+    })
+  ),
+};
 
 export default LocationsScreen;
