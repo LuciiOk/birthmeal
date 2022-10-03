@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import { StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { StyleSheet, FlatList, SafeAreaView, StatusBar } from "react-native";
 import { STABLISHMENTS } from "../data/stablishments";
 import StablishmentCard from "../components/StablishmentCard";
 import Text from "../components/Text";
 import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "../constants/colorSchema";
+
 
 const HomeScreen = () => {
 
@@ -20,6 +22,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
       <Text text="Lugares" title bold />
       <FlatList
         data={STABLISHMENTS}

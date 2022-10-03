@@ -26,7 +26,6 @@ const stylesT = StyleSheet.create({
   },
   bold: {
     fontFamily: "Lato-Bold",
-    fontWeight: "800",
   },
   light: {
     fontFamily: "Lato-Light",
