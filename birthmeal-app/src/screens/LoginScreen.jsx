@@ -5,9 +5,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import SignUserDetails from "../components/SignUserDetails";
 import Text from "../components/Text";
-import { COLORS } from "../constants/colorSchema";
 import Input from "../components/Input";
 import NavForm from "../components/NavForm";
+import { COLORS } from "../constants/colorSchema";
 
 const LoginScreen = () => {
   const [email, setEmail] = React.useState("");
