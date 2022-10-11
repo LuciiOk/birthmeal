@@ -1,11 +1,22 @@
+import { ConfigType } from '@nestjs/config/dist';
 import { Module, Global } from '@nestjs/common';
 import { MongoClient } from 'mongodb';
+import { MongooseModule } from '@nestjs/mongoose';
+
+import config from '../config';
 
 const API_KEY = '12345634';
 const API_KEY_PROD = 'PROD1212121SA';
 
 @Global()
 @Module({
+  imports: [
+    MongooseModule.forRoot('mongodb://localhost:27017', {
+      user: 'root',
+      pass: 'example',
+      dbName: 'Birthmeal',
+    }),
+  ],
   providers: [
     {
       provide: 'API_KEY',
@@ -13,14 +24,16 @@ const API_KEY_PROD = 'PROD1212121SA';
     },
     {
       provide: 'MONGO',
-      useFactory: async () => {
-        const uri =
-          'mongodb://root:example@localhost:27017/?authMechanism=DEFAULT';
+      useFactory: async (configService: ConfigType<typeof config>) => {
+        const { connection, user, password, host, port, dbName } =
+          configService.mongo;
+        const uri = `${connection}://${user}:${password}@${host}:${port}/?authMechanism=DEFAULT`;
         const client = new MongoClient(uri);
         await client.connect();
-        const database = client.db('Birthmeal');
+        const database = client.db(dbName);
         return database;
       },
+      inject: [config.KEY],
     },
   ],
 
