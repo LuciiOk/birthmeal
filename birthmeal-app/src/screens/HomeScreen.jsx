@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { StyleSheet, FlatList, SafeAreaView, StatusBar, View } from "react-native";
 import { STABLISHMENTS } from "../data/stablishments";
 import StablishmentCard from "../components/StablishmentCard";
 import Text from "../components/Text";
 import { useNavigation } from "@react-navigation/native";
+
 
 const HomeScreen = () => {
 
@@ -20,6 +21,14 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
+      <View style={styles.header}>
+        <View style={styles.headerText}>
+          <Text text="Hola, " bold title styles={styles.textHeader}/>
+          <Text text="Luciano" title styles={styles.textHeader}/>
+        </View>
+        <Text text="Encuentra los mejores restaurantes para celebrar tu cumpleaños" opaque />
+      </View>
       <Text text="Lugares" title bold />
       <FlatList
         data={STABLISHMENTS}
@@ -41,6 +50,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "red",
+  },
+  header: {
+    marginVertical: 20,
+  },
+  headerText: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  textHeader: {
+    fontSize: 24,
   },
 });
 

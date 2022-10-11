@@ -7,7 +7,7 @@
     "icon": "./assets/images/Burger-logo2.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/Burger-app-sin-fondo.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#A9005F"
     },
