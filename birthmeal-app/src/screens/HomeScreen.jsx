@@ -1,41 +1,50 @@
 import React, { useEffect } from "react";
-import { StyleSheet, FlatList, SafeAreaView, StatusBar, View } from "react-native";
+import { StyleSheet, FlatList, StatusBar, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import { STABLISHMENTS } from "../data/stablishments";
 import StablishmentCard from "../components/StablishmentCard";
 import Text from "../components/Text";
-import { useNavigation } from "@react-navigation/native";
-
+import FiltersCards from "../components/FiltersCards";
+import { FILTERS } from "../data/filters";
+import { COLORS } from "../constants/colorSchema";
 
 const HomeScreen = () => {
-
   const navigation = useNavigation();
 
   useEffect(() => {
-    navigation.setOptions({ 
+    navigation.setOptions({
       headerLargeTitle: false,
       headerSearchBarOptions: {
         placeholder: "Search",
-      }
+      },
     });
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="white" />
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.white}/>
       <View style={styles.header}>
-        <View style={styles.headerText}>
-          <Text text="Hola, " bold title styles={styles.textHeader}/>
-          <Text text="Luciano" title styles={styles.textHeader}/>
-        </View>
-        <Text text="Encuentra los mejores restaurantes para celebrar tu cumpleaños" opaque />
+        <Text text="Bienvenido a " title />
+        <Text text="Birthmeal" title bold />
       </View>
       <Text text="Lugares" title bold />
+      <View>
+        <FlatList
+          data={FILTERS}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <FiltersCards filter={item} />}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
       <FlatList
         data={STABLISHMENTS}
-        renderItem={({ item }) => <StablishmentCard stablishment={item} />}
         keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <StablishmentCard stablishment={item} />}
+        showsVerticalScrollIndicator={false}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -43,23 +52,9 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
   },
-  text: {
-    fontSize: 20,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "red",
-  },
   header: {
-    marginVertical: 20,
-  },
-  headerText: {
     flexDirection: "row",
-    alignItems: "center",
-  },
-  textHeader: {
-    fontSize: 24,
+    marginVertical: 10,
   },
 });
 

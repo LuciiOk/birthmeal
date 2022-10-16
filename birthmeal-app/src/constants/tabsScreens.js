@@ -1,12 +1,9 @@
+import FavoritesScreen from "../screens/FavoritesScreen";
 import HomeScreen from "../screens/HomeScreen";
+import MoreInfoScreen from "../screens/MoreInfoScreen";
+import BirthScreen from "../screens/BirthScreen";
 
 export const TABS = [
-  {
-    name: "Favorites",
-    title: "Favorites",
-    icon: "heart",
-    component: HomeScreen,
-  },
   {
     name: "Overview",
     title: "Birthmeal",
@@ -14,9 +11,21 @@ export const TABS = [
     component: HomeScreen,
   },
   {
+    name: "Favorites",
+    title: "Favorites",
+    icon: "heart",
+    component: FavoritesScreen,
+  },
+  {
+    name: "Birthdays",
+    title: "Birthdays",
+    icon: "calendar",
+    component: BirthScreen,
+  },
+  {
     name: "Information",
     title: "Information",
     icon: "information-circle",
-    component: HomeScreen,
+    component: MoreInfoScreen,
   },
 ];

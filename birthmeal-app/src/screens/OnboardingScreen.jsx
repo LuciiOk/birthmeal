@@ -14,8 +14,8 @@ const OnboardingScreen = ({ navigation }) => {
   const ref = React.useRef();
 
   useEffect(() => {
-    StatusBar.setBarStyle('default');
-    StatusBar.setBackgroundColor('#f6d365');
+    StatusBar.setBarStyle("default");
+    StatusBar.setBackgroundColor("#f6d365");
   }, []);
 
   const updateCurrentSlideIndex = (e) => {

@@ -20,20 +20,19 @@ const TabIcon = ({ focused, icon }) => {
 };
 
 const TabNavigator = () => {
-
   const navigation = useNavigation();
 
   useEffect(() => {
-    StatusBar.setBarStyle('dark-content');
-    StatusBar.setBackgroundColor('transparent');
+    StatusBar.setBarStyle("dark-content");
+    StatusBar.setBackgroundColor("transparent");
     // add search bar to header
     navigation.setOptions({
-      headerTitle: 'Birthmeal',
+      headerTitle: "Birthmeal",
       headerTitleStyle: {
         color: "red",
         fontSize: 24,
-        fontFamily: 'Lato-Bold',
-        fontWeight: '1000',
+        fontFamily: "Lato-Bold",
+        fontWeight: "1000",
       },
       headerRight: () => (
         <IonicIcon
@@ -44,7 +43,6 @@ const TabNavigator = () => {
         />
       ),
     });
-
   }, [navigation, StatusBar]);
 
   return (
@@ -64,6 +62,7 @@ const TabNavigator = () => {
             tabBarIcon: ({ focused }) => (
               <TabIcon focused={focused} icon={tab.icon} />
             ),
+            
           }}
         />
       ))}
@@ -92,7 +91,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// prop types
 TabIcon.propTypes = {
   focused: PropTypes.bool,
   icon: PropTypes.string,

@@ -34,4 +34,32 @@ export const STABLISHMENTS = [
     imageUrl: require("./../../assets/images/Burger-logo.png"),
     webUrl: "https://www.google.com",
   },
+  {
+    id: "p6",
+    title: "The Orange House",
+    description: "A nice place to stay",
+    imageUrl: require("./../../assets/images/Burger-logo.png"),
+    webUrl: "https://www.google.com",
+  },
+  {
+    id: "p7",
+    title: "The Black House",
+    description: "A nice place to stay",
+    imageUrl: require("./../../assets/images/Burger-logo.png"),
+    webUrl: "https://www.google.com",
+  },
+  {
+    id: "p8",
+    title: "The Orange House",
+    description: "A nice place to stay",
+    imageUrl: require("./../../assets/images/Burger-logo.png"),
+    webUrl: "https://www.google.com",
+  },
+  {
+    id: "p9",
+    title: "The Black House",
+    description: "A nice place to stay",
+    imageUrl: require("./../../assets/images/Burger-logo.png"),
+    webUrl: "https://www.google.com",
+  }
 ];
