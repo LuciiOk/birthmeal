@@ -3,7 +3,6 @@ import { View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import Text from "../components/Text";
 import LocationItem from "../components/LocationItem";
-import useLocations from "../hooks/useLocations";
 
 const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
 

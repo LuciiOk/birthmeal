@@ -1,12 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import Separator from "../components/Separator";
-import Text from "../components/Text";
+import { useNavigation } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import IonicIcon from "react-native-vector-icons/Ionicons";
+
 import { COLORS } from "../constants/colorSchema";
-import { useNavigation } from "@react-navigation/native";
+import Separator from "../components/Separator";
+import Text from "../components/Text";
 
 const StablishmentDetail = (props) => {
   const navigation = useNavigation();
@@ -23,7 +24,6 @@ const StablishmentDetail = (props) => {
   };
 
   const addToFavorites = () => {
-    console.log("add to favorites");
     setFavorite(!favorite);
   };
 
@@ -93,7 +93,6 @@ const StablishmentDetail = (props) => {
         </View>
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
-          {/* show 5 stars */}
           <View style={styles.starsContainer}>
             <IonicIcon name="star" size={24} color={COLORS.primary} />
             <IonicIcon name="star" size={24} color={COLORS.primary} />
@@ -169,5 +168,6 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
+
 
 export default StablishmentDetail;
