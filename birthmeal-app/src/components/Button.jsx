@@ -5,11 +5,24 @@ import PropTypes from "prop-types";
 import Text from "./Text";
 import { COLORS } from "../constants/colorSchema";
 
-const Button = ({ buttonText, action }) => {
+const Button = ({ buttonText, action, outlined, filled, buttonStyles }) => {
+  const style = [
+    styles.button,
+    outlined && styles.outlined,
+    filled && styles.filled,
+    buttonStyles,
+  ];
 
   return (
-    <TouchableOpacity style={styles.button} onPress={action}>
-      <Text text={buttonText} bold opaque />
+    <TouchableOpacity style={style} onPress={action}>
+      <Text
+        text={buttonText}
+        bold
+        title
+        styles={{
+          color: outlined ? COLORS.dark : COLORS.white,
+        }}
+      />
     </TouchableOpacity>
   );
 };
@@ -21,8 +34,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
+    backgroundColor: COLORS.primary,
+  },
+  outlined: {
     borderWidth: 2.5,
     borderColor: COLORS.dark,
+    backgroundColor: "transparent",
+  },
+  filled: {
+    backgroundColor: COLORS.dark,
   },
 });
 

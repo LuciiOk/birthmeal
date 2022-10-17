@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
+    marginBottom: 20,
   },
   checkboxText: {
     color: COLORS.dark,

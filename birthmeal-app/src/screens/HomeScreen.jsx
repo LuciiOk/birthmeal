@@ -26,11 +26,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
       <View style={styles.header}>
-        <Text text="Bienvenido a " title />
-        <Text text="Birthmeal" title bold />
-      </View>
-      <Text text="Lugares" title bold />
-      <View>
+        <Text text="Categorías" title bold />
         <FlatList
           data={FILTERS}
           keyExtractor={(item) => item.id}
@@ -38,7 +34,9 @@ const HomeScreen = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
+        <Text text="Establecimientos" title bold />
       </View>
+
       <FlatList
         data={STABLISHMENTS}
         keyExtractor={(item) => item.id}
@@ -57,7 +55,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   header: {
-    flexDirection: "row",
     marginVertical: 10,
   },
 });

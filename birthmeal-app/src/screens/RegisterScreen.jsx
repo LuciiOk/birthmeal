@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -9,6 +9,7 @@ import Input from "../components/Input";
 import SignUserDetails from "../components/SignUserDetails";
 import ConditionTerms from "../components/ConditionTerms";
 import NavForm from "../components/NavForm";
+import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
 
 const RegisterScreen = () => {
@@ -66,9 +67,7 @@ const RegisterScreen = () => {
         />
         <InputDate placeholder="Tu fecha de nacimiento" />
         <ConditionTerms />
-        <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text text="Crear cuenta" bold styles={{ color: COLORS.dark }} />
-        </TouchableOpacity>
+        <Button buttonText="Crear cuenta" action={handleSubmit} outlined />
         <SignUserDetails
           to="Login"
           text="¿Ya tienes una cuenta?"
@@ -106,16 +105,6 @@ const styles = StyleSheet.create({
   formHeaderText: {
     color: COLORS.dark,
     fontSize: 28,
-  },
-  button: {
-    width: "70%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    borderWidth: 2.5,
-    borderColor: COLORS.dark,
-    marginTop: 20,
   },
 });
 

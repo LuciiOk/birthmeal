@@ -60,7 +60,7 @@ export const AddModal = ({ onClose, visible }) => {
                 value={switchValue}
               />
             </View>
-            <Button buttonText="Agregar" action={handleSubmit} />
+            <Button buttonText="Agregar" action={handleSubmit} outlined />
           </View>
         </View>
       </View>
@@ -111,18 +111,18 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     padding: 20,
     width: "90%",
-    height: "50%",
     borderRadius: 20,
   },
   modalHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: 20,
   },
   modalBody: {
-    flex: 3,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 10,
   },
   switchContainer: {
     flexDirection: "row",

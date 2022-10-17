@@ -7,12 +7,17 @@ export const COLORS = {
   primaryDark: "#ff0844",
   secondary: "#6c757d",
   secondaryDark: "#6c757d",
-  success: "#28a745",
+  success: "#a3be8c",
   info: "#17a2b8",
-  warning: "#ffc107",
-  danger: "#dc3545",
+  warning: "#ebcb8b",
+  danger: "#bf616a",
   light: "#f8f9fa",
-  dark: "#343a40",
+  dark: "#2e3440",
+  // frost colors by nordtheme
+  frost1: "#8fbcbb",
+  frost2: "#88c0d0",
+  frost3: "#81a1c1",
+  frost4: "#5e81ac",
 };
 
 // "#f6d365", "#fda085"

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -7,6 +7,7 @@ import SignUserDetails from "../components/SignUserDetails";
 import Text from "../components/Text";
 import Input from "../components/Input";
 import NavForm from "../components/NavForm";
+import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
 
 const LoginScreen = () => {
@@ -47,9 +48,7 @@ const LoginScreen = () => {
         />
         <Input placeholder="Tu contraseña" keyboardType="default" isPassword />
       </View>
-      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-        <Text text="Iniciar sesión" bold styles={{ color: COLORS.dark }} />
-      </TouchableOpacity>
+      <Button buttonText="Iniciar sesión" action={handleSubmit} outlined/>
       <SignUserDetails
         to="Register"
         text="¿No tienes una cuenta?"
@@ -88,15 +87,6 @@ const styles = StyleSheet.create({
   formHeaderText: {
     color: COLORS.dark,
     fontSize: 28,
-  },
-  button: {
-    width: "70%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    borderWidth: 2.5,
-    borderColor: COLORS.dark,
   },
 });
 

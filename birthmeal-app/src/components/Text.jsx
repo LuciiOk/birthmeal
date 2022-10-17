@@ -35,7 +35,7 @@ const stylesT = StyleSheet.create({
     fontSize: 18,
   },
   opaque: {
-    opacity: 0.95,
+    opacity: 0.75,
   },
   semiBold: {
     fontFamily: "Lato-semibold",
