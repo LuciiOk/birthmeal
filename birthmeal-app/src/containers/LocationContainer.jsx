@@ -1,8 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
+
 import Text from "../components/Text";
 import LocationItem from "../components/LocationItem";
+import NoData from "../components/NoData";
 
 const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
 
@@ -21,6 +23,7 @@ const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
             setLocation={() => setLocation(location)}
           />
         ))}
+        {locations.length === 0 && <NoData text="No hay ubicaciones disponibles" />}
       </View>
     </View>
   );

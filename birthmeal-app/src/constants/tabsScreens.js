@@ -12,19 +12,19 @@ export const TABS = [
   },
   {
     name: "Favorites",
-    title: "Favorites",
+    title: "Mis Favoritos",
     icon: "heart",
     component: FavoritesScreen,
   },
   {
     name: "Birthdays",
-    title: "Birthdays",
+    title: "Cumpleaños",
     icon: "calendar",
     component: BirthScreen,
   },
   {
     name: "Information",
-    title: "Information",
+    title: "Más Información",
     icon: "information-circle",
     component: MoreInfoScreen,
   },

@@ -8,6 +8,7 @@ import Text from "../components/Text";
 import FiltersCards from "../components/FiltersCards";
 import { FILTERS } from "../data/filters";
 import { COLORS } from "../constants/colorSchema";
+import NoData from "../components/NoData";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -23,7 +24,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.white}/>
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
       <View style={styles.header}>
         <Text text="Bienvenido a " title />
         <Text text="Birthmeal" title bold />
@@ -43,6 +44,9 @@ const HomeScreen = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <StablishmentCard stablishment={item} />}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={
+          <NoData text="Ups... No hay establecimientos disponibles" />
+        }
       />
     </View>
   );
