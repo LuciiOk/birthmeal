@@ -8,6 +8,7 @@ import { CompaniesModule } from './companies/companies.module';
 import { LocationsModule } from './locations/locations.module';
 import { CompaniesController } from './companies/controllers/companies/companies.controller';
 import { enviroments } from './enviroments';
+import { BirthdaysModule } from './birthdays/birthdays.module';
 
 import * as Joi from 'joi';
 import config from './config';
@@ -28,6 +29,7 @@ import config from './config';
     AuthModule,
     CompaniesModule,
     LocationsModule,
+    BirthdaysModule,
   ],
   controllers: [AppController, CompaniesController],
   providers: [AppService],
