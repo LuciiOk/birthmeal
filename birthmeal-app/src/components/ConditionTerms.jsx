@@ -6,11 +6,13 @@ import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
 
 const ConditionTerms = () => {
+  const [isSelected, setSelection] = React.useState(false);
+
   return (
     <View style={styles.checkboxContainer}>
       <Checkbox
-        value={true}
-        onValueChange={(newValue) => console.log(newValue)}
+        value={isSelected}
+        onValueChange={setSelection}
         style={styles.checkbox}
       />
       <Text

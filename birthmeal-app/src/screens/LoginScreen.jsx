@@ -46,9 +46,16 @@ const LoginScreen = () => {
           placeholder="Tu correo electrónico"
           keyboardType="email-address"
         />
-        <Input placeholder="Tu contraseña" keyboardType="default" isPassword />
+        <Input placeholder="Tu contraseña" keyboardType="default" isPassword/>
+        {/* 
+        TODO...
+        <SignUserDetails
+          redirectText="Olvidaste tu contraseña?"
+          to="ForgotPassword"
+          alignText="right"
+        /> */}
       </View>
-      <Button buttonText="Iniciar sesión" action={handleSubmit} outlined/>
+      <Button buttonText="Iniciar sesión" action={handleSubmit} outlined />
       <SignUserDetails
         to="Register"
         text="¿No tienes una cuenta?"

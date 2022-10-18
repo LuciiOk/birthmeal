@@ -55,10 +55,10 @@ const InputDate = ({ placeholder }) => {
 const styles = StyleSheet.create({
   input: {
     width: "100%",
-    height: 50,
+    height: 45,
     borderRadius: 10,
     paddingHorizontal: 20,
-    marginBottom: 10,
+    marginVertical: 10,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 2,

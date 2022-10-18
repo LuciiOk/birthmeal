@@ -10,8 +10,9 @@ import { COLORS } from "../constants/colorSchema";
 const MoreInfoScreen = () => {
   const { copyToClipBoard } = useClipBoard();
 
-  const appDescription =
-    "Birthmeal es una aplicación desarrollada por estudiantes de la Pontificia Universidad Católica de Valparaíso, con el objetivo facilitar la búsqueda de establecimientos que ofrezcan descuentos por encontrarse de cumpleaños.";
+  const appDescription = `Birthmeal es una aplicación desarrollada
+  por estudiantes de la Pontificia Universidad Católica de Valparaíso, con el objetivo facilitar
+  la búsqueda de establecimientos que ofrezcan descuentos por encontrarse de cumpleaños.`;
   const developers = [
     {
       name: "Luciano Portales",
@@ -19,7 +20,7 @@ const MoreInfoScreen = () => {
     },
     {
       name: "Ignacio Durán",
-      email: "ignacio.duran.@mail.pucv.cl",
+      email: "ignacio.duran.v@mail.pucv.cl",
     },
   ];
 

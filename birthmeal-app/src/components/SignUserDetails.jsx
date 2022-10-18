@@ -1,12 +1,11 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
 
-const SignUserDetails = ({ to, text, redirectText }) => {
-
+const SignUserDetails = ({ to, text, redirectText, alignText = "center" }) => {
   const navigation = useNavigation();
 
   const navigate = () => {
@@ -14,21 +13,22 @@ const SignUserDetails = ({ to, text, redirectText }) => {
   };
 
   return (
-    <View style={{ marginTop: 5 }}>
-      <Text text={text} light styles={{ textAlign: "center" }} />
+    <View
+      style={{
+        width: "100%",
+        marginTop: 10,
+      }}
+    >
+      {text && <Text text={text} light styles={{ textAlign: alignText }} />}
       <TouchableOpacity onPress={navigate}>
         <Text
           text={redirectText}
           bold
-          styles={{ textAlign: "center", color: COLORS.dark }}
+          styles={{ textAlign: alignText, color: COLORS.dark }}
         />
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-
-})
 
 export default SignUserDetails;

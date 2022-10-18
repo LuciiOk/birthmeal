@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, TouchableOpacity} from "react-native";
+import { StyleSheet, TextInput, View, TouchableOpacity } from "react-native";
 
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
-const Input = ({ placeholder, keyboardType, isPassword = false }) => {
-  const [value, setValue] = useState("");
+const Input = ({ placeholder, keyboardType, isPassword = false, value, onChangeText }) => {
   const [isSecure, setIsSecure] = useState(true);
+  const icon = !isPassword ? "user" : "lock";
 
   const onChange = (text) => {
     setValue(text);
@@ -16,24 +16,30 @@ const Input = ({ placeholder, keyboardType, isPassword = false }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder={placeholder}
-        keyboardType={keyboardType}
-        secureTextEntry={isPassword && isSecure}
-        value={value}
-        onChangeText={onChange}
-        placeholderTextColor={COLORS.grayDark}
-      />
-      {isPassword && (
-        <TouchableOpacity style={styles.icon} onPress={() => setIsSecure(!isSecure)}>
-          <FontAwesome
-            name={isSecure ? "eye-slash" : "eye"}
-            size={20}
-            color={COLORS.dark}
-          />
-        </TouchableOpacity>
-      )}
+      <View style={styles.inputContainer}>
+        <Icon name={icon} size={20} color={COLORS.dark} />
+        <TextInput
+          style={styles.input}
+          placeholder={placeholder}
+          keyboardType={keyboardType}
+          secureTextEntry={isPassword && isSecure}
+          value={value}
+          onChangeText={onChangeText}
+          placeholderTextColor={COLORS.grayDark}
+        />
+        {isPassword && (
+          <TouchableOpacity
+            style={styles.showPassword}
+            onPress={() => setIsSecure(!isSecure)}
+          >
+            <Icon
+              name={isSecure ? "eye-slash" : "eye"}
+              size={20}
+              color={COLORS.dark}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };
@@ -46,24 +52,27 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     paddingRight: 0,
-    marginVertical: 10,
+    marginTop: 10,
     borderWidth: 2,
     borderColor: COLORS.dark,
     width: "100%",
   },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+  },
   input: {
-    width: "90%",
-    height: 50,
+    width: "100%",
+    height: 40,
+    paddingLeft: 10,
     fontSize: 16,
     color: COLORS.dark,
-    fontFamily: "Lato-Bold",
   },
-  icon: {
-    width: "10%",
-    height: 50,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+  showPassword: {
+    position: "absolute",
+    right: 10,
   },
 });
 

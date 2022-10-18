@@ -38,7 +38,7 @@ const StackNavigator = () => {
             component={AddModal}
             options={{
               headerTitle: "Agregar cumpleaños",
-              presentation: "modal", // <-- this is the important part
+              presentation: "modal",
             }}
           />
         </Stack.Group>
