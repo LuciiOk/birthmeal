@@ -1,17 +1,15 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsNumber, IsPositive, IsString } from 'class-validator';
 
-export class CompanyDto {
-  @IsString()
+export class BirthdateDto {
   @ApiProperty()
-  readonly business_name: string;
-
   @IsString()
-  @ApiProperty()
-  readonly description: string;
+  name: string;
 
+  @ApiProperty()
   @IsNumber()
   @IsPositive()
-  @ApiProperty()
-  readonly rating: number;
+  birthdate: number;
 }
+
+export class UpdateBirthdateDto extends PartialType(BirthdateDto) {}

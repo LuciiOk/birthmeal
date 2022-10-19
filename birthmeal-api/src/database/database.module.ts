@@ -11,14 +11,11 @@ const API_KEY_PROD = 'PROD1212121SA';
 @Global()
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://root:<example>@birthmeal.nenn1xp.mongodb.net/?retryWrites=true&w=majority',
-      {
-        user: 'root',
-        pass: 'example',
-        dbName: 'Birthmeal',
-      },
-    ),
+    MongooseModule.forRoot('mongodb://localhost:27017', {
+      user: 'root',
+      pass: 'example',
+      dbName: 'Birthmeal',
+    }),
   ],
   providers: [
     {
