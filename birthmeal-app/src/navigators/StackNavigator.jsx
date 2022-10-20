@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -10,12 +10,16 @@ import RegisterScreen from "../screens/RegisterScreen";
 import LocationsScreen from "../screens/LocationsScreen";
 import useOnboarding from "../hooks/useOnboarding";
 import { AddModal } from "../components/AddButton";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
+  const { user, token } = useContext(AuthContext);
+
+  console.log("user", user);
+  console.log("token", token);
   const isFirstLaunch = useOnboarding();
-  const isAuthentificated = true;
 
   return (
     isFirstLaunch !== null && (
@@ -25,8 +29,12 @@ const StackNavigator = () => {
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
           )}
           <Stack.Screen name="Home" component={TabNavigator} />
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Register" component={RegisterScreen} />
+          {!user && !token && (
+            <>
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Register" component={RegisterScreen} />
+            </>
+          )}
         </Stack.Group>
         <Stack.Group screenOptions={{ headerShown: true }}>
           <Stack.Screen name="Details" component={StablishmentDetail} />

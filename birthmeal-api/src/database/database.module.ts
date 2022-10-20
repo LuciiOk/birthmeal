@@ -11,14 +11,19 @@ const API_KEY_PROD = 'PROD1212121SA';
 @Global()
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://root:<example>@birthmeal.nenn1xp.mongodb.net/?retryWrites=true&w=majority',
-      {
-        user: 'root',
-        pass: 'example',
-        dbName: 'Birthmeal',
+    MongooseModule.forRootAsync({
+      useFactory: (configService: ConfigType<typeof config>) => {
+        const { connection, user, password, host, dbName } =
+          configService.mongo;
+        return {
+          uri: `${connection}://${host}`,
+          user,
+          pass: password,
+          dbName,
+        };
       },
-    ),
+      inject: [config.KEY],
+    }),
   ],
   providers: [
     {
@@ -28,9 +33,8 @@ const API_KEY_PROD = 'PROD1212121SA';
     {
       provide: 'MONGO',
       useFactory: async (configService: ConfigType<typeof config>) => {
-        const { connection, user, password, host, port, dbName } =
-          configService.mongo;
-        const uri = `${connection}://${user}:${password}@${host}:${port}/?authMechanism=DEFAULT`;
+        const { connection, user, password, host, dbName } = configService.mongo;
+        const uri = `${connection}://${user}:${password}@${host}/?authSource=admin&readPreference=primary`;
         const client = new MongoClient(uri);
         await client.connect();
         const database = client.db(dbName);
