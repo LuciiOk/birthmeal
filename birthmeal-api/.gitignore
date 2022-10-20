@@ -37,4 +37,4 @@ lerna-debug.log*
 #MONGO
 /mongo
 
-.env
+/.env
