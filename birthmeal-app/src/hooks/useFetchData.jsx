@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 export const methods = {
   GET: "GET",
   POST: "POST",
   PUT: "PUT",
   DELETE: "DELETE",
-}
+};
 
-const URL = "https://jsonplaceholder.typicode.com/";
+export const URL = "http://localhost:3000/";
 
 const useFetchData = (path, method = methods.GET, body = null) => {
   const [data, setData] = useState(null);
@@ -16,22 +17,23 @@ const useFetchData = (path, method = methods.GET, body = null) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(URL + path, {
-          method,
-          body,
-        });
-        const data = await response.json();
-        setData(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
     fetchData();
-  }, []);
+  }, [path]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios({
+        method,
+        url: `${URL}${path}`,
+        data: body,
+      });
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  };
 
   return { data, error, loading };
 };

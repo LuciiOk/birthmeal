@@ -27,13 +27,13 @@ const HomeScreen = () => {
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
       <View style={styles.header}>
         <Text text="Categorías" title bold />
-        <FlatList
+        {/* <FlatList
           data={FILTERS}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <FiltersCards filter={item} />}
           horizontal
           showsHorizontalScrollIndicator={false}
-        />
+        /> */}
         <Text text="Establecimientos" title bold />
       </View>
 

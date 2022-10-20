@@ -1,10 +1,8 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { navigationRef } from "./src/utils/RootNavigation";
 
-import StackNavigator from "./src/navigators/StackNavigator";
-
+import AppNav from "./src/navigators/AppNav";
+import { AuthProvider } from "./src/contexts/AuthContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -20,8 +18,8 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer ref={navigationRef}>
-      <StackNavigator />
-    </NavigationContainer>
+    <AuthProvider>
+      <AppNav />
+    </AuthProvider>
   );
 }

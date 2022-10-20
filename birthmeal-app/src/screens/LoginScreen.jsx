@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,14 +9,17 @@ import Input from "../components/Input";
 import NavForm from "../components/NavForm";
 import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
+import { AuthContext } from "../contexts/AuthContext";
 
 const LoginScreen = () => {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const navigation = useNavigation();
 
   const handleSubmit = () => {
+    login(email, password);
     navigation.navigate("Home", {
       screen: "Overview",
     });
@@ -45,8 +48,16 @@ const LoginScreen = () => {
         <Input
           placeholder="Tu correo electrónico"
           keyboardType="email-address"
+          value={email}
+          onChangeText={handleEmail}
         />
-        <Input placeholder="Tu contraseña" keyboardType="default" isPassword/>
+        <Input
+          placeholder="Tu contraseña"
+          keyboardType="default"
+          isPassword
+          value={password}
+          onChangeText={handlePassword}
+        />
         {/* 
         TODO...
         <SignUserDetails

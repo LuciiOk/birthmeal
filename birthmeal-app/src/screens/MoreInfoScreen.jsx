@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -6,9 +6,11 @@ import Text from "../components/Text";
 import Button from "../components/Button";
 import useClipBoard from "../hooks/useClipBoard";
 import { COLORS } from "../constants/colorSchema";
+import { AuthContext } from "../contexts/AuthContext";
 
 const MoreInfoScreen = () => {
   const { copyToClipBoard } = useClipBoard();
+  const { user, token, logout } = useContext(AuthContext);
 
   const appDescription = `Birthmeal es una aplicación desarrollada
   por estudiantes de la Pontificia Universidad Católica de Valparaíso, con el objetivo facilitar
@@ -29,7 +31,7 @@ const MoreInfoScreen = () => {
   const appLogo = require("../../assets/images/logo.png");
 
   const closeSession = () => {
-    console.log("Cerrar sesión");
+    logout();
   };
 
   return (
@@ -85,12 +87,14 @@ const MoreInfoScreen = () => {
         ))}
       </View>
       <View style={styles.footer}>
-        <Button
-          buttonText="Cerrar sesión"
-          action={closeSession}
-          filled
-          styles={styles.button}
-        />
+        {user && token && (
+          <Button
+            buttonText="Cerrar sesión"
+            action={closeSession}
+            filled
+            styles={styles.button}
+          />
+        )}
       </View>
     </View>
   );
