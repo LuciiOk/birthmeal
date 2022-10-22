@@ -1,53 +1,23 @@
 import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import Text from "../components/Text";
 import AddButton from "../components/AddButton";
 
-import useFetchData from "../hooks/useFetchData";
-import NoData from "../components/NoData";
-import BirthItem from "../components/BirthItem";
+import BirthdaysContainer from "../containers/BirthdaysContainer";
+import { BirthdaysProvider } from "../contexts/BirthdaysContext";
 
 const BirthScreen = () => {
-  const data = [
-  ];
-  const { _data, error, loading } = useFetchData("posts");
-
-  const onDelete = (id) => {
-    console.log("Delete", id);
-  };
-
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text text="Cumpleaños" bold title />
+    <BirthdaysProvider>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text text="Cumpleaños" bold title />
+        </View>
+        <BirthdaysContainer />
+        <AddButton />
       </View>
-      <View style={styles.body}>
-        {loading ? (
-          <Text text="Cargando..." />
-        ) : error ? (
-          <Text text="Error" />
-        ) : data ? (
-          <FlatList
-            data={[]}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <BirthItem
-                name={item.name}
-                date={item.date}
-                onDelete={onDelete}
-              />
-            )}
-            ListEmptyComponent={
-              <NoData text="Ups... Parece que no hay nada por aquí, agrega un nuevo cumpleaños! 🥳" />
-            }
-            ListHeaderComponent={<View style={{ height: 20 }} />}
-            ListFooterComponent={<View style={{ height: 20 }} />}
-          />
-        ) : null}
-      </View>
-      <AddButton />
-    </View>
+    </BirthdaysProvider>
   );
 };
 

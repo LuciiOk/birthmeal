@@ -9,7 +9,6 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import LocationsScreen from "../screens/LocationsScreen";
 import useOnboarding from "../hooks/useOnboarding";
-import { AddModal } from "../components/AddButton";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +24,7 @@ const StackNavigator = () => {
     isFirstLaunch !== null && (
       <Stack.Navigator>
         <Stack.Group screenOptions={{ headerShown: false }}>
-          {!isFirstLaunch && (
+          {isFirstLaunch && (
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
           )}
           <Stack.Screen name="Home" component={TabNavigator} />
@@ -39,16 +38,6 @@ const StackNavigator = () => {
         <Stack.Group screenOptions={{ headerShown: true }}>
           <Stack.Screen name="Details" component={StablishmentDetail} />
           <Stack.Screen name="Locations" component={LocationsScreen} />
-        </Stack.Group>
-        <Stack.Group screenOptions={{ presentation: "modal" }}>
-          <Stack.Screen
-            name="Add"
-            component={AddModal}
-            options={{
-              headerTitle: "Agregar cumpleaños",
-              presentation: "modal",
-            }}
-          />
         </Stack.Group>
       </Stack.Navigator>
     )

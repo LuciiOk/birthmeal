@@ -5,27 +5,16 @@ import RNDateTimePicker from "@react-native-community/datetimepicker";
 
 import Text from "./Text";
 import { COLORS } from "../constants/colorSchema";
+import { getFormattedDate } from "../utils/formatDate";
 
-
-const InputDate = ({ placeholder }) => {
-  const [date, setDate] = useState(null);
+const InputDate = ({ placeholder, date, changeDate }) => {
   const [show, setShow] = useState(false);
 
-  const onChange = (event, selectedDate) => {
+  const onChangeDate = (event, selectedDate) => {
+    console.log(selectedDate);
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
-    setDate(currentDate); 
-  };
-
-  const getFormattedDate = () => {
-    let tempDate = new Date(date);
-    let fDate =
-      tempDate.getDate() +
-      "/" +
-      (tempDate.getMonth() + 1) +
-      "/" +
-      tempDate.getFullYear();
-    return fDate;
+    changeDate(currentDate);
   };
 
 
@@ -35,9 +24,14 @@ const InputDate = ({ placeholder }) => {
       onPress={() => {
         setShow(true);
       }}
-    > 
-      <Text text={placeholder} bold opaque styles={{ color: COLORS.grayDark, fontSize: 16 }}/>
-      { date && <Text text={getFormattedDate()} bold opaque/> }
+    >
+      <Text
+        text={placeholder}
+        bold
+        opaque
+        styles={{ color: COLORS.grayDark, fontSize: 16 }}
+      />
+      {date && <Text text={getFormattedDate(date)} bold opaque />}
       {show && (
         <RNDateTimePicker
           testID="dateTimePicker"
@@ -45,7 +39,7 @@ const InputDate = ({ placeholder }) => {
           mode="date"
           is24Hour={true}
           display="calendar"
-          onChange={onChange}
+          onChange={onChangeDate}
         />
       )}
     </TouchableOpacity>
@@ -67,6 +61,8 @@ const styles = StyleSheet.create({
 
 InputDate.propTypes = {
   placeholder: PropTypes.string,
+  date: PropTypes.object,
+  setDate: PropTypes.func,
 };
 
 export default InputDate;
