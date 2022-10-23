@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
 import Text from "./Text";
 import { getFormattedDate } from "../utils/formatDate";
-import { BirthdaysContext } from "../contexts/BirthdaysContext";
 
 const BirthItem = ({ id, name, date }) => {
-  const { removeBirthday } = useContext(BirthdaysContext);
 
   const onDelete = (id) => {
     removeBirthday(id);

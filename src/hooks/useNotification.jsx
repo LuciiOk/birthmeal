@@ -15,17 +15,25 @@ export const scheduleUserBirthday = async (date, name) => {
       importance: Notifications.AndroidImportance.HIGH,
     });
   }
+  date = moment(date).add(5, "sec");
+  let dateN;
 
-  date = moment(date).add(5, "seconds").toDate();
+  if (moment(date).isBefore(moment())) {
+    const day = moment(date).day() + 1;
+    const month = moment(date).month() + 1;
+    const year = moment().year() + 1;
+    dateN = moment(`${day}/${month}/${year}:20:59:00`, "DD/MM/YYYY:HH:mm:ss");
+  } else {
+    dateN = moment(date);
+  }
 
-  const trigger = moment(date).toDate();
   const notificationId = await Notifications.scheduleNotificationAsync({
     content: {
       title: message.title + name + "! 🎉",
       body: message.body,
     },
     trigger: {
-      date: trigger,
+      date: dateN.toDate(),
       repeats: true,
     },
     channelId: "birthday",

@@ -8,6 +8,7 @@ import IonicIcon from "react-native-vector-icons/Ionicons";
 import { COLORS } from "../constants/colorSchema";
 import Separator from "../components/Separator";
 import Text from "../components/Text";
+import FavoriteButton from "../components/FavoriteButton";
 
 const StablishmentDetail = (props) => {
   const navigation = useNavigation();
@@ -39,13 +40,7 @@ const StablishmentDetail = (props) => {
         <View style={styles.infoContainer}>
           <View style={styles.infoHeader}>
             <Text text="Información" title bold />
-            <IonicIcon
-              name={favorite ? "heart" : "heart-outline"}
-              size={28}
-              color="#000"
-              style={styles.heartIcon}
-              onPress={addToFavorites}
-            />
+            <FavoriteButton isFavorite={favorite} onPress={addToFavorites} />
           </View>
           <View style={styles.info}>
             <Text text="Ubicaciones" semiBold />
@@ -139,8 +134,9 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   infoHeader: {
-    width: "100%",
-    paddingBottom: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   info: {
     width: "100%",

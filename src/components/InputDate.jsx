@@ -11,7 +11,6 @@ const InputDate = ({ placeholder, date, changeDate }) => {
   const [show, setShow] = useState(false);
 
   const onChangeDate = (event, selectedDate) => {
-    console.log(selectedDate);
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     changeDate(currentDate);
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
 InputDate.propTypes = {
   placeholder: PropTypes.string,
   date: PropTypes.object,
-  setDate: PropTypes.func,
+  changeDate: PropTypes.func,
 };
 
 export default InputDate;

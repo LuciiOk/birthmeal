@@ -5,9 +5,7 @@ import Checkbox from "expo-checkbox";
 import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
 
-const ConditionTerms = () => {
-  const [isSelected, setSelection] = React.useState(false);
-
+const ConditionTerms = ({ isSelected, setSelection }) => {
   return (
     <View style={styles.checkboxContainer}>
       <Checkbox

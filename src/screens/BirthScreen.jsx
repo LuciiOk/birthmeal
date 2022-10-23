@@ -1,23 +1,43 @@
-import React from "react";
+import React, {
+  useEffect,
+  useState,
+} from "react";
 import { StyleSheet, View } from "react-native";
 
 import Text from "../components/Text";
 import AddButton from "../components/AddButton";
 
 import BirthdaysContainer from "../containers/BirthdaysContainer";
-import { BirthdaysProvider } from "../contexts/BirthdaysContext";
+import AxiosInstance from "../utils/AxiosInstance";
 
 const BirthScreen = () => {
+  const [birthdays, setBirthdays] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const getBirthday = async () => {
+    try {
+      const response = await AxiosInstance.get("/birthdays/profile");
+      setBirthdays(response.data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getBirthday();
+  }, []);
+
   return (
-    <BirthdaysProvider>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text text="Cumpleaños" bold title />
-        </View>
-        <BirthdaysContainer />
-        <AddButton />
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text text="Cumpleaños" bold title />
       </View>
-    </BirthdaysProvider>
+      <BirthdaysContainer birthdays={birthdays} loading={loading} error={error}/>
+      <AddButton />
+    </View>
   );
 };
 
