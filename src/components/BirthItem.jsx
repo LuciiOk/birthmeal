@@ -3,10 +3,15 @@ import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
-import COLORS from "../constants/colorSchema";
 import Text from "./Text";
+import { getFormattedDate } from "../utils/formatDate";
 
-const BirthItem = ({ name, date, onDelete }) => {
+const BirthItem = ({ id, name, date }) => {
+
+  const onDelete = (id) => {
+    removeBirthday(id);
+  };
+
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
@@ -16,12 +21,12 @@ const BirthItem = ({ name, date, onDelete }) => {
         />
         <View style={styles.itemText}>
           <Text text={name} bold />
-          <Text text={date} opaque light />
+          <Text text={getFormattedDate(date)} opaque light />
         </View>
       </View>
       <View style={styles.itemRight}>
         <TouchableOpacity
-          onPress={() => onDelete(item.id)}
+          onPress={() => onDelete(id)}
           style={styles.deleteButton}
         >
           <Icon name="close" size={30} color="red" />
@@ -67,7 +72,7 @@ const styles = StyleSheet.create({
 
 BirthItem.propTypes = {
   name: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 

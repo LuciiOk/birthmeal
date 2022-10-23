@@ -20,4 +20,3 @@ export const COLORS = {
   frost4: "#5e81ac",
 };
 
-// "#f6d365", "#fda085"

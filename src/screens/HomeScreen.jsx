@@ -31,7 +31,6 @@ const HomeScreen = () => {
         ListEmptyComponent={
           <NoData text="Ups... No hay establecimientos disponibles" />
         }
-        ListHeaderComponent={<FiltersContainer />}
         ListFooterComponent={<View style={{ height: 100 }} />}
       />
     </View>

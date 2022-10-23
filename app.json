@@ -39,6 +39,15 @@
       "eas": {
         "projectId": "9312b05c-245a-4e8c-a9cd-097c0ebe345a"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/Burger-logo2.png",
+          "color": "#A9005F"
+        }
+      ]
+    ]
   }
 }

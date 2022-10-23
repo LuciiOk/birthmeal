@@ -1,28 +1,33 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import { methods, URL } from "../hooks/useFetchData";
-import axios from "axios";
+import { ToastAndroid } from "react-native";
+import Axios from "../utils/AxiosInstance";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [token, setToken] = useState(null);
 
   const login = async (email, password) => {
     try {
-      const response = await axios({
-        method: methods.POST,
-        url: `${URL}auth/login`,
-        data: { email, password },
+      setLoading(true);
+      const response = await Axios.post(`auth/login`, {
+        email,
+        password,
       });
-      const { user, token } = response.data;
+      const { user, access_token } = response.data;
       setUser(user);
-      setToken(token);
-      await AsyncStorage.setItem("token", token);
-    } catch (error) {
-      console.log(error);
+      setToken(access_token);
+      await AsyncStorage.setItem("token", access_token);
+      await AsyncStorage.setItem("user", JSON.stringify(user));
+      ToastAndroid.show("Has iniciado sesión", ToastAndroid.SHORT);
+    } catch ({ response }) {
+      setError(response.data);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -32,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await AsyncStorage.removeItem("user");
       await AsyncStorage.removeItem("token");
+      ToastAndroid.show("Sesión cerrada", ToastAndroid.SHORT);
     } catch (error) {
       console.log(error);
     }
@@ -42,11 +48,31 @@ export const AuthProvider = ({ children }) => {
       const user = await AsyncStorage.getItem("user");
       const token = await AsyncStorage.getItem("token");
       if (user && token) {
-        setUser(user);
+        setUser(JSON.parse(user));
         setToken(token);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+    }
+  };
+
+  const register = async (newUser) => {
+    try {
+      setLoading(true);
+      const response = await Axios.post(`/auth/register`, newUser);
+      const { user, access_token } = response.data;
+      setUser(user);
+      setToken(access_token);
+      await AsyncStorage.setItem("token", access_token);
+      ToastAndroid.show("Usuario registrado", ToastAndroid.SHORT);
+      return {
+        success: true,
+      };
+    } catch ({ response }) {
+      setError(response.data);
+      return response.data;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,9 +85,12 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         token,
+        loading,
+        error,
         login,
         logout,
         isLogged,
+        register,
       }}
     >
       {children}
