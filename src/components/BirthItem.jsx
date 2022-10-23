@@ -39,40 +39,43 @@ const BirthItem = ({ id, name, date }) => {
 const styles = StyleSheet.create({
   item: {
     flex: 1,
+    height: 70,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    margin: 10,
+  },
+  itemLeft: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  itemRight: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   image: {
     width: 50,
     height: 50,
     borderRadius: 50,
   },
-  itemLeft: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-  },
   itemText: {
-    marginLeft: 20,
-  },
-  itemRight: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    marginLeft: 10,
   },
   deleteButton: {
-    marginHorizontal: 10,
-    marginVertical: 2,
+    padding: 10,
   },
 });
 
 BirthItem.propTypes = {
   name: PropTypes.string.isRequired,
-  date: PropTypes.instanceOf(Date).isRequired,
+  date: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 

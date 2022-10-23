@@ -21,6 +21,7 @@
       "supportsTablet": true
     },
     "android": {
+      "enableDangerousExperimentalLeanBuilds": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/Burger-logo2.png",
         "backgroundColor": "#A9005F"

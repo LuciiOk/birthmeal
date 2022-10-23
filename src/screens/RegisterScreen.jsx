@@ -50,6 +50,7 @@ const RegisterScreen = () => {
     await register(newUser);
     if (!error) {
       navigation.navigate("Home");
+      return;
     }
     setErrorMessage("El email ingresado ya existe.");
     navigation.navigate("Register");
