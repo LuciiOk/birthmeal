@@ -7,9 +7,11 @@ import Button from "../components/Button";
 import useClipBoard from "../hooks/useClipBoard";
 import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
+import { useNavigation } from "@react-navigation/native";
 
 const MoreInfoScreen = () => {
   const { copyToClipBoard } = useClipBoard();
+  const navigation = useNavigation()
   const { user, token, logout } = useContext(AuthContext);
 
   const appDescription = `Birthmeal es una aplicación desarrollada
@@ -32,6 +34,10 @@ const MoreInfoScreen = () => {
 
   const closeSession = () => {
     logout();
+  };
+
+  const login = () => {
+    navigation.navigate("Login");
   };
 
   return (
@@ -91,6 +97,15 @@ const MoreInfoScreen = () => {
           <Button
             buttonText="Cerrar sesión"
             action={closeSession}
+            filled
+            styles={styles.button}
+          />
+        )}
+
+        {!user && !token && (
+          <Button
+            buttonText="Iniciar sesión"
+            action={login}
             filled
             styles={styles.button}
           />

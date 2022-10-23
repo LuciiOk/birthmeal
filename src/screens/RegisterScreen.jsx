@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,19 +11,48 @@ import ConditionTerms from "../components/ConditionTerms";
 import NavForm from "../components/NavForm";
 import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
+import { AuthContext } from "../contexts/AuthContext";
+
+import LoadingScreen from "./LoadingScreen";
 
 const RegisterScreen = () => {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-
+  const [name, setName] = useState("luciano");
+  const [email, setEmail] = useState("lportales85@gmail.com");
+  const [password, setPassword] = useState("123");
+  const [confirmPassword, setConfirmPassword] = useState("123");
+  const [date, setDate] = useState(null);
+  const [isSelected, setSelection] = useState(false);
   const navigation = useNavigation();
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleSubmit = () => {
-    navigation.navigate("Home", {
-      screen: "Overview",
-    });
+
+  const { register, loading, error } = useContext(AuthContext);
+
+  const handleSubmit = async () => {
+    if (password !== confirmPassword) {
+      setErrorMessage("Las contraseñas no coinciden");
+      return;
+    }
+
+    if (!isSelected) {
+      setErrorMessage("Debes aceptar los términos y condiciones");
+      return;
+    }
+    const newUser = {
+      name,
+      birthdate: date,
+      userAuth: {
+        email,
+        password,
+        confirmPassword,
+      },
+    };
+    await register(newUser);
+    if (!error) {
+      navigation.navigate("Home");
+    }
+    setErrorMessage("El email ingresado ya existe.");
+    navigation.navigate("Register");
   };
 
   const handleName = (text) => {
@@ -42,6 +71,14 @@ const RegisterScreen = () => {
     setConfirmPassword(text);
   };
 
+  const onChangeDate = (selectedDate) => {
+    setDate(selectedDate);
+  };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <NavForm />
@@ -56,17 +93,45 @@ const RegisterScreen = () => {
             title
             styles={styles.formHeaderText}
           />
+          <Text
+            text="Ingresa tus datos para crear tu cuenta"
+            styles={styles.formHeaderSubText}
+          />
         </View>
-        <Input placeholder="Tu nombre" keyboardType="default" />
-        <Input placeholder="Tu email" keyboardType="email-address" />
-        <Input placeholder="Tu contraseña" keyboardType="default" isPassword />
+        <Input
+          placeholder="Tu nombre"
+          keyboardType="default"
+          onChangeText={handleName}
+          value={name}
+        />
+        <Input
+          placeholder="Tu email"
+          keyboardType="email-address"
+          onChangeText={handleEmail}
+          value={email}
+        />
+        <Input
+          placeholder="Tu contraseña"
+          keyboardType="default"
+          isPassword
+          onChangeText={handlePassword}
+          value={password}
+        />
+
         <Input
           placeholder="Confirma tu contraseña"
           keyboardType="default"
           isPassword
+          onChangeText={handleConfirmPassword}
+          value={confirmPassword}
         />
-        <InputDate placeholder="Tu fecha de nacimiento" />
-        <ConditionTerms />
+        <InputDate
+          placeholder="Tu fecha de nacimiento"
+          date={date}
+          changeDate={onChangeDate}
+        />
+        <ConditionTerms isSelected={isSelected} setSelection={setSelection} />
+        {error && <Text text={errorMessage} styles={styles.error} />}
         <Button buttonText="Crear cuenta" action={handleSubmit} outlined />
         <SignUserDetails
           to="Login"
@@ -105,6 +170,14 @@ const styles = StyleSheet.create({
   formHeaderText: {
     color: COLORS.dark,
     fontSize: 28,
+  },
+  formHeaderSubText: {
+    color: COLORS.dark,
+    fontSize: 16,
+  },
+  error: {
+    color: COLORS.danger,
+    fontSize: 16,
   },
 });
 

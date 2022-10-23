@@ -10,19 +10,20 @@ import NavForm from "../components/NavForm";
 import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
+import LoadingScreen from "./LoadingScreen";
 
 const LoginScreen = () => {
-  const { login } = useContext(AuthContext);
+  const { login, loading, error } = useContext(AuthContext);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
-    login(email, password);
-    navigation.navigate("Home", {
-      screen: "Overview",
-    });
+  const handleSubmit = async () => {
+    await login(email, password);
+    if (!error) {
+      navigation.navigate("Home");
+    }
+    navigation.navigate("Login");
   };
 
   const handleEmail = (text) => {
@@ -32,6 +33,10 @@ const LoginScreen = () => {
   const handlePassword = (text) => {
     setPassword(text);
   };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -58,14 +63,22 @@ const LoginScreen = () => {
           value={password}
           onChangeText={handlePassword}
         />
-        {/* 
-        TODO...
+        {error && (
+          <View style={styles.errorContainer}>
+            <Text
+              text="Correo o contraseña incorrectos"
+              styles={styles.errorText}
+            />
+          </View>
+        )}
+
         <SignUserDetails
           redirectText="Olvidaste tu contraseña?"
           to="ForgotPassword"
           alignText="right"
-        /> */}
+        />
       </View>
+
       <Button buttonText="Iniciar sesión" action={handleSubmit} outlined />
       <SignUserDetails
         to="Register"
@@ -105,6 +118,15 @@ const styles = StyleSheet.create({
   formHeaderText: {
     color: COLORS.dark,
     fontSize: 28,
+  },
+  errorContainer: {
+    width: "80%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorText: {
+    color: COLORS.danger,
+    fontSize: 16,
   },
 });
 

@@ -17,7 +17,6 @@ import InputDate from "../components/InputDate";
 import { BirthdaysContext } from "../contexts/BirthdaysContext";
 
 const AddModal = ({ onClose, visible }) => {
-  const { addBirthday } = useContext(BirthdaysContext);
 
   const [name, setName] = useState("");
   const [date, setDate] = useState(null);
@@ -28,7 +27,6 @@ const AddModal = ({ onClose, visible }) => {
   };
 
   const handleSubmit = () => {
-    addBirthday({ name, date, notify: switchValue });
     onClose();
   };
 

@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import Text from "../components/Text";
 import NoData from "../components/NoData";
 import BirthItem from "../components/BirthItem";
-import { BirthdaysContext } from "../contexts/BirthdaysContext";
 
-const BirthdaysContainer = () => {
-  const { birthdays, loading, error } = useContext(BirthdaysContext);
+const BirthdaysContainer = ({ birthdays, loading, error }) => {
 
   const onDelete = (id) => {
     console.log("Deleted", id);
@@ -26,7 +24,7 @@ const BirthdaysContainer = () => {
           renderItem={({ item }) => (
             <BirthItem
               name={item.name}
-              date={item.date}
+              date={item.birthdate}
               id={item.id}
               onDelete={onDelete}
             />

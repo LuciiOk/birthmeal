@@ -1,31 +1,41 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import AxiosInstance from "../utils/AxiosInstance";
 
-export const methods = {
-  GET: "GET",
-  POST: "POST",
-  PUT: "PUT",
-  DELETE: "DELETE",
-};
-
-export const URL = "http://localhost:3000/";
-
-const useFetchData = (path, method = methods.GET, body = null) => {
+const useFetchData = (urlPath, initialRequest = false) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchData();
-  }, [path]);
-
-  const fetchData = async () => {
+  const get = async (params = null) => {
     try {
-      const response = await axios({
-        method,
-        url: `${URL}${path}`,
-        data: body,
+      const response = await AxiosInstance.get(urlPath, {
+        params,
+      });
+      setData(response.data);
+      console.log(data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const post = async (body) => {
+    try {
+      const response = await AxiosInstance.post(urlPath, body);
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  };
+
+  const put = async (body, params) => {
+    try {
+      const response = await AxiosInstance.put(urlPath, body, {
+        params,
       });
       setData(response.data);
       setLoading(false);
@@ -35,13 +45,31 @@ const useFetchData = (path, method = methods.GET, body = null) => {
     }
   };
 
-  return { data, error, loading };
+  const del = async (params = null) => {
+    try {
+      const response = await AxiosInstance.delete(urlPath, {
+        params,
+      });
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  };
+
+  if (initialRequest === true) {
+    useEffect(() => {
+      get();
+    }, []);
+  }
+
+  return { data, error, loading, get, post, put, del };
 };
 
 useFetchData.propTypes = {
-  url: PropTypes.string.isRequired,
-  method: PropTypes.oneOf(Object.values(methods)),
-  body: PropTypes.object,
+  urlPath: PropTypes.string.isRequired,
+  initialRequest: PropTypes.bool,
 };
 
 export default useFetchData;
