@@ -16,7 +16,7 @@ const BirthItem = ({ id, name, date }) => {
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         <Image
-          source={require("../../assets/images/logo.png")}
+          source={require("../../assets/images/Burger-logo.png")}
           style={styles.image}
         />
         <View style={styles.itemText}>

@@ -23,6 +23,7 @@
     "expo-notifications": "~0.16.1",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
+    "expo-updates": "~0.14.6",
     "expo-web-browser": "~11.0.0",
     "lottie-react-native": "5.1.3",
     "moment": "^2.29.4",

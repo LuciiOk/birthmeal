@@ -30,7 +30,7 @@ const MoreInfoScreen = () => {
 
   const appVersion = "1.0.0";
 
-  const appLogo = require("../../assets/images/logo.png");
+  const appLogo = require("../../assets/images/Burger-logo.png");
 
   const closeSession = () => {
     logout();

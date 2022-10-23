@@ -12,7 +12,7 @@ const Header = ({ title }) => {
       {/* <StatusBar style="dark" /> */}
       <Image
         style={styles.logo}
-        source={require("./../../assets/images/logo.png")}
+        source={require("./../../assets/images/Burger-logo.png")}
       />
       <Text text={title} title bold />
     </SafeAreaView>

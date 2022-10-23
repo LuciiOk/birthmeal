@@ -14,7 +14,6 @@ import Text from "../components/Text";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import InputDate from "../components/InputDate";
-import { BirthdaysContext } from "../contexts/BirthdaysContext";
 
 const AddModal = ({ onClose, visible }) => {
 
