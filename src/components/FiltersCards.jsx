@@ -1,26 +1,27 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { COLORS } from "../constants/colorSchema";
 
 const FiltersCards = ({ filter }) => (
   <TouchableOpacity style={styles.container}>
-    <FontAwesome name={filter.icon} size={30} color={COLORS.dark} />
+    <FontAwesomeIcon icon={filter} size={40} />
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    height: 60,
-    width: 60,
+    backgroundColor: "white",
+    height: 80,
+    width: 80,
     borderRadius: 15,
     padding: 10,
     marginVertical: 7,
     marginHorizontal: 5,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+    shadowColor: COLORS.primary,
     elevation: 5,
     alignItems: "center",
     justifyContent: "center",

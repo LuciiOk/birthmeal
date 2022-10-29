@@ -24,6 +24,7 @@ const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
             setLocation={() => setLocation(item.geometry)}
           />
         )}
+        showsVerticalScrollIndicator={false}
         ListEmptyComponent={<NoData text="No hay ubicaciones disponibles" />}
       />
     </View>

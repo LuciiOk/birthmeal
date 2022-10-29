@@ -32,7 +32,7 @@ const LocationsScreen = ({ locations, business_name = "starbucks", route }) => {
     getLocations();
   }, []);
 
-  if (loading) return <LoadingScreen />;
+  if (loading) return <LoadingScreen backgroundColor="white"/>;
 
   return (
     <View style={styles.container}>

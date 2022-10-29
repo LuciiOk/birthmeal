@@ -13,6 +13,7 @@ import NoData from "../components/NoData";
 import LoadingScreen from "./LoadingScreen";
 import useRequestHttp from "../hooks/useRequestHttp";
 import Text from "../components/Text";
+import FiltersContainer from "../containers/FiltersContainer";
 
 const HomeScreen = () => {
   const {
@@ -32,24 +33,15 @@ const HomeScreen = () => {
           <RefreshControl refreshing={loading} onRefresh={fetchData} />
         }
         data={stablishments}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id + "stablishments"}
         renderItem={({ item }) => <StablishmentCard stablishment={item} />}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <NoData text="Ups... No hay establecimientos disponibles" />
         }
         ListFooterComponent={<View style={{ height: 100 }} />}
-        ListHeaderComponent={<HeaderComponent />}
+        ListHeaderComponent={<FiltersContainer />}
       />
-    </View>
-  );
-};
-
-const HeaderComponent = () => {
-  return (
-    <View style={styles.header}>
-      <Text style={styles.title}>Establecimientos</Text>
-      
     </View>
   );
 };
@@ -60,7 +52,6 @@ const styles = StyleSheet.create({
   },
   header: {
     marginTop: 10,
-    marginBottom: 20,
   },
   primary: {
     color: COLORS.primary,

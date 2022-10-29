@@ -31,6 +31,12 @@ AxiosInstance.interceptors.response.use(
         item.id = item._id;
         delete item._id;
       });
+    } // if data is paginated
+    else if (response.data.data) {
+      response.data.data.map((item) => {
+        item.id = item._id;
+        delete item._id;
+      });
     } else {
       response.data.id = response.data._id;
       delete response.data._id;

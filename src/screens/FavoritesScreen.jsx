@@ -28,8 +28,8 @@ const FavoritesScreen = () => {
           refreshControl={
             <RefreshControl refreshing={loading} onRefresh={fetchData} />
           }
-          data={favorites.paginatedFavorites}
-          keyExtractor={({ id }) => id}
+          data={favorites.data}
+          keyExtractor={({ id }) => id + "favorites"}
           renderItem={({ item }) => <StablishmentCard stablishment={item} />}
           ListEmptyComponent={
             <NoData text="Ups... No hay establecimientos favoritos 😢💔" />

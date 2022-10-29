@@ -12,9 +12,10 @@ const FiltersContainer = ({ filters }) => {
       <FlatList
         data={FILTERS}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <FiltersCards filter={item} />}
-        horizontal
+        renderItem={({ item }) => <FiltersCards filter={item.icon} />}
         showsHorizontalScrollIndicator={false}
+        horizontal
+        style={styles.list}
       />
       <Text text="Establecimientos" title bold />
     </View>
