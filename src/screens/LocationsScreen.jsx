@@ -21,7 +21,6 @@ const LocationsScreen = ({ locations, business_name = "starbucks", route }) => {
   const getLocations = async () => {
     try {
       const { data } = await AxiosInstance.get(`google-maps/${businessName}`);
-      console.log(data);
       setLocationsData(data);
       setSelectedLocation(data[0].geometry);
       setLoading(false);
