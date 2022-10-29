@@ -3,29 +3,27 @@ import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import IonicIcon from "react-native-vector-icons/Ionicons";
+import PropTypes from "prop-types";
 
 import { COLORS } from "../constants/colorSchema";
 import Separator from "../components/Separator";
 import Text from "../components/Text";
 import FavoriteButton from "../components/FavoriteButton";
+import Valoration from "../components/Valoration";
 
-const StablishmentDetail = (props) => {
+const StablishmentDetail = ({ route }) => {
   const navigation = useNavigation();
-  const [favorite, setFavorite] = React.useState(false);
 
   const redirect = () => {
-    WebBrowser.openBrowserAsync(props.route.params.stablishment.webUrl);
+    // validate if the url is valid
+    WebBrowser.openBrowserAsync(route.params.stablishment.webUrl);
   };
 
   const goToLocations = () => {
     navigation.navigate("Locations", {
-      stablishment: props.route.params.stablishment,
+      stablishment: route.params.stablishment,
+      business_name: route.params.stablishment.name,
     });
-  };
-
-  const addToFavorites = () => {
-    setFavorite(!favorite);
   };
 
   return (
@@ -33,14 +31,17 @@ const StablishmentDetail = (props) => {
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={props.route.params.stablishment.imageUrl}
+          source={
+            route.params.stablishment.imageUrl ||
+            require("../../assets/images/Burger-logo.png")
+          }
         />
       </View>
       <View style={styles.detailsContainer}>
         <View style={styles.infoContainer}>
           <View style={styles.infoHeader}>
             <Text text="Información" title bold />
-            <FavoriteButton isFavorite={favorite} onPress={addToFavorites} />
+            <FavoriteButton id={route.params.stablishment.id} />
           </View>
           <View style={styles.info}>
             <Text text="Ubicaciones" semiBold />
@@ -62,7 +63,7 @@ const StablishmentDetail = (props) => {
           <View style={styles.info}>
             <Text text="Ir al sitio web" semiBold />
             <TouchableOpacity onPress={redirect}>
-              <Text text="www.birthmeal.cl" light opaque />
+              <Text text={route.params.stablishment.webUrl} light opaque />
               <FontAwesome
                 name="angle-right"
                 size={24}
@@ -74,27 +75,13 @@ const StablishmentDetail = (props) => {
           <Separator />
           <View style={styles.info}>
             <Text text="Beneficios" semiBold />
-            <Text
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas
-              congue ligula ac quam viverra nec consectetur ante
-              hendrerit. Donec et mollis dolor. Praesent et diam eget
-            "
-              opaque
-              light
-            />
+            <Text text={route.params.stablishment.description} opaque light />
           </View>
           <Separator />
         </View>
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
-          <View style={styles.starsContainer}>
-            <IonicIcon name="star" size={24} color={COLORS.primary} />
-            <IonicIcon name="star" size={24} color={COLORS.primary} />
-            <IonicIcon name="star" size={24} color={COLORS.primary} />
-            <IonicIcon name="star-outline" size={24} color={COLORS.primary} />
-            <IonicIcon name="star-outline" size={24} color={COLORS.primary} />
-          </View>
+          <Valoration rating={route.params.stablishment.rating} />
         </View>
       </View>
     </View>
@@ -165,5 +152,9 @@ const styles = StyleSheet.create({
   },
 });
 
+StablishmentDetail.propTypes = {
+  route: PropTypes.object,
+  params: PropTypes.object,
+};
 
 export default StablishmentDetail;

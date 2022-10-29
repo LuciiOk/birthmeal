@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
 import Text from "./Text";
 import { getFormattedDate } from "../utils/formatDate";
+import { COLORS } from "../constants/colorSchema";
+import { BirthdayContext } from "../contexts/BirthdayContext";
 
 const BirthItem = ({ id, name, date }) => {
+  const { deleteBirthday } = useContext(BirthdayContext);
 
-  const onDelete = (id) => {
-    removeBirthday(id);
+  const onDelete = () => {
+    deleteBirthday(id);
   };
 
   return (
@@ -26,7 +29,7 @@ const BirthItem = ({ id, name, date }) => {
       </View>
       <View style={styles.itemRight}>
         <TouchableOpacity
-          onPress={() => onDelete(id)}
+          onPress={() => onDelete()}
           style={styles.deleteButton}
         >
           <Icon name="close" size={30} color="red" />
@@ -47,6 +50,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     margin: 10,
+    shadowColor: COLORS.primary,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   itemLeft: {
     flex: 1,
@@ -74,9 +85,9 @@ const styles = StyleSheet.create({
 });
 
 BirthItem.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
 
 export default BirthItem;

@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Image, Dimensions, SafeAreaView } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import Text from "./Text";
 import PropTypes from "prop-types";
 

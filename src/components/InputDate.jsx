@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, Platform } from "react-native";
 import PropTypes from "prop-types";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 

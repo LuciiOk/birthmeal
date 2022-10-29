@@ -1,25 +1,28 @@
-import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 
 import NoData from "../components/NoData";
 import BirthItem from "../components/BirthItem";
+import { BirthdayContext } from "../contexts/BirthdayContext";
+import LoadingScreen from "../screens/LoadingScreen";
 
-const BirthdaysContainer = ({ birthdays }) => {
-  const onDelete = (id) => {
-    console.log("Deleted", id);
-  };
+const BirthdaysContainer = () => {
+  const { birthdays, loading } = useContext(BirthdayContext);
+
+  if (loading && birthdays.length === 0)
+    return <LoadingScreen backgroundColor="transparent" />;
 
   return (
     <View style={styles.body}>
       <FlatList
-        data={birthdays || []}
-        keyExtractor={(item) => item.id.toString()}
+        data={birthdays}
+        keyExtractor={({ id }) => id.toString()}
         renderItem={({ item }) => (
           <BirthItem
             name={item.name}
             date={item.birthdate}
             id={item.id}
-            onDelete={onDelete}
+            key={item.id}
           />
         )}
         ListEmptyComponent={

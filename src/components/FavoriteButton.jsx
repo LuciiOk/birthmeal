@@ -1,9 +1,13 @@
 import React, { useRef, useEffect } from "react";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import LottieView from "lottie-react-native";
+import PropTypes from "prop-types";
 
-const FavoriteButton = ({ isFavorite, onPress }) => {
+import useFavorite from "../hooks/useFavorite";
+
+const FavoriteButton = ({ id }) => {
   const animation = useRef(null);
+  const { isFavorite, onFavorite } = useFavorite(id);
 
   useEffect(() => {
     if (animation.current) {
@@ -15,14 +19,8 @@ const FavoriteButton = ({ isFavorite, onPress }) => {
     }
   }, [isFavorite]);
 
-  const handlePress = () => {
-    if (onPress) {
-      onPress();
-    }
-  };
-
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <TouchableWithoutFeedback onPress={() => onFavorite()}>
       <View style={styles.container}>
         <LottieView
           ref={animation}
@@ -50,5 +48,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
 });
+
+FavoriteButton.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 export default FavoriteButton;

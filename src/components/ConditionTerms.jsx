@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import Checkbox from "expo-checkbox";
+import PropTypes from "prop-types";
 
 import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
@@ -38,5 +39,10 @@ const styles = StyleSheet.create({
     color: COLORS.dark,
   },
 });
+
+ConditionTerms.propTypes = {
+  isSelected: PropTypes.bool.isRequired,
+  setSelection: PropTypes.func.isRequired,
+};
 
 export default ConditionTerms;

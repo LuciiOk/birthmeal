@@ -1,19 +1,26 @@
 import React from "react";
-import { View, StyleSheet, StatusBar, Text, Animation } from "react-native";
+import { View, StyleSheet, StatusBar, Text } from "react-native";
 import LottieView from "lottie-react-native";
+import PropTypes from "prop-types";
 
 import { COLORS } from "../constants/colorSchema";
 
-const LoadingScreen = () => {
+const LoadingScreen = ({ backgroundColor = COLORS.primary }) => {
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor={COLORS.primary} />
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor,
+      }}
+    >
+      <StatusBar backgroundColor={backgroundColor} />
       <LottieView
         source={require("../../assets/loties/burguer-loader.json")}
         autoPlay
         loop
         style={styles.animation}
-      />  
+      />
+      <Text style={styles.text}>Estamos preparando todo para ti!</Text>
     </View>
   );
 };
@@ -30,7 +37,18 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
   },
-
+  text: {
+    width: "55%",
+    color: COLORS.dark,
+    fontSize: 20,
+    textAlign: "center",
+    fontFamily: "Lato",
+  },
 });
+
+LoadingScreen.propTypes = {
+  backgroundColor: PropTypes.string,
+};
+
 
 export default LoadingScreen;

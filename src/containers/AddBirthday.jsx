@@ -8,24 +8,33 @@ import {
   Switch,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import LottieView from "lottie-react-native";
+import PropTypes from "prop-types";
 
 import { COLORS } from "../constants/colorSchema";
 import Text from "../components/Text";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import InputDate from "../components/InputDate";
+import { BirthdayContext } from "../contexts/BirthdayContext";
 
 const AddModal = ({ onClose, visible }) => {
-
   const [name, setName] = useState("");
   const [date, setDate] = useState(null);
   const [switchValue, setSwitchValue] = useState(false);
+  const { addBirthday, loading } = useContext(BirthdayContext);
 
   const onDismiss = () => {
     onClose();
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const birthday = {
+      name,
+      birthdate: date,
+      remind: switchValue,
+    };
+    await addBirthday(birthday);
     onClose();
   };
 
@@ -42,7 +51,7 @@ const AddModal = ({ onClose, visible }) => {
           alignItems: "center",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
         }}
-      > 
+      >
         <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
@@ -73,7 +82,17 @@ const AddModal = ({ onClose, visible }) => {
                 value={switchValue}
               />
             </View>
-            <Button buttonText="Agregar" action={handleSubmit} outlined />
+            {!loading && (
+              <Button buttonText="Agregar" action={handleSubmit} outlined />
+            )}
+            {loading && (
+              <LottieView
+                source={require("../../assets/loties/loader.json")}
+                autoPlay
+                loop
+                style={styles.animation}
+              />
+            )}
           </View>
         </View>
       </View>
@@ -106,6 +125,14 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 20,
   },
+  animation: {
+    width: 200,
+  },
 });
+
+AddModal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
+};
 
 export default AddModal;

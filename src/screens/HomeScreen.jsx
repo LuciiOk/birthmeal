@@ -1,30 +1,37 @@
-import React, { useEffect } from "react";
-import { StyleSheet, FlatList, StatusBar, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import {
+  StyleSheet,
+  FlatList,
+  StatusBar,
+  View,
+  RefreshControl,
+} from "react-native";
 
-import { STABLISHMENTS } from "../data/stablishments";
 import StablishmentCard from "../components/StablishmentCard";
 import { COLORS } from "../constants/colorSchema";
 import NoData from "../components/NoData";
-import FiltersContainer from "../containers/FiltersContainer";
+import LoadingScreen from "./LoadingScreen";
+import useRequestHttp from "../hooks/useRequestHttp";
+import Text from "../components/Text";
 
 const HomeScreen = () => {
-  // const navigation = useNavigation();
+  const {
+    data: stablishments,
+    loading,
+    fetchData,
+  } = useRequestHttp("companies", "get");
 
-  // useEffect(() => {
-  //   navigation.setOptions({
-  //     headerLargeTitle: false,
-  //     headerSearchBarOptions: {
-  //       placeholder: "Search",
-  //     },
-  //   });
-  // }, [navigation]);
+  if (loading && stablishments.length === 0)
+    return <LoadingScreen backgroundColor="transparent" />;
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
       <FlatList
-        data={STABLISHMENTS}
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={fetchData} />
+        }
+        data={stablishments}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <StablishmentCard stablishment={item} />}
         showsVerticalScrollIndicator={false}
@@ -32,7 +39,17 @@ const HomeScreen = () => {
           <NoData text="Ups... No hay establecimientos disponibles" />
         }
         ListFooterComponent={<View style={{ height: 100 }} />}
+        ListHeaderComponent={<HeaderComponent />}
       />
+    </View>
+  );
+};
+
+const HeaderComponent = () => {
+  return (
+    <View style={styles.header}>
+      <Text style={styles.title}>Establecimientos</Text>
+      
     </View>
   );
 };
@@ -41,6 +58,23 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
   },
+  header: {
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  primary: {
+    color: COLORS.primary,
+    fontSize: 30,
+  },
+  frost: {
+    color: COLORS.frost1,
+    fontSize: 25,
+  },
+  normal: {
+    color: COLORS.warning,
+    fontSize: 19,
+  },
+
 });
 
 export default HomeScreen;

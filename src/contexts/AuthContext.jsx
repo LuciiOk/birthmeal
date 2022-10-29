@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       setToken(access_token);
       await AsyncStorage.setItem("token", access_token);
+      await AsyncStorage.setItem("user", JSON.stringify(user));
       ToastAndroid.show("Usuario registrado", ToastAndroid.SHORT);
       return {
         success: true,

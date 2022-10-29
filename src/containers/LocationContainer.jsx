@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import PropTypes from "prop-types";
 
 import Text from "../components/Text";
@@ -13,18 +13,19 @@ const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
       <View style={styles.locationHeader}>
         <Text text="Seleciona una ubicación:" bold />
       </View>
-      <View style={styles.locationList}>
-        {locations.map((location) => (
+      <FlatList
+        data={locations}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
           <LocationItem
-            key={location.id}
-            name={location.name}
-            address={location.address}
-            selected={selectedLocation && selectedLocation.id === location.id}
-            setLocation={() => setLocation(location)}
+            name={item.name}
+            address={item.address}
+            selected={item.geometry === selectedLocation}
+            setLocation={() => setLocation(item.geometry)}
           />
-        ))}
-        {locations.length === 0 && <NoData text="No hay ubicaciones disponibles" />}
-      </View>
+        )}
+        ListEmptyComponent={<NoData text="No hay ubicaciones disponibles" />}
+      />
     </View>
   );
 };
@@ -51,20 +52,16 @@ const styles = StyleSheet.create({
 LocationContainer.propTypes = {
   locations: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       address: PropTypes.string.isRequired,
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
+      geometry: PropTypes.shape({
+        coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+      }).isRequired,
     })
   ).isRequired,
   setLocation: PropTypes.func.isRequired,
   selectedLocation: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
 };
 
