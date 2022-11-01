@@ -50,7 +50,9 @@ export const AuthProvider = ({ children }) => {
       if (user && token) {
         setUser(JSON.parse(user));
         setToken(token);
+        return true;
       }
+      return false;
     } catch (error) {
       console.log(error.message);
     }
