@@ -12,7 +12,6 @@ import LoadingScreen from "./LoadingScreen";
 
 
 const LocationsScreen = ({ route }) => {
-  // get params from props
   const { params } = route;
   const { companyId } = params;
   const [locationsData, setLocationsData] = useState([]);
@@ -46,8 +45,6 @@ const LocationsScreen = ({ route }) => {
       <Map
         latitude={selectedLocation?.coordinates[1] || 0}
         longitude={selectedLocation?.coordinates[0] || 0}
-        latitudeDelta={0.004757}
-        longitudeDelta={0.006866}
       >
         {locationsData.map(({ geometry, name, address, _id }) => (
           <MapView.Marker

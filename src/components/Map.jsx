@@ -10,16 +10,16 @@ const Map = ({ latitude, longitude, ...props }) => {
       initialRegion={{
         latitude: 4.60971,
         longitude: -74.08175,
-        latitudeDelta: 0.09,
-        longitudeDelta: 0.09,
+        latitudeDelta: 1,
+        longitudeDelta: 1,
       }}
       region={
         latitude && longitude
           ? {
               latitude,
               longitude,
-              latitudeDelta: 0.09,
-              longitudeDelta: 0.09,
+              latitudeDelta: 0.000060757,
+              longitudeDelta: 0.009366,
             }
           : null
       }
