@@ -27,6 +27,11 @@ const HomeScreen = () => {
     fetchData: fetchCategories,
   } = useRequestHttp("categories/companies", "get");
 
+  const onRefresh = () => {
+    fetchData();
+    fetchCategories();
+  };
+
   if (loading && stablishments.length === 0)
     return <LoadingScreen backgroundColor="transparent" />;
 
@@ -35,7 +40,7 @@ const HomeScreen = () => {
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
       <FlatList
         refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={fetchData} />
+          <RefreshControl refreshing={loading} onRefresh={onRefresh} />
         }
         data={stablishments}
         keyExtractor={(item) => item.id + "stablishments"}
@@ -45,7 +50,7 @@ const HomeScreen = () => {
           <NoData text="Ups... No hay establecimientos disponibles" />
         }
         ListFooterComponent={<View style={{ height: 100 }} />}
-        ListHeaderComponent={<FiltersContainer filters={categories}/>}
+        ListHeaderComponent={<FiltersContainer filters={categories} />}
       />
     </View>
   );

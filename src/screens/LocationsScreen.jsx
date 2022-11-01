@@ -8,7 +8,6 @@ import Map from "../components/Map";
 import LocationContainer from "../containers/LocationContainer";
 import AxiosInstance from "./../utils/AxiosInstance";
 import LoadingScreen from "./LoadingScreen";
-// import * as Location from 'expo-location';
 
 
 const LocationsScreen = ({ route }) => {

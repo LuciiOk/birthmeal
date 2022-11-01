@@ -7,21 +7,24 @@ import Text from "./Text";
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 const FiltersCards = ({ filter }) => (
-  <TouchableOpacity style={styles.container}>
-    <FontAwesomeIcon
-      icon={Icons["faAngleDown"]}
-      size={24}
-      color={filter.color}
-    />
-    <Text
-      text={filter.name || ""}
-      styles={{
-        ...styles.text,
-        color: filter.color,
-      }}
-      semiBold
-    />
-  </TouchableOpacity>
+  console.log(filter),
+  (
+    <TouchableOpacity style={styles.container}>
+      <FontAwesomeIcon
+        icon={Icons[filter.icon || "faSearch"]}
+        size={24}
+        color={filter.color}
+      />
+      <Text
+        text={filter.name || ""}
+        styles={{
+          ...styles.text,
+          color: filter.color,
+        }}
+        semiBold
+      />
+    </TouchableOpacity>
+  )
 );
 
 const styles = StyleSheet.create({
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontSize: 18,
     textAlign: "center",
-    // lowercase
+    marginLeft: 10,
     textTransform: "capitalize",
   },
 });
