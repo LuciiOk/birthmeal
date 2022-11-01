@@ -12,7 +12,6 @@ import { COLORS } from "../constants/colorSchema";
 import NoData from "../components/NoData";
 import LoadingScreen from "./LoadingScreen";
 import useRequestHttp from "../hooks/useRequestHttp";
-import Text from "../components/Text";
 import FiltersContainer from "../containers/FiltersContainer";
 
 const HomeScreen = () => {
@@ -21,6 +20,12 @@ const HomeScreen = () => {
     loading,
     fetchData,
   } = useRequestHttp("companies", "get");
+
+  const {
+    data: categories,
+    loading: loadingCategories,
+    fetchData: fetchCategories,
+  } = useRequestHttp("categories/companies", "get");
 
   if (loading && stablishments.length === 0)
     return <LoadingScreen backgroundColor="transparent" />;
@@ -40,7 +45,7 @@ const HomeScreen = () => {
           <NoData text="Ups... No hay establecimientos disponibles" />
         }
         ListFooterComponent={<View style={{ height: 100 }} />}
-        ListHeaderComponent={<FiltersContainer />}
+        ListHeaderComponent={<FiltersContainer filters={categories}/>}
       />
     </View>
   );
@@ -65,7 +70,6 @@ const styles = StyleSheet.create({
     color: COLORS.warning,
     fontSize: 19,
   },
-
 });
 
 export default HomeScreen;

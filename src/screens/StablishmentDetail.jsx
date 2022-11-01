@@ -10,9 +10,11 @@ import Separator from "../components/Separator";
 import Text from "../components/Text";
 import FavoriteButton from "../components/FavoriteButton";
 import Valoration from "../components/Valoration";
+import AxiosInstance from "../utils/AxiosInstance";
 
 const StablishmentDetail = ({ route }) => {
   const navigation = useNavigation();
+  const [nearLocation, setNearLocation] = React.useState(null);
 
   const redirect = () => {
     // validate if the url is valid
@@ -23,8 +25,21 @@ const StablishmentDetail = ({ route }) => {
     navigation.navigate("Locations", {
       stablishment: route.params.stablishment,
       business_name: route.params.stablishment.name,
+      companyId: route.params.stablishment.id,
     });
   };
+
+  const getNearLocation = async () => {
+    const {data} = await AxiosInstance.post(
+      `location/nearest/${route.params.stablishment.id}`,
+      { coordinates: [-32.90086717852091, -71.26485029719171] }
+    );
+    setNearLocation(data);
+  };
+
+  React.useEffect(() => {
+    getNearLocation();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -47,7 +62,7 @@ const StablishmentDetail = ({ route }) => {
             <Text text="Ubicaciones" semiBold />
             <TouchableOpacity onPress={goToLocations}>
               <Text
-                text="Av. Valparaíso 1070, local 3044, Viña del Mar"
+                text={nearLocation?.address || "No hay ubicaciones"}
                 light
                 opaque
               />

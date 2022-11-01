@@ -3,10 +3,12 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { COLORS } from "../constants/colorSchema";
+import Text from "./Text";
 
 const FiltersCards = ({ filter }) => (
   <TouchableOpacity style={styles.container}>
-    <FontAwesomeIcon icon={filter} size={40} />
+    {/* <FontAwesomeIcon icon={filter} size={40} /> */}
+    <Text text={filter.name || 'dsfsdf'} styles={styles.text}/>
   </TouchableOpacity>
 );
 
@@ -25,6 +27,11 @@ const styles = StyleSheet.create({
     elevation: 5,
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
+    color: COLORS.primary,
+    fontSize: 15,
+    textAlign: "center",
   },
 });
 

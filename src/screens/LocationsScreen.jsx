@@ -8,23 +8,31 @@ import Map from "../components/Map";
 import LocationContainer from "../containers/LocationContainer";
 import AxiosInstance from "./../utils/AxiosInstance";
 import LoadingScreen from "./LoadingScreen";
+// import * as Location from 'expo-location';
 
-const LocationsScreen = ({ locations, business_name = "starbucks", route }) => {
+
+const LocationsScreen = ({ route }) => {
   // get params from props
   const { params } = route;
-  const { business_name: businessName } = params;
-
+  const { companyId } = params;
   const [locationsData, setLocationsData] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const getLocations = async () => {
     try {
-      const { data } = await AxiosInstance.get(`google-maps/${businessName}`);
+      const { data } = await AxiosInstance.post(`location/nearests/${companyId}`, {
+        coordinates: [-32.90086717852091, -71.26485029719171]
+      });
       setLocationsData(data);
       setSelectedLocation(data[0].geometry);
       setLoading(false);
-    } catch (error) {}
+    } catch (error) {
+
+    }
+    finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -36,8 +44,8 @@ const LocationsScreen = ({ locations, business_name = "starbucks", route }) => {
   return (
     <View style={styles.container}>
       <Map
-        latitude={selectedLocation.coordinates[1]}
-        longitude={selectedLocation.coordinates[0]}
+        latitude={selectedLocation?.coordinates[1] || 0}
+        longitude={selectedLocation?.coordinates[0] || 0}
         latitudeDelta={0.004757}
         longitudeDelta={0.006866}
       >

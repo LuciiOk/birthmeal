@@ -14,18 +14,18 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setLoading(true);
-      const response = await Axios.post(`auth/login`, {
+      const { data } = await Axios.post(`auth/login`, {
         email,
         password,
       });
-      const { user, access_token } = response.data;
+      const { user, access_token } = data;
       setUser(user);
       setToken(access_token);
       await AsyncStorage.setItem("token", access_token);
       await AsyncStorage.setItem("user", JSON.stringify(user));
       ToastAndroid.show("Has iniciado sesión", ToastAndroid.SHORT);
     } catch ({ response }) {
-      setError(response.data);
+      setError(response);
     } finally {
       setLoading(false);
     }
