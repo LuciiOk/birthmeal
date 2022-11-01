@@ -3,18 +3,18 @@ import { StyleSheet, View, FlatList } from "react-native";
 
 import Text from "../components/Text";
 import FiltersCards from "../components/FiltersCards";
-import { FILTERS } from "../data/filters";
 
 const FiltersContainer = ({ filters }) => {
   return (
     <View style={styles.header}>
       <Text text="Categorías" title bold />
       <FlatList
-        data={FILTERS}
+        data={filters}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <FiltersCards filter={item} />}
-        horizontal
         showsHorizontalScrollIndicator={false}
+        horizontal
+        style={styles.list}
       />
       <Text text="Establecimientos" title bold />
     </View>

@@ -49,6 +49,9 @@ const styles = StyleSheet.create({
 Button.propTypes = {
   buttonText: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired,
+  outlined: PropTypes.bool,
+  filled: PropTypes.bool,
+  buttonStyles: PropTypes.object,
 };
 
 export default Button;

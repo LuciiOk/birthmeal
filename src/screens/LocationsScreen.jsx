@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 
 import MapView from "react-native-maps";
@@ -6,56 +6,66 @@ import PropTypes from "prop-types";
 
 import Map from "../components/Map";
 import LocationContainer from "../containers/LocationContainer";
-import useLocations from "../hooks/useLocations";
+import AxiosInstance from "./../utils/AxiosInstance";
+import LoadingScreen from "./LoadingScreen";
+// import * as Location from 'expo-location';
 
-const LocationsScreen = ({ locations }) => {
-  const locationList = [
-    {
-      id: 1,
-      name: "Casa de la cultura",
-      address: "Calle 1 # 2 - 3",
-      latitude: 4.60971,
-      longitude: -74.08175,
-    },
-    {
-      id: 2,
-      name: "Casa de la cultura",
-      address: "Calle 1 # 2 - 3",
-      latitude: 20.60971,
-      longitude: -74.08175,
-    },
-    {
-      id: 3,
-      name: "Casa de la cultura",
-      address: "Calle 1 # 2 - 3",
-      latitude: 4.60971,
-      longitude: -24.08175,
-    },
-  ];
 
-  const [selectedLocation, setLocation] = useLocations(locationList[0]);
+const LocationsScreen = ({ route }) => {
+  // get params from props
+  const { params } = route;
+  const { companyId } = params;
+  const [locationsData, setLocationsData] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const getLocations = async () => {
+    try {
+      const { data } = await AxiosInstance.post(`location/nearests/${companyId}`, {
+        coordinates: [-32.90086717852091, -71.26485029719171]
+      });
+      setLocationsData(data);
+      setSelectedLocation(data[0].geometry);
+      setLoading(false);
+    } catch (error) {
+
+    }
+    finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getLocations();
+  }, []);
+
+  if (loading) return <LoadingScreen backgroundColor="white"/>;
 
   return (
     <View style={styles.container}>
       <Map
-        latitude={selectedLocation.latitude}
-        longitude={selectedLocation.longitude}
+        latitude={selectedLocation?.coordinates[1] || 0}
+        longitude={selectedLocation?.coordinates[0] || 0}
+        latitudeDelta={0.004757}
+        longitudeDelta={0.006866}
       >
-        {locationList.map((location) => (
+        {locationsData.map(({ geometry, name, address, _id }) => (
           <MapView.Marker
-            key={location.id}
+            key={_id+name+address}
             coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
+              latitude: geometry.coordinates[1],
+              longitude: geometry.coordinates[0],
+              latitudeDelta: 0.0000000757,
+              longitudeDelta: 0.000066,
             }}
-            title={location.name}
-            description={location.address}
+            title={address}
+            description={address}
           />
         ))}
       </Map>
       <LocationContainer
-        locations={locationList}
-        setLocation={setLocation}
+        locations={locationsData}
+        setLocation={setSelectedLocation}
         selectedLocation={selectedLocation}
       />
     </View>

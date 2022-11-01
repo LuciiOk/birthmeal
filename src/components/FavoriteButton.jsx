@@ -1,9 +1,18 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext, useState } from "react";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import LottieView from "lottie-react-native";
+import PropTypes from "prop-types";
 
-const FavoriteButton = ({ isFavorite, onPress }) => {
+import useFavorite from "../hooks/useFavorite";
+import { AuthContext } from "../contexts/AuthContext";
+import LoginMessage from "./LoginMessage";
+
+const FavoriteButton = ({ id }) => {
   const animation = useRef(null);
+  const { isFavorite, onFavorite } = useFavorite(id);
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
+
+  const { isLogged } = useContext(AuthContext);
 
   useEffect(() => {
     if (animation.current) {
@@ -15,20 +24,27 @@ const FavoriteButton = ({ isFavorite, onPress }) => {
     }
   }, [isFavorite]);
 
-  const handlePress = () => {
-    if (onPress) {
-      onPress();
+  const handleFavorite = async () => {
+    console.log(await isLogged())
+    if (!(await isLogged())) {
+      setShowLoginMessage(true);
+      return;
     }
+    onFavorite();
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <TouchableWithoutFeedback onPress={handleFavorite}>
       <View style={styles.container}>
         <LottieView
           ref={animation}
           source={require("../../assets/loties/favorite.json")}
           loop={false}
           style={styles.animation}
+        />
+        <LoginMessage
+          visible={showLoginMessage}
+          onClose={() => setShowLoginMessage(false)}
         />
       </View>
     </TouchableWithoutFeedback>
@@ -50,5 +66,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
 });
+
+FavoriteButton.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 export default FavoriteButton;

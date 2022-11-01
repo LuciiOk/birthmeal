@@ -1,61 +1,15 @@
+import {
+  faFilm,
+  faBurger,
+  faPizzaSlice,
+  faCoffee,
+  faChampagneGlasses,
+} from "@fortawesome/free-solid-svg-icons";
+// reassign the icon property to the imported icon
 export const FILTERS = [
-  {
-    id: "f1",
-    title: "All",
-    description: "All",
-  },
-  {
-    id: "f2",
-    title: "Burgers",
-    description: "Burgers",
-    icon: "hamburger"
-  },
-  {
-    id: "f3",
-    title: "Pizza",
-    description: "Pizza",
-    icon: "pizza-slice"
-  },
-  {
-    id: "f4",
-    title: "Sushi",
-    description: "Sushi",
-    icon: "fish"
-  },
-  {
-    id: "f5",
-    title: "Chinese",
-    description: "Chinese",
-    icon: "dumpling"
-  },
-  {
-    id: "f6",
-    title: "Italian",
-    description: "Italian",
-    icon: "spaghetti"
-  },
-  {
-    id: "f7",
-    title: "Indian",
-    description: "Indian",
-    icon: "curry"
-  },
-  {
-    id: "f8",
-    title: "Thai",
-    description: "Thai",
-    icon: "lemon"
-  },
-  {
-    id: "f9",
-    title: "French",
-    description: "French",
-    icon: "bread-slice"
-  },
-  {
-    id: "f10",
-    title: "Japanese",
-    description: "Japanese",
-    icon: "rice"
-  },
+  { name: "films", icon: faFilm, id: 1 },
+  { name: "Burgers", icon: faBurger, id: 2 },
+  { name: "Pizza", icon: faPizzaSlice, id: 3 },
+  { name: "Coffee", icon: faCoffee, id: 4 },
+  { name: "Champagne", icon: faChampagneGlasses, id: 5 },
 ];

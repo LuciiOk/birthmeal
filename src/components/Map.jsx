@@ -24,7 +24,7 @@ const Map = ({ latitude, longitude, ...props }) => {
           : null
       }
     >
-      { props.children }
+      {props.children}
     </MapView>
   );
 };
@@ -32,6 +32,7 @@ const Map = ({ latitude, longitude, ...props }) => {
 Map.propTypes = {
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -40,6 +41,5 @@ const styles = StyleSheet.create({
     height: "45%",
   },
 });
-
 
 export default Map;

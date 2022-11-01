@@ -22,6 +22,7 @@ const LoginScreen = () => {
     await login(email, password);
     if (!error) {
       navigation.navigate("Home");
+      return;
     }
     navigation.navigate("Login");
   };

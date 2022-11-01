@@ -14,18 +14,18 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setLoading(true);
-      const response = await Axios.post(`auth/login`, {
+      const { data } = await Axios.post(`auth/login`, {
         email,
         password,
       });
-      const { user, access_token } = response.data;
+      const { user, access_token } = data;
       setUser(user);
       setToken(access_token);
       await AsyncStorage.setItem("token", access_token);
       await AsyncStorage.setItem("user", JSON.stringify(user));
       ToastAndroid.show("Has iniciado sesión", ToastAndroid.SHORT);
     } catch ({ response }) {
-      setError(response.data);
+      setError(response);
     } finally {
       setLoading(false);
     }
@@ -50,7 +50,9 @@ export const AuthProvider = ({ children }) => {
       if (user && token) {
         setUser(JSON.parse(user));
         setToken(token);
+        return true;
       }
+      return false;
     } catch (error) {
       console.log(error.message);
     }
@@ -64,6 +66,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       setToken(access_token);
       await AsyncStorage.setItem("token", access_token);
+      await AsyncStorage.setItem("user", JSON.stringify(user));
       ToastAndroid.show("Usuario registrado", ToastAndroid.SHORT);
       return {
         success: true,

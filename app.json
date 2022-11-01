@@ -25,7 +25,7 @@
         "foregroundImage": "./assets/images/Burger-logo2.png",
         "backgroundColor": "#A9005F"
       },
-      "package": "com.anonymous.birthmealapp",
+      "package": "com.birthmeal.birthmeal",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyDsadPAbIgJa8JNvCGwPWVBY0NUn5MKcoE"

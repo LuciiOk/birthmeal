@@ -1,32 +1,39 @@
-import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 
-import Text from "../components/Text";
 import NoData from "../components/NoData";
 import StablishmentCard from "../components/StablishmentCard";
-
-import useFetchData from "../hooks/useFetchData";
+import useRequestHttp from "../hooks/useRequestHttp";
+import AxiosInstance from "../utils/AxiosInstance";
+import LoadingScreen from "./LoadingScreen";
 
 const FavoritesScreen = () => {
+  const {
+    data: favorites,
+    loading,
+    fetchData,
+  } = useRequestHttp("user/favorite", "get");
 
-  const [data, setData] = React.useState([]);
-  const { _data, error, loading } = useFetchData("favorites");
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  React.useEffect(() => {
-    setData(_data ?? []);
-  }, [_data]);
+  if (loading && favorites.length === 0)
+    return <LoadingScreen backgroundColor="transparent" />;
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text text="Favoritos" title bold />
-      </View>
       <View style={styles.favoritesList}>
         <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={fetchData} />
+          }
+          data={favorites.data}
+          keyExtractor={({ id }) => id + "favorites"}
           renderItem={({ item }) => <StablishmentCard stablishment={item} />}
-          ListEmptyComponent={<NoData text="Ups... No hay establecimientos favoritos 😢💔" />}
+          ListEmptyComponent={
+            <NoData text="Ups... No hay establecimientos favoritos 😢💔" />
+          }
         />
       </View>
     </View>
@@ -36,17 +43,14 @@ const FavoritesScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
-  header: {
-    flex: 1,
-    width: "100%",
-    paddingLeft: 20,
-    justifyContent: "center",
-  },
   favoritesList: {
     flex: 10,
+    width: "100%",
+    paddingHorizontal: 10,
   },
 });
 

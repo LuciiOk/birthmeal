@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Image, Dimensions, SafeAreaView } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import Text from "./Text";
 import PropTypes from "prop-types";
 
@@ -12,7 +11,7 @@ const Header = ({ title }) => {
       {/* <StatusBar style="dark" /> */}
       <Image
         style={styles.logo}
-        source={require("./../../assets/images/logo.png")}
+        source={require("./../../assets/images/Burger-logo.png")}
       />
       <Text text={title} title bold />
     </SafeAreaView>

@@ -10,7 +10,7 @@ const StablishmentCard = ({ stablishment }) => {
 
   const redirecTo = () => {
     navigator.navigate("Details", {
-      title: stablishment.title,
+      title: stablishment.name,
       name: stablishment.name,
       stablishment,
     });
@@ -18,9 +18,15 @@ const StablishmentCard = ({ stablishment }) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={redirecTo}>
-      <Image style={styles.image} source={stablishment.imageUrl} />
+      <Image
+        style={styles.image}
+        source={
+          stablishment.imageUrl ||
+          require("../../assets/images/Burger-logo.png")
+        }
+      />
       <View style={styles.textContainer}>
-        <Text text={stablishment.title} title bold />
+        <Text text={stablishment.name} title bold />
         <Text text={stablishment.description} opaque />
       </View>
     </TouchableOpacity>
@@ -30,7 +36,7 @@ const StablishmentCard = ({ stablishment }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.light,
-    height: 80,
+    height: 70,
     borderRadius: 15,
     padding: 10,
     marginVertical: 7,
