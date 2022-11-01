@@ -4,19 +4,29 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
+import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 const FiltersCards = ({ filter }) => (
   <TouchableOpacity style={styles.container}>
-    {/* <FontAwesomeIcon icon={filter} size={40} /> */}
-    <Text text={filter.name || 'dsfsdf'} styles={styles.text}/>
+    <FontAwesomeIcon
+      icon={Icons["faAngleDown"]}
+      size={24}
+      color={filter.color}
+    />
+    <Text
+      text={filter.name || ""}
+      styles={{
+        ...styles.text,
+        color: filter.color,
+      }}
+      semiBold
+    />
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    height: 80,
-    width: 80,
     borderRadius: 15,
     padding: 10,
     marginVertical: 7,
@@ -27,11 +37,14 @@ const styles = StyleSheet.create({
     elevation: 5,
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
   },
   text: {
     color: COLORS.primary,
-    fontSize: 15,
+    fontSize: 18,
     textAlign: "center",
+    // lowercase
+    textTransform: "capitalize",
   },
 });
 

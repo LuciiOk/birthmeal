@@ -30,7 +30,13 @@
         "googleMaps": {
           "apiKey": "AIzaSyDsadPAbIgJa8JNvCGwPWVBY0NUn5MKcoE"
         }
-      }
+      },
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/images/Burger-logo.png"
