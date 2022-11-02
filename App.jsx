@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFonts } from "expo-font";
 
 import AppNav from "./src/navigators/AppNav";
 import { AuthProvider } from "./src/contexts/AuthContext";
+import { LocationProvider } from "./src/contexts/LocationProvider";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,8 +18,10 @@ export default function App() {
   }
 
   return (
-    <AuthProvider>
-      <AppNav />
-    </AuthProvider>
+    <LocationProvider>
+      <AuthProvider>
+        <AppNav />
+      </AuthProvider>
+    </LocationProvider>
   );
 }

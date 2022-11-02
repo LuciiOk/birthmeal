@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
@@ -11,9 +11,12 @@ import FavoriteButton from "../components/FavoriteButton";
 import Valoration from "../components/Valoration";
 import AxiosInstance from "../utils/AxiosInstance";
 
+import { LocationContext } from "../contexts/LocationProvider";
+
 const StablishmentDetail = ({ route }) => {
   const navigation = useNavigation();
-  const [nearLocation, setNearLocation] = React.useState(null);
+  const [nearLocation, setNearLocation] = useState(null);
+  const { location: coordinates } = useContext(LocationContext);
 
   const redirect = () => {
     WebBrowser.openBrowserAsync(route.params.stablishment.webUrl);
@@ -30,12 +33,12 @@ const StablishmentDetail = ({ route }) => {
   const getNearLocation = async () => {
     const { data } = await AxiosInstance.post(
       `location/nearest/${route.params.stablishment.id}`,
-      { coordinates: [-32.90086717852091, -71.26485029719171] }
+      { coordinates }
     );
     setNearLocation(data);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getNearLocation();
   }, []);
 
