@@ -6,7 +6,6 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
 import { COLORS } from "../constants/colorSchema";
-import Separator from "../components/Separator";
 import Text from "../components/Text";
 import FavoriteButton from "../components/FavoriteButton";
 import Valoration from "../components/Valoration";
@@ -17,20 +16,7 @@ const StablishmentDetail = ({ route }) => {
   const [nearLocation, setNearLocation] = React.useState(null);
 
   const redirect = () => {
-    const url = route.params.stablishment.webUrl;
-    // CONvierte la url en un objeto de tipo URL
-
-    const parsedUrl = new URL(url);
-
-    console.log(parsedUrl);
-
-    // Si la url no tiene protocolo, se le agrega el protocolo http
-
-    if (!parsedUrl.protocol) {
-      parsedUrl.protocol = "http";
-    }
-
-    WebBrowser.openBrowserAsync(parsedUrl.toString());
+    WebBrowser.openBrowserAsync(route.params.stablishment.webUrl);
   };
 
   const goToLocations = () => {
