@@ -20,14 +20,14 @@ const LocationItem = ({ name, address, selected, setLocation }) => {
             style={styles.selectedLocationIcon}
           />
           <View style={styles.selectedLocationTextContainer}>
-            <Text text={name} subtitle bold />
+            <Text text={name} bold />
             <Text text={address} light />
           </View>
         </View>
       )}
       {!selected && (
         <>
-          <Text text={name} subtitle bold />
+          <Text text={name} bold />
           <Text text={address} light />
         </>
       )}
