@@ -17,6 +17,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import InputDate from "../components/InputDate";
 import { BirthdayContext } from "../contexts/BirthdayContext";
+import { scheduleUserBirthday } from "../hooks/useNotification";
 
 const AddModal = ({ onClose, visible }) => {
   const [name, setName] = useState("");
@@ -34,6 +35,9 @@ const AddModal = ({ onClose, visible }) => {
       birthdate: date,
       remind: switchValue,
     };
+    if (birthday.remind) {
+      await scheduleUserBirthday(birthday.birthdate, birthday.name);
+    }
     await addBirthday(birthday);
     onClose();
   };
@@ -55,7 +59,7 @@ const AddModal = ({ onClose, visible }) => {
         <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <Text text="Agregar nuevo cumpleaños" bold subtitle/>
+            <Text text="Agregar nuevo cumpleaños" bold subtitle />
             <TouchableOpacity onPress={onDismiss}>
               <Icon name="close" size={20} color={COLORS.dark} />
             </TouchableOpacity>

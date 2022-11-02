@@ -1,6 +1,5 @@
 import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
-import moment from "moment";
 
 const message = {
   title: `Hey! Hoy es el cumpleaños de `,
@@ -8,6 +7,7 @@ const message = {
 };
 
 export const scheduleUserBirthday = async (date, name) => {
+  clearAllNotifications();
   if (Platform.OS === "android") {
     Notifications.setNotificationChannelAsync("birthday", {
       name: "birthday",
@@ -15,27 +15,34 @@ export const scheduleUserBirthday = async (date, name) => {
       importance: Notifications.AndroidImportance.HIGH,
     });
   }
-  date = moment(date).add(5, "sec");
-  let dateN;
-
-  if (moment(date).isBefore(moment())) {
-    const day = moment(date).day() + 1;
-    const month = moment(date).month() + 1;
-    const year = moment().year() + 1;
-    dateN = moment(`${day}/${month}/${year}:20:59:00`, "DD/MM/YYYY:HH:mm:ss");
-  } else {
-    dateN = moment(date);
-  }
+  // get current date with GMT-3
+  const trigger = new Date()
+  // subtract 3 hours to get GMT-3
+  trigger.setHours(trigger.getHours() - 3)
+  // add 3 seconds to current date
+  trigger.setSeconds(trigger.getSeconds() + 3);
 
   const notificationId = await Notifications.scheduleNotificationAsync({
     content: {
-      title: message.title + name + "! 🎉",
+      title: message.title + name,
       body: message.body,
     },
     trigger: {
-      date: dateN.toDate(),
+      date: trigger,
       repeats: true,
-    },
-    channelId: "birthday",
+      channelId: "birthday",
+    }
   });
+  // get when the notification is scheduled
+  const notifications = await Notifications.getAllScheduledNotificationsAsync();
+  notifications.forEach((notification) => {
+    const date = new Date(notification.trigger["value"]);
+    console.log(date, notification.trigger["value"]);
+  });
+
+  return notificationId;
+};
+
+const clearAllNotifications = async () => {
+  await Notifications.cancelAllScheduledNotificationsAsync();
 };
