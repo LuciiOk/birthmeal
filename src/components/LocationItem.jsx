@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: "white",
     borderRadius: 10,
-    marginBottom: 10,
+    marginBottom: 15,
   },
   selectedLocation: {
     flexDirection: "row",
