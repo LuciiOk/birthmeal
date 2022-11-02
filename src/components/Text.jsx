@@ -34,13 +34,13 @@ const stylesT = StyleSheet.create({
   },
   displayTitle: {
     fontFamily: "Lato-Bold",
-    fontSize: 30,
+    fontSize: 28,
   },
   title: {
-    fontSize: 25,
+    fontSize: 23,
   },
   subtitle: {
-    fontSize: 17,
+    fontSize: 18,
   },
   opaque: {
     opacity: 0.75,

@@ -7,7 +7,7 @@ import FiltersCards from "../components/FiltersCards";
 const FiltersContainer = ({ filters }) => {
   return (
     <View style={styles.header}>
-      <Text text="Categorías" bold styles={styles.title} />
+      <Text text="Categorías" bold title />
       <FlatList
         data={filters}
         keyExtractor={(item) => item.id}
@@ -16,7 +16,7 @@ const FiltersContainer = ({ filters }) => {
         horizontal
         style={styles.list}
       />
-      <Text text="Establecimientos" bold styles={styles.title} />
+      <Text text="Establecimientos" bold title />
     </View>
   );
 };
@@ -25,10 +25,6 @@ const styles = StyleSheet.create({
   header: {
     marginVertical: 10,
     marginHorizontal: 10,
-  },
-  title: {
-    marginBottom: 10,
-    fontSize: 23,
   },
 });
 

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import Text from "../components/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import TabNavigator from "./Tabs";
@@ -49,9 +49,12 @@ const StackNavigator = () => {
                   color={COLORS.dark}
                 />
               </TouchableOpacity>
-              <Text style={styles.headerTitle}>
-                {route.params.name || route.name}
-              </Text>
+              <Text
+                displayTitle
+                cap
+                bold
+                text={route.params.name || route.name}
+              />
             </View>
           ),
         }}
