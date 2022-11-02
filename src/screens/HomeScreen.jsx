@@ -57,8 +57,12 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLORS.white,
+    flex: 1,
+  },
   header: {
-    marginTop: 10,
+    marginTop: 20,
   },
   primary: {
     color: COLORS.primary,

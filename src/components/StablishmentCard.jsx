@@ -26,8 +26,8 @@ const StablishmentCard = ({ stablishment }) => {
         }
       />
       <View style={styles.textContainer}>
-        <Text text={stablishment.name} title bold />
-        <Text text={stablishment.description} opaque />
+        <Text text={stablishment.name} title bold cap />
+        <Text text={stablishment.description} opaque cap />
       </View>
     </TouchableOpacity>
   );
@@ -35,26 +35,18 @@ const StablishmentCard = ({ stablishment }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.light,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: COLORS.white,
     height: 70,
     borderRadius: 15,
     padding: 10,
-    marginVertical: 7,
+    marginVertical: 10,
     marginHorizontal: 10,
-    shadowColor: COLORS.primary,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    flexDirection: "row",
-    alignItems: "center",
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     borderRadius: 25,
   },
   textContainer: {

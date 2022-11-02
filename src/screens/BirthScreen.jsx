@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import AddButton from "../components/AddButton";
 import BirthdayProvider from "../contexts/BirthdayContext";
 import BirthdaysContainer from "../containers/BirthdaysContainer";
+import { COLORS } from "../constants/colorSchema";
 
 const BirthScreen = () => {
 
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: COLORS.white,
   },
   body: {
     flex: 1,

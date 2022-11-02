@@ -4,8 +4,8 @@ import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 import NoData from "../components/NoData";
 import StablishmentCard from "../components/StablishmentCard";
 import useRequestHttp from "../hooks/useRequestHttp";
-import AxiosInstance from "../utils/AxiosInstance";
 import LoadingScreen from "./LoadingScreen";
+import { COLORS } from "../constants/colorSchema";
 
 const FavoritesScreen = () => {
   const {
@@ -42,6 +42,7 @@ const FavoritesScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: COLORS.white,
     flex: 1,
     width: "100%",
     justifyContent: "center",

@@ -1,51 +1,31 @@
-import React, { useContext, useEffect } from "react";
-import { StatusBar, StyleSheet } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, Image } from "react-native";
 import IonicIcon from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PropTypes from "prop-types";
 import { TABS } from "../constants/tabsScreens";
 import { COLORS } from "../constants/colorSchema";
-import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Tab = createBottomTabNavigator();
 
 const TabIcon = ({ focused, icon }) => {
+  const stylesT = [
+    styles.tabIcon,
+    focused ? styles.tabIconFocused : styles.tabIconUnfocused,
+  ];
+
   return (
     <IonicIcon
       name={focused ? icon : icon + "-outline"}
-      size={28}
-      color={focused ? COLORS.primary : COLORS.dark}
+      size={26}
+      style={stylesT}
     />
   );
 };
 
 const TabNavigator = () => {
-  const navigation = useNavigation();
   const { user, token } = useContext(AuthContext);
-
-  useEffect(() => {
-    StatusBar.setBarStyle("dark-content");
-    StatusBar.setBackgroundColor("transparent");
-    // add search bar to header
-    navigation.setOptions({
-      headerTitle: "Birthmeal",
-      headerTitleStyle: {
-        color: "red",
-        fontSize: 24,
-        fontFamily: "Lato-Bold",
-        fontWeight: "1000",
-      },
-      headerRight: () => (
-        <IonicIcon
-          name="search"
-          size={28}
-          color={COLORS.primary}
-          style={styles.searchIcon}
-        />
-      ),
-    });
-  }, [navigation, StatusBar]);
 
   return (
     <Tab.Navigator
@@ -62,6 +42,14 @@ const TabNavigator = () => {
             <TabIcon focused={focused} icon={TABS.HOME.icon} />
           ),
           headerTitle: TABS.HOME.title,
+          headerTitleStyle: styles.headerTitle,
+          headerStyle: styles.header,
+          headerRight: () => (
+            <Image
+              source={require("../../assets/images/Burger-logo.png")}
+              style={styles.logo}
+            />
+          ),
         }}
       />
       {user && token && (
@@ -74,6 +62,14 @@ const TabNavigator = () => {
                 <TabIcon focused={focused} icon={TABS.FAVORITES.icon} />
               ),
               headerTitle: TABS.FAVORITES.title,
+              headerTitleStyle: styles.headerTitle,
+              headerStyle: styles.header,
+              headerRight: () => (
+                <Image
+                  source={require("../../assets/images/Burger-logo.png")}
+                  style={styles.logo}
+                />
+              ),
             }}
           />
           <Tab.Screen
@@ -84,6 +80,14 @@ const TabNavigator = () => {
                 <TabIcon focused={focused} icon={TABS.BIRTH.icon} />
               ),
               headerTitle: TABS.BIRTH.title,
+              headerTitleStyle: styles.headerTitle,
+              headerStyle: styles.header,
+              headerRight: () => (
+                <Image
+                  source={require("../../assets/images/Burger-logo.png")}
+                  style={styles.logo}
+                />
+              ),
             }}
           />
         </>
@@ -96,6 +100,14 @@ const TabNavigator = () => {
             <TabIcon focused={focused} icon={TABS.MORE_INFO.icon} />
           ),
           headerTitle: TABS.MORE_INFO.title,
+          headerTitleStyle: styles.headerTitle,
+          headerStyle: styles.header,
+          headerRight: () => (
+            <Image
+              source={require("../../assets/images/Burger-logo.png")}
+              style={styles.logo}
+            />
+          ),
         }}
       />
     </Tab.Navigator>
@@ -112,15 +124,39 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     border: 0,
     height: 75,
-    shadowColor: COLORS.primary,
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5,
     borderTopWidth: 0,
+    shadowColor: "transparent",
+  },
+  tabIcon: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 21,
+    paddingVertical: 10,
+    paddingHorizontal: 13,
+    color: COLORS.white,
+  },
+  tabIconFocused: {
+    backgroundColor: COLORS.primary,
+  },
+  tabIconUnfocused: {
+    color: COLORS.dark,
+    backgroundColor: COLORS.white,
+  },
+  headerTitle: {
+    color: COLORS.dark,
+    fontSize: 30,
+    fontWeight: "bold",
+    fontFamily: "Lato-Bold",
+  },
+  header: {
+    backgroundColor: COLORS.white,
+    height: 80,
+  },
+  logo: {
+    width: 60,
+    height: 60,
+    borderRadius: 25,
+    marginRight: 10,
+    padding: 10,
   },
 });
 

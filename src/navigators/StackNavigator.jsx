@@ -23,7 +23,7 @@ const StackNavigator = () => {
       <Stack.Navigator>
         <Stack.Group screenOptions={{ headerShown: false }}>
           {isFirstLaunch && (
-            <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+            <Stack.Screen name="Onboarding" component={OnboardingScreen}/>
           )}
           <Stack.Screen name="Home" component={TabNavigator} />
           {!user && !token && (

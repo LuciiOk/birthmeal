@@ -30,7 +30,7 @@ const StablishmentDetail = ({ route }) => {
   };
 
   const getNearLocation = async () => {
-    const {data} = await AxiosInstance.post(
+    const { data } = await AxiosInstance.post(
       `location/nearest/${route.params.stablishment.id}`,
       { coordinates: [-32.90086717852091, -71.26485029719171] }
     );
@@ -109,27 +109,25 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 15,
-    paddingVertical: 20,
   },
   imageContainer: {
     width: "100%",
     height: "50%",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 20,
   },
   image: {
     width: "100%",
     height: "100%",
     resizeMode: "contain",
-    borderRadius: 40,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
   },
   detailsContainer: {
     width: "100%",
     height: "50%",
-    paddingHorizontal: 10,
     paddingTop: 10,
+    paddingHorizontal: 25,
   },
   infoContainer: {
     paddingTop: 10,

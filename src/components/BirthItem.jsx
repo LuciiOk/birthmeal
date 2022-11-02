@@ -23,8 +23,8 @@ const BirthItem = ({ id, name, date }) => {
           style={styles.image}
         />
         <View style={styles.itemText}>
-          <Text text={name} title bold  />
-          <Text text={getFormattedDate(date)} opaque light />
+          <Text text={name} title bold cap />
+          <Text text={getFormattedDate(date)} opaque light cap />
         </View>
       </View>
       <View style={styles.itemRight}>
@@ -41,20 +41,12 @@ const BirthItem = ({ id, name, date }) => {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: COLORS.light,
+    backgroundColor: COLORS.white,
     height: 70,
     borderRadius: 15,
     padding: 10,
     marginVertical: 7,
     marginHorizontal: 10,
-    shadowColor: COLORS.primary,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -72,9 +64,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
+    width: 60,
+    height: 60,
+    borderRadius: 25,
   },
   itemText: {
     marginLeft: 10,
