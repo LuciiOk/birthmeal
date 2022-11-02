@@ -19,7 +19,7 @@ const LocationItem = ({ name, address, selected, setLocation }) => {
             size={24}
             style={styles.selectedLocationIcon}
           />
-          <View>
+          <View style={styles.selectedLocationTextContainer}>
             <Text text={name} subtitle bold />
             <Text text={address} light />
           </View>
@@ -44,8 +44,8 @@ LocationItem.propTypes = {
 
 const styles = StyleSheet.create({
   locationItem: {
-    padding: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
     backgroundColor: "white",
     borderRadius: 10,
     marginBottom: 10,
@@ -61,6 +61,10 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 15,
     borderRadius: 50,
+  },
+  selectedLocationTextContainer: {
+    flex: 1,
+    flexWrap: "nowrap",
   },
 });
 
