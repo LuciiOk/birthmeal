@@ -9,7 +9,6 @@ export default function App() {
     Lato: require("./assets/fonts/Lato-Regular.ttf"),
     "Lato-Bold": require("./assets/fonts/Lato-Bold.ttf"),
     "Lato-semibold": require("./assets/fonts/Lato-Semibold.ttf"),
-    "Lato-Black": require("./assets/fonts/Lato-Black.ttf"),
     "Lato-Light": require("./assets/fonts/Lato-Light.ttf"),
   });
 

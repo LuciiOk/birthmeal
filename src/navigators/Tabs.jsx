@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import IonicIcon from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PropTypes from "prop-types";
 import { TABS } from "../constants/tabsScreens";
 import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
+import Text from "../components/Text";
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +42,12 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={TABS.HOME.icon} />
           ),
-          headerTitle: TABS.HOME.title,
+          headerTitle: (props) => (
+            <View style={styles.headerTitle}>
+              <Text text={TABS.HOME.title} displayTitle bold />
+            </View>
+          ),
+
           headerTitleStyle: styles.headerTitle,
           headerStyle: styles.header,
           headerRight: () => (
@@ -61,7 +67,11 @@ const TabNavigator = () => {
               tabBarIcon: ({ focused }) => (
                 <TabIcon focused={focused} icon={TABS.FAVORITES.icon} />
               ),
-              headerTitle: TABS.FAVORITES.title,
+              headerTitle: (props) => (
+                <View style={styles.headerTitle}>
+                  <Text text={TABS.FAVORITES.title} displayTitle bold />
+                </View>
+              ),
               headerTitleStyle: styles.headerTitle,
               headerStyle: styles.header,
               headerRight: () => (
@@ -79,7 +89,11 @@ const TabNavigator = () => {
               tabBarIcon: ({ focused }) => (
                 <TabIcon focused={focused} icon={TABS.BIRTH.icon} />
               ),
-              headerTitle: TABS.BIRTH.title,
+              headerTitle: (props) => (
+                <View style={styles.headerTitle}>
+                  <Text text={TABS.BIRTH.title} displayTitle bold />
+                </View>
+              ),
               headerTitleStyle: styles.headerTitle,
               headerStyle: styles.header,
               headerRight: () => (
@@ -99,7 +113,11 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={TABS.MORE_INFO.icon} />
           ),
-          headerTitle: TABS.MORE_INFO.title,
+          headerTitle: (props) => (
+            <View style={styles.headerTitle}>
+              <Text text={TABS.MORE_INFO.title} displayTitle bold />
+            </View>
+          ),
           headerTitleStyle: styles.headerTitle,
           headerStyle: styles.header,
           headerRight: () => (

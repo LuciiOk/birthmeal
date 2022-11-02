@@ -3,11 +3,12 @@ import { StyleSheet, Text as T } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
-const Text = ({ text, bold, light, title, subtitle, opaque, semiBold, cap, styles }) => {
+const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBold, cap, styles }) => {
   const textStyles = [
     stylesT.text,
     bold && stylesT.bold,
     light && stylesT.light,
+    displayTitle && stylesT.displayTitle,
     title && stylesT.title,
     subtitle && stylesT.subtitle,
     opaque && stylesT.opaque,
@@ -31,6 +32,10 @@ const stylesT = StyleSheet.create({
     fontFamily: "Lato-Light",
     fontWeight: "400",
   },
+  displayTitle: {
+    fontFamily: "Lato-Bold",
+    fontSize: 30,
+  },
   title: {
     fontSize: 25,
   },
@@ -53,10 +58,13 @@ Text.propTypes = {
   text: PropTypes.string.isRequired,
   bold: PropTypes.bool,
   light: PropTypes.bool,
+  displayTitle: PropTypes.bool,
   title: PropTypes.bool,
+  subtitle: PropTypes.bool,
   opaque: PropTypes.bool,
   semiBold: PropTypes.bool,
   styles: PropTypes.object,
+  cap: PropTypes.bool,
 };
 
 export default Text;
