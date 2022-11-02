@@ -18,7 +18,7 @@ const Button = ({ buttonText, action, outlined, filled, buttonStyles }) => {
       <Text
         text={buttonText}
         bold
-        title
+        subtitle
         styles={{
           color: outlined ? COLORS.dark : COLORS.white,
         }}

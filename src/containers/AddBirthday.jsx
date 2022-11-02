@@ -55,7 +55,7 @@ const AddModal = ({ onClose, visible }) => {
         <StatusBar backgroundColor="rgba(0, 0, 0, 0.5)" />
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <Text text="Agregar nuevo cumpleaños" bold title />
+            <Text text="Agregar nuevo cumpleaños" bold subtitle/>
             <TouchableOpacity onPress={onDismiss}>
               <Icon name="close" size={20} color={COLORS.dark} />
             </TouchableOpacity>
