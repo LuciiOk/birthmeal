@@ -23,6 +23,7 @@
     "expo-device": "~4.3.0",
     "expo-linear-gradient": "^11.4.0",
     "expo-linking": "~3.2.2",
+    "expo-location": "~14.3.0",
     "expo-notifications": "~0.16.1",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",

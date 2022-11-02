@@ -25,7 +25,6 @@ const FavoriteButton = ({ id }) => {
   }, [isFavorite]);
 
   const handleFavorite = async () => {
-    console.log(await isLogged())
     if (!(await isLogged())) {
       setShowLoginMessage(true);
       return;
