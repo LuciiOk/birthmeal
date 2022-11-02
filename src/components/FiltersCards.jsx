@@ -29,7 +29,7 @@ const FiltersCards = ({ filter }) => (
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: COLORS.light,
     borderRadius: 15,
     padding: 10,
     marginVertical: 7,

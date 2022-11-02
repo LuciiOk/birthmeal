@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   favoritesList: {
     flex: 10,
     width: "100%",
-    paddingHorizontal: 10,
   },
 });
 

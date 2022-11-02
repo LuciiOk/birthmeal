@@ -24,6 +24,7 @@ const FiltersContainer = ({ filters }) => {
 const styles = StyleSheet.create({
   header: {
     marginVertical: 10,
+    marginHorizontal: 10,
   },
 });
 

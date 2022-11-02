@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 10,
     marginVertical: 7,
+    marginHorizontal: 10,
     shadowColor: COLORS.primary,
     shadowOffset: {
       width: 0,
@@ -48,18 +49,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    flexDirection: "row",
+    alignItems: "center",
   },
   image: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: COLORS.primary,
-    position: "absolute",
-    left: 10,
-    top: 7,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   },
   textContainer: {
-    marginLeft: 80,
+    marginLeft: 10,
   },
 });
 

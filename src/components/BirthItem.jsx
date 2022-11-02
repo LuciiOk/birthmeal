@@ -23,7 +23,7 @@ const BirthItem = ({ id, name, date }) => {
           style={styles.image}
         />
         <View style={styles.itemText}>
-          <Text text={name} bold />
+          <Text text={name} title bold  />
           <Text text={getFormattedDate(date)} opaque light />
         </View>
       </View>
@@ -32,7 +32,7 @@ const BirthItem = ({ id, name, date }) => {
           onPress={() => onDelete()}
           style={styles.deleteButton}
         >
-          <Icon name="close" size={30} color="red" />
+          <Icon name="close" size={24} color="red" />
         </TouchableOpacity>
       </View>
     </View>
@@ -41,15 +41,12 @@ const BirthItem = ({ id, name, date }) => {
 
 const styles = StyleSheet.create({
   item: {
-    flex: 1,
+    backgroundColor: COLORS.light,
     height: 70,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    margin: 10,
+    borderRadius: 15,
+    padding: 10,
+    marginVertical: 7,
+    marginHorizontal: 10,
     shadowColor: COLORS.primary,
     shadowOffset: {
       width: 0,
@@ -58,6 +55,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   itemLeft: {
     flex: 1,
