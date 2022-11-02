@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Text from "../components/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -34,26 +34,32 @@ const StackNavigator = () => {
           },
           header: ({ route }) => (
             <View style={styles.header}>
-              <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => {
-                  if (route.name === "Onboarding") {
-                    isFirstLaunch();
-                  }
-                  navigation.goBack();
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faAngleLeft}
-                  size={30}
-                  color={COLORS.dark}
+              <View style={styles.headerLeft}>
+                <TouchableOpacity
+                  style={styles.backButton}
+                  onPress={() => {
+                    if (route.name === "Onboarding") {
+                      isFirstLaunch();
+                    }
+                    navigation.goBack();
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    size={25}
+                    color={COLORS.dark}
+                  />
+                </TouchableOpacity>
+                <Text
+                  displayTitle
+                  cap
+                  bold
+                  text={route.params.name || route.name}
                 />
-              </TouchableOpacity>
-              <Text
-                displayTitle
-                cap
-                bold
-                text={route.params.name || route.name}
+              </View>
+              <Image
+                source={require("../../assets/images/Burger-logo.png")}
+                style={styles.logo}
               />
             </View>
           ),
@@ -84,12 +90,14 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     backgroundColor: COLORS.white,
-    height: 60,
-    borderBottomWidth: 1,
+    height: 70,
     borderBottomColor: COLORS.light,
-    marginLeft: 10,
+    marginRight: 10,
+  },
+  headerLeft: {
+    flexDirection: "row",
   },
   headerTitle: {
     fontFamily: "Lato-Bold",
@@ -98,7 +106,12 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   backButton: {
-    marginRight: 10,
+    padding: 10,
+  },
+  logo: {
+    width: 60,
+    height: 60,
+    borderRadius: 25,
   },
 });
 
