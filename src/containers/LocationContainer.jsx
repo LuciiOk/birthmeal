@@ -7,11 +7,10 @@ import LocationItem from "../components/LocationItem";
 import NoData from "../components/NoData";
 
 const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
-
   return (
     <View style={styles.locationsContainer}>
       <View style={styles.locationHeader}>
-        <Text text="Seleciona una ubicación:" bold />
+        <Text text="Seleciona una ubicación:" title bold />
       </View>
       <FlatList
         data={locations}
@@ -38,9 +37,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "60%",
     backgroundColor: "white",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
     padding: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   locationHeader: {
     padding: 10,

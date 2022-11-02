@@ -23,7 +23,7 @@ const BirthItem = ({ id, name, date }) => {
           style={styles.image}
         />
         <View style={styles.itemText}>
-          <Text text={name} title bold cap />
+          <Text text={name} subtitle bold cap />
           <Text text={getFormattedDate(date)} opaque light cap />
         </View>
       </View>

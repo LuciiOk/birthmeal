@@ -4,6 +4,8 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 import Text from "./Text";
 
+import { COLORS } from '../constants/colorSchema';
+
 const LocationItem = ({ name, address, selected, setLocation }) => {
   return (
     <TouchableOpacity
@@ -18,14 +20,14 @@ const LocationItem = ({ name, address, selected, setLocation }) => {
             style={styles.selectedLocationIcon}
           />
           <View>
-            <Text text={name} bold />
+            <Text text={name} subtitle bold />
             <Text text={address} light />
           </View>
         </View>
       )}
       {!selected && (
         <>
-          <Text text={name} bold />
+          <Text text={name} subtitle bold />
           <Text text={address} light />
         </>
       )}
@@ -53,8 +55,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   selectedLocationIcon: {
-    color: "red",
+    color: `${COLORS.danger}`,
     marginRight: 10,
+    backgroundColor: `${COLORS.danger}10`,
+    padding: 10,
+    paddingHorizontal: 15,
+    borderRadius: 50,
   },
 });
 

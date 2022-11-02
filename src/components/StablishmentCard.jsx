@@ -26,7 +26,7 @@ const StablishmentCard = ({ stablishment }) => {
         }
       />
       <View style={styles.textContainer}>
-        <Text text={stablishment.name} title bold cap />
+        <Text text={stablishment.name} subtitle bold cap />
         <Text text={stablishment.description} opaque cap />
       </View>
     </TouchableOpacity>

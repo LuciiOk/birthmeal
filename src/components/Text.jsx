@@ -3,12 +3,13 @@ import { StyleSheet, Text as T } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
-const Text = ({ text, bold, light, title, opaque, semiBold, cap, styles }) => {
+const Text = ({ text, bold, light, title, subtitle, opaque, semiBold, cap, styles }) => {
   const textStyles = [
     stylesT.text,
     bold && stylesT.bold,
     light && stylesT.light,
     title && stylesT.title,
+    subtitle && stylesT.subtitle,
     opaque && stylesT.opaque,
     semiBold && stylesT.semiBold,
     cap && stylesT.cap,
@@ -31,7 +32,10 @@ const stylesT = StyleSheet.create({
     fontWeight: "400",
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
+  },
+  subtitle: {
+    fontSize: 17,
   },
   opaque: {
     opacity: 0.75,

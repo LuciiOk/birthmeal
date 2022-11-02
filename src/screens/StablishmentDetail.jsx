@@ -17,8 +17,20 @@ const StablishmentDetail = ({ route }) => {
   const [nearLocation, setNearLocation] = React.useState(null);
 
   const redirect = () => {
-    // validate if the url is valid
-    WebBrowser.openBrowserAsync(route.params.stablishment.webUrl);
+    const url = route.params.stablishment.webUrl;
+    // CONvierte la url en un objeto de tipo URL
+
+    const parsedUrl = new URL(url);
+
+    console.log(parsedUrl);
+
+    // Si la url no tiene protocolo, se le agrega el protocolo http
+
+    if (!parsedUrl.protocol) {
+      parsedUrl.protocol = "http";
+    }
+
+    WebBrowser.openBrowserAsync(parsedUrl.toString());
   };
 
   const goToLocations = () => {
@@ -58,7 +70,7 @@ const StablishmentDetail = ({ route }) => {
             <Text text="Información" title bold />
             <FavoriteButton id={route.params.stablishment.id} />
           </View>
-          <View style={styles.info}>
+          <View style={{ ...styles.info, ...styles.locationSection }}>
             <Text text="Ubicaciones" semiBold />
             <TouchableOpacity onPress={goToLocations}>
               <Text
@@ -74,8 +86,7 @@ const StablishmentDetail = ({ route }) => {
               />
             </TouchableOpacity>
           </View>
-          <Separator />
-          <View style={styles.info}>
+          <View style={{ ...styles.info }}>
             <Text text="Ir al sitio web" semiBold />
             <TouchableOpacity onPress={redirect}>
               <Text text={route.params.stablishment.webUrl} light opaque />
@@ -87,12 +98,10 @@ const StablishmentDetail = ({ route }) => {
               />
             </TouchableOpacity>
           </View>
-          <Separator />
-          <View style={styles.info}>
+          <View style={{ ...styles.info }}>
             <Text text="Beneficios" semiBold />
             <Text text={route.params.stablishment.description} opaque light />
           </View>
-          <Separator />
         </View>
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
@@ -109,6 +118,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: COLORS.white,
   },
   imageContainer: {
     width: "100%",
@@ -129,23 +139,17 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 25,
   },
-  infoContainer: {
-    paddingTop: 10,
-    width: "100%",
-  },
   infoHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   info: {
-    width: "100%",
     paddingBottom: 10,
-  },
-  heartIcon: {
-    position: "absolute",
-    right: 0,
-    color: "#FF0000",
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginBottom: 10,
   },
   ratingContainer: {
     width: "100%",
@@ -160,9 +164,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   arrowIcon: {
+    backgroundColor: `${COLORS.primary}10`,
     position: "absolute",
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    borderRadius: 20,
     right: 0,
   },
+  locationSection: {},
 });
 
 StablishmentDetail.propTypes = {
