@@ -35,7 +35,7 @@ export const scheduleUserBirthday = async (date, name) => {
       repeats: true,
     },
   });
-  console.log(notificationId);
+  return notificationId;
 };
 
 export const clearAllNotifications = async () => {

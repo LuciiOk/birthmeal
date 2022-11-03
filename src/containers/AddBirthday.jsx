@@ -46,7 +46,11 @@ const AddModal = ({ onClose, visible }) => {
       remind: switchValue,
     };
     if (birthday.remind) {
-      await scheduleUserBirthday(birthday.birthdate, birthday.name);
+      const notificationId = await scheduleUserBirthday(
+        birthday.birthdate,
+        birthday.name
+      );
+      birthday.notificationId = notificationId;
     }
     await addBirthday(birthday);
     onClose();
