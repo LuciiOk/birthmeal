@@ -21,15 +21,34 @@ const HomeScreen = () => {
     fetchData,
   } = useRequestHttp("companies", "get");
 
-  const {
-    data: categories,
-    loading: loadingCategories,
-    fetchData: fetchCategories,
-  } = useRequestHttp("categories/companies", "get");
+  const [query, setQuery] = React.useState(null);
+
+  const onQuery = async (category) => {
+    let categories = query?.categories ?? [];
+    if (categories.includes(category)) {
+      const index = categories.indexOf(category);
+      categories.splice(index, 1);
+      if (categories.length === 0) {
+        setQuery(null);
+      } else {
+        setQuery({ ...query, categories });
+      }
+    } else {
+      categories = [...categories, category];
+    }
+    await fetchData({ categories });
+    setQuery({ categories });
+  };
+
+  const { data: categories, fetchData: fetchCategories } = useRequestHttp(
+    "categories/companies",
+    "get"
+  );
 
   const onRefresh = () => {
     fetchData();
     fetchCategories();
+    setQuery(null);
   };
 
   if (loading && stablishments.length === 0)
@@ -50,7 +69,13 @@ const HomeScreen = () => {
           <NoData text="Ups... No hay establecimientos disponibles" />
         }
         ListFooterComponent={<View style={{ height: 100 }} />}
-        ListHeaderComponent={<FiltersContainer filters={categories} />}
+        ListHeaderComponent={
+          <FiltersContainer
+            filters={categories}
+            setQuery={onQuery}
+            categoriesSelected={query?.categories ?? []}
+          />
+        }
       />
     </View>
   );

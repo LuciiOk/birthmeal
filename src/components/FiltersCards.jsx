@@ -6,35 +6,51 @@ import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
 import * as Icons from "@fortawesome/free-solid-svg-icons";
 
-const FiltersCards = ({ filter }) => (
-  <TouchableOpacity style={styles.container}>
-    <FontAwesomeIcon
-      icon={Icons[filter.icon || "faSearch"]}
-      size={24}
-      color={filter.color}
-    />
-    <Text
-      text={filter.name || ""}
-      styles={{
-        ...styles.text,
-        color: filter.color,
-      }}
-      semiBold
-    />
-  </TouchableOpacity>
-);
+const FiltersCards = ({ filter, setQuery, isSelected }) => {
+  const handlePress = () => {
+    setQuery(filter.name);
+  };
+
+  return (
+    <TouchableOpacity
+      style={[
+        styles.container,
+        isSelected && {
+          backgroundColor: `${filter.color}40`,
+          borderColor: filter.color,
+        },
+        !isSelected && {
+          backgroundColor: `${filter.color}08`,
+          borderColor: filter.color,
+        },
+      ]}
+      onPress={() => handlePress()}
+    >
+      <FontAwesomeIcon
+        icon={Icons[filter.icon || "faSearch"]}
+        size={24}
+        color={filter.color}
+        style={styles.icon}
+      />
+      <Text
+        text={filter.name || ""}
+        styles={{
+          ...styles.text,
+          color: filter.color,
+        }}
+        semiBold
+      />
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.light,
     borderRadius: 15,
+    backgroundColor: COLORS.white,
     padding: 10,
     marginVertical: 7,
     marginHorizontal: 5,
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    shadowColor: COLORS.primary,
-    elevation: 5,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
@@ -45,11 +61,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginLeft: 10,
     textTransform: "capitalize",
+    backgroundColor: "transparent",
   },
 });
 
 FiltersCards.propTypes = {
   filter: PropTypes.object.isRequired,
+  setQuery: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool,
 };
 
 export default FiltersCards;

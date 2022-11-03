@@ -6,42 +6,49 @@ const initialState = {
   data: [],
   loading: true,
   error: null,
+  queryParams: null
 };
 
 // add reload page
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_SUCCESS":
-      return {
-        ...state,
-        data: action.payload,
-        loading: false,
-      };
-    case "FETCH_ERROR":
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
-      };
-    case "FETCH_LOADING":
-      return {
-        ...state,
-        loading: true,
-      };
-    default:
+  case "FETCH_SUCCESS":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+  case "FETCH_ERROR":
+    return {
+      ...state,
+      error: action.payload,
+      loading: false,
+    };
+  case "FETCH_LOADING":
+    return {
+      ...state,
+      loading: true,
+    };
+  case "FETCH_QUERY_PARAMS":
+    return {
+      ...state,
+      queryParams: action.payload,
+    };
+  default:
   }
 };
 
 const useRequestHttp = (url, method, body) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (queryParams = null) => {
     dispatch({ type: "FETCH_LOADING" });
     try {
       const response = await AxiosInstance({
         url,
         method,
         data: body,
+        params: queryParams,
       });
       dispatch({ type: "FETCH_SUCCESS", payload: response.data });
     } catch (error) {
