@@ -15,12 +15,12 @@ export const scheduleUserBirthday = async (date, name) => {
       importance: Notifications.AndroidImportance.HIGH,
     });
   }
-  // get current date with GMT-3
-  const trigger = new Date()
-  // subtract 3 hours to get GMT-3
-  trigger.setHours(trigger.getHours() - 3)
-  // add 3 seconds to current date
-  trigger.setSeconds(trigger.getSeconds() + 3);
+  const dob = new Date(date);
+
+  const day = dob.getDate();
+  const month = dob.getMonth();
+  const hour = dob.getHours();
+  const minute = dob.getMinutes() + 1 === 60 ? 0 : dob.getMinutes() + 1;
 
   const notificationId = await Notifications.scheduleNotificationAsync({
     content: {
@@ -28,21 +28,20 @@ export const scheduleUserBirthday = async (date, name) => {
       body: message.body,
     },
     trigger: {
-      date: trigger,
+      day,
+      month,
+      hour,
+      minute,
       repeats: true,
-      channelId: "birthday",
-    }
+    },
   });
-  // get when the notification is scheduled
-  const notifications = await Notifications.getAllScheduledNotificationsAsync();
-  notifications.forEach((notification) => {
-    const date = new Date(notification.trigger["value"]);
-    console.log(date, notification.trigger["value"]);
-  });
-
-  return notificationId;
+  console.log(notificationId);
 };
 
-const clearAllNotifications = async () => {
+export const clearAllNotifications = async () => {
   await Notifications.cancelAllScheduledNotificationsAsync();
+};
+
+export const cancelNotification = async (notificationId) => {
+  await Notifications.cancelScheduledNotificationAsync(notificationId);
 };

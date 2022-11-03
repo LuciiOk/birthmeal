@@ -19,6 +19,16 @@ import InputDate from "../components/InputDate";
 import { BirthdayContext } from "../contexts/BirthdayContext";
 import { scheduleUserBirthday } from "../hooks/useNotification";
 
+import * as Notifications from "expo-notifications";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+
 const AddModal = ({ onClose, visible }) => {
   const [name, setName] = useState("");
   const [date, setDate] = useState(null);
