@@ -106,24 +106,24 @@ const ItemSlide = ({ item }) => {
                 backgroundColor: "white",
                 padding: 10,
                 borderRadius: 30,
-                width: width / 2 - 40,
+                width: width / 2 - 50,
                 alignItems: "center",
               }}
               onPress={toLogin}
             >
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Iniciar Sesión</Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>Iniciar Sesión</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 backgroundColor: "white",
                 padding: 10,
                 borderRadius: 30,
-                width: width / 2 - 40,
+                width: width / 2 - 50,
                 alignItems: "center",
               }}
               onPress={toHome}
             >
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Comenzar</Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>Comenzar</Text>
             </TouchableOpacity>
           </View>
         )}
