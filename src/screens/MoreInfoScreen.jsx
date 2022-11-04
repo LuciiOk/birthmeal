@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const MoreInfoScreen = () => {
   const { copyToClipBoard } = useClipBoard();
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const { user, token, logout } = useContext(AuthContext);
 
   const appDescription = `Birthmeal es una aplicación desarrollada

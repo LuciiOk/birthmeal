@@ -6,9 +6,9 @@ import StackNavigator from "./StackNavigator";
 const AppNav = () => {
   return (
     <NavigationContainer>
-      <StackNavigator /> 
+      <StackNavigator />
     </NavigationContainer>
   );
-}
+};
 
 export default AppNav;

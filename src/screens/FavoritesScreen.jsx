@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 
 import NoData from "../components/NoData";

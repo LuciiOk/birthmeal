@@ -14,7 +14,7 @@ const useClipBoard = () => {
   const fetchClipBoard = async () => {
     const content = await Clipboard.getStringAsync();
     setClipBoard(content);
-  }
+  };
 
   return { clipBoard, copyToClipBoard, fetchClipBoard };
 };

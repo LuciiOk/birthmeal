@@ -42,7 +42,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={TABS.HOME.icon} />
           ),
-          headerTitle: (props) => (
+          headerTitle: () => (
             <View style={styles.headerTitle}>
               <Text text={TABS.HOME.title} displayTitle bold />
             </View>
@@ -67,7 +67,7 @@ const TabNavigator = () => {
               tabBarIcon: ({ focused }) => (
                 <TabIcon focused={focused} icon={TABS.FAVORITES.icon} />
               ),
-              headerTitle: (props) => (
+              headerTitle: () => (
                 <View style={styles.headerTitle}>
                   <Text text={TABS.FAVORITES.title} displayTitle bold />
                 </View>
@@ -89,7 +89,7 @@ const TabNavigator = () => {
               tabBarIcon: ({ focused }) => (
                 <TabIcon focused={focused} icon={TABS.BIRTH.icon} />
               ),
-              headerTitle: (props) => (
+              headerTitle: () => (
                 <View style={styles.headerTitle}>
                   <Text text={TABS.BIRTH.title} displayTitle bold />
                 </View>
@@ -113,7 +113,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={TABS.MORE_INFO.icon} />
           ),
-          headerTitle: (props) => (
+          headerTitle: () => (
             <View style={styles.headerTitle}>
               <Text text={TABS.MORE_INFO.title} displayTitle bold />
             </View>
