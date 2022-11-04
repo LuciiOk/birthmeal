@@ -2,7 +2,7 @@
   "expo": {
     "name": "Birthmeal",
     "slug": "Birthmeal",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/Burger-logo2.png",
     "userInterfaceStyle": "light",
@@ -38,7 +38,8 @@
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.RECEIVE_BOOT_COMPLETED",
         "android.permission.SCHEDULE_EXACT_ALARM"
-      ]
+      ],
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/images/Burger-logo.png"
