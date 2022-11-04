@@ -2,7 +2,7 @@ import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 
 const message = {
-  title: `Hey! Hoy es el cumpleaños de `,
+  title: "Hey! Hoy es el cumpleaños de ",
   body: "No te olvides de saludarle! 🥳🎉",
 };
 
