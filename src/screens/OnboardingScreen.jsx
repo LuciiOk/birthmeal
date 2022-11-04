@@ -1,84 +1,244 @@
-import React, { useEffect } from "react";
-import { Dimensions, FlatList, StatusBar } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { slides } from "../data/slides";
-import Slide from "../components/Slide";
-import FooterSlide from "../components/FooterSlide";
+import React from "react";
+import {
+  Animated,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
 import PropTypes from "prop-types";
-import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+
+import { slides } from "../data/slides";
+const bgs = ["#ebcb8b", "#a3be8c", "#bf616a", "#59b2ab", "#ebcb8b"];
+// a little bit of magic
+const bgDarkers = ["#b48e3f", "#6f8c5a", "#8f4f56", "#3d7a7b", "#b48e3f"];
 
 const { width, height } = Dimensions.get("window");
 
-const OnboardingScreen = ({ navigation }) => {
-  const [currentSlide, setCurrentSlideIndex] = React.useState(0);
-  const ref = React.useRef();
-
-  useEffect(() => {
-    StatusBar.setBarStyle("default");
-    StatusBar.setBackgroundColor("#f6d365");
-  }, []);
-
-  const updateCurrentSlideIndex = (e) => {
-    const { contentOffset } = e.nativeEvent;
-    const index = Math.round(contentOffset.x / width);
-    setCurrentSlideIndex(index);
-  };
-
-  const goToNextSlide = () => {
-    const nextSlideIndex = currentSlide + 1;
-    if (nextSlideIndex != slides.length) {
-      const offset = nextSlideIndex * width;
-      ref?.current.scrollToOffset({ offset, animated: true });
-      setCurrentSlideIndex(nextSlideIndex);
-    }
-  };
-
-  const onSkip = () => {
-    const lastSlideIndex = slides.length - 1;
-    const offset = lastSlideIndex * width;
-    ref?.current.scrollToOffset({ offset });
-    setCurrentSlideIndex(lastSlideIndex);
-  };
-
+const OnboardingScreen = () => {
+  const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-      }}
-    >
-      <LinearGradient
-        style={{
-          flex: 1,
-        }}
-        colors={["#f6d365", "#fda085"]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        locations={[0, 1]}
-      >
-        <FlatList
-          ref={ref}
-          data={slides}
-          pagingEnabled
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ height: height * 0.85 }}
-          onMomentumScrollEnd={updateCurrentSlideIndex}
-          renderItem={({ item }) => <Slide item={item} />}
-          keyExtractor={({ key }) => key}
-        />
-        <FooterSlide
-          index={currentSlide}
-          onNext={goToNextSlide}
-          onSkip={onSkip}
-          navigation={navigation}
-        ></FooterSlide>
-      </LinearGradient>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <StatusBar hidden />
+      <Backdrop scrollX={scrollX} />
+      <Square scrollX={scrollX} />
+      <Animated.FlatList
+        data={slides}
+        keyExtractor={(item) => item.key}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => <ItemSlide item={item} />}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        scrollEventThrottle={32}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: false }
+        )}
+      />
+      <Indicator scrollX={scrollX} />
+    </View>
   );
 };
 
-OnboardingScreen.propTypes = {
-  navigation: PropTypes.object.isRequired,
+const ItemSlide = ({ item }) => {
+  const index = slides.findIndex((slide) => slide.key === item.key);
+
+  const navigation = useNavigation();
+
+  const toLogin = () => {
+    navigation.navigate("Login");
+  };
+
+  const toHome = () => {
+    navigation.navigate("Home");
+  };
+
+  return (
+    <View style={{ width, alignItems: "center", padding: 20 }}>
+      <View
+        style={{ flex: 0.60, justifyContent: "center", alignItems: "center" }}
+      >
+        <Image
+          source={item.image}
+          style={{ width: width / 1.2, height: height, resizeMode: "contain" }}
+        />
+      </View>
+      <View style={{ flex: 0.35 }}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: "900",
+            marginBottom: 10,
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          {item.title}
+        </Text>
+        <Text
+          style={{
+            fontSize: 20,
+            color: "white",
+            textAlign: "center",
+            fontWeight: "600",
+            marginBottom: 40,
+          }}
+        >
+          {item.description}
+        </Text>
+        {index === slides.length - 1 && (
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width,
+              marginBottom: 20,
+              paddingHorizontal: 20,
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                backgroundColor: "white",
+                padding: 10,
+                borderRadius: 30,
+                width: width / 2 - 40,
+                alignItems: "center",
+              }}
+              onPress={toLogin}
+            >
+              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Iniciar Sesión</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "white",
+                padding: 10,
+                borderRadius: 30,
+                width: width / 2 - 40,
+                alignItems: "center",
+              }}
+              onPress={toHome}
+            >
+              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Comenzar</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+    </View>
+  );
+};
+
+const Indicator = ({ scrollX }) => {
+  return (
+    <View style={{ position: "absolute", bottom: 100, flexDirection: "row" }}>
+      {slides.map((_, i) => {
+        const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
+        const scale = scrollX.interpolate({
+          inputRange,
+          outputRange: [0.8, 1.4, 0.8],
+          extrapolate: "clamp",
+        });
+        const opacity = scrollX.interpolate({
+          inputRange,
+          outputRange: [0.6, 0.9, 0.6],
+          extrapolate: "clamp",
+        });
+        return (
+          <Animated.View
+            key={`indicator-${i}`}
+            style={{
+              height: 15,
+              width: 15,
+              borderRadius: 10,
+              backgroundColor: "white",
+              margin: 10,
+              opacity,
+              transform: [{ scale }],
+            }}
+          />
+        );
+      })}
+    </View>
+  );
+};
+
+const Backdrop = ({ scrollX }) => {
+  const backgroundColor = scrollX.interpolate({
+    inputRange: bgs.map((_, i) => i * width),
+    outputRange: bgs.map((bg) => bg),
+  });
+  return (
+    <Animated.View
+      style={[StyleSheet.absoluteFillObject, { backgroundColor }]}
+    />
+  );
+};
+
+const Square = ({ scrollX }) => {
+  const YOLO = Animated.divide(
+    Animated.modulo(Animated.modulo(scrollX, width), width),
+    new Animated.Value(width)
+  );
+  const rotate = YOLO.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: ["35deg", "0deg", "35deg"],
+  });
+  const translateX = YOLO.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, -height, 0],
+  });
+  const scale = YOLO.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [1, 0.6, 1],
+  });
+  const backgroundColor = scrollX.interpolate({
+    inputRange: bgDarkers.map((_, i) => i * width),
+    outputRange: bgDarkers.map((bg) => `${bg}99`),
+  });
+
+  return (
+    <Animated.View
+      style={{
+        width: height,
+        height: height,
+        backgroundColor,
+        borderRadius: 86,
+        position: "absolute",
+        top: -height * 0.6,
+        left: -height * 0.3,
+        transform: [{ rotate }, { translateX }, { scale }],
+      }}
+    />
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+ItemSlide.propTypes = {
+  item: PropTypes.object.isRequired,
+};
+
+Indicator.propTypes = {
+  scrollX: PropTypes.object.isRequired,
+};
+
+Backdrop.propTypes = {
+  scrollX: PropTypes.object.isRequired,
+};
+
+Square.propTypes = {
+  scrollX: PropTypes.object.isRequired,
 };
 
 export default OnboardingScreen;
