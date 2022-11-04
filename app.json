@@ -57,6 +57,10 @@
           "color": "#A9005F"
         }
       ]
-    ]
+    ],
+    "notification": {
+      "icon": "./assets/images/Burger-logo96x96.png",
+      "color": "#A9005F"
+    } 
   }
 }
