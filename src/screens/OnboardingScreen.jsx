@@ -72,10 +72,10 @@ const ItemSlide = ({ item }) => {
         <Text
           style={{
             fontSize: 30,
-            fontWeight: "900",
             marginBottom: 10,
             color: "white",
             textAlign: "center",
+            fontFamily: "Lato-Bold",
           }}
         >
           {item.title}
@@ -87,6 +87,7 @@ const ItemSlide = ({ item }) => {
             textAlign: "center",
             fontWeight: "600",
             marginBottom: 40,
+            fontFamily: "Lato",
           }}
         >
           {item.description}
@@ -111,7 +112,7 @@ const ItemSlide = ({ item }) => {
               }}
               onPress={toLogin}
             >
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>Iniciar Sesión</Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold", fontFamily: "Lato" }}>Iniciar sesión</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -120,10 +121,11 @@ const ItemSlide = ({ item }) => {
                 borderRadius: 30,
                 width: width / 2 - 50,
                 alignItems: "center",
+                fontFamily: "Lato"
               }}
               onPress={toHome}
             >
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>Comenzar</Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold", fontFamily: "Lato" }}>Comenzar</Text>
             </TouchableOpacity>
           </View>
         )}
