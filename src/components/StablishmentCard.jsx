@@ -15,13 +15,13 @@ const StablishmentCard = ({ stablishment }) => {
       stablishment,
     });
   };
-
+  console.log(stablishment);
   return (
     <TouchableOpacity style={styles.container} onPress={redirecTo}>
       <Image
         style={styles.image}
         source={
-          stablishment.imageUrl ||
+          (stablishment.imageUrl && { uri: stablishment.imageUrl }) ||
           require("../../assets/images/Burger-logo.png")
         }
       />

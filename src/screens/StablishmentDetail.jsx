@@ -48,7 +48,9 @@ const StablishmentDetail = ({ route }) => {
         <Image
           style={styles.image}
           source={
-            route.params.stablishment.imageUrl ||
+            (route.params.stablishment.imageUrl && {
+              uri: route.params.stablishment.imageUrl,
+            }) ||
             require("../../assets/images/Burger-logo.png")
           }
         />
