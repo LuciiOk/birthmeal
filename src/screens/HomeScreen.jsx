@@ -56,7 +56,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} showHideTransition/>
       <FlatList
         refreshControl={
           <RefreshControl refreshing={loading} onRefresh={onRefresh} />

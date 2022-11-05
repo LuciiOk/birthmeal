@@ -15,11 +15,10 @@ import { AuthContext } from "../contexts/AuthContext";
 
 import LoadingScreen from "./LoadingScreen";
 
+import { useForm } from "react-hook-form";
+
 const RegisterScreen = () => {
-  const [name, setName] = useState("luciano");
-  const [email, setEmail] = useState("lportales85@gmail.com");
-  const [password, setPassword] = useState("123");
-  const [confirmPassword, setConfirmPassword] = useState("123");
+  const { handleSubmit, control, reset } = useForm();
   const [date, setDate] = useState(null);
   const [isSelected, setSelection] = useState(false);
   const navigation = useNavigation();
@@ -28,7 +27,7 @@ const RegisterScreen = () => {
 
   const { register, loading, error } = useContext(AuthContext);
 
-  const handleSubmit = async () => {
+  const onSubmit = async ({ email, password, name, confirmPassword }) => {
     if (password !== confirmPassword) {
       setErrorMessage("Las contraseñas no coinciden");
       return;
@@ -54,22 +53,6 @@ const RegisterScreen = () => {
     }
     setErrorMessage("El email ingresado ya existe.");
     navigation.navigate("Register");
-  };
-
-  const handleName = (text) => {
-    setName(text);
-  };
-
-  const handleEmail = (text) => {
-    setEmail(text);
-  };
-
-  const handlePassword = (text) => {
-    setPassword(text);
-  };
-
-  const handleConfirmPassword = (text) => {
-    setConfirmPassword(text);
   };
 
   const onChangeDate = (selectedDate) => {
@@ -102,29 +85,33 @@ const RegisterScreen = () => {
         <Input
           placeholder="Tu nombre"
           keyboardType="default"
-          onChangeText={handleName}
-          value={name}
+          control={control}
+          name="name"
+          rules={{ required: true }}
         />
         <Input
           placeholder="Tu email"
           keyboardType="email-address"
-          onChangeText={handleEmail}
-          value={email}
+          control={control}
+          name="email"
+          rules={{ required: true }}
         />
         <Input
           placeholder="Tu contraseña"
           keyboardType="default"
           isPassword
-          onChangeText={handlePassword}
-          value={password}
+          control={control}
+          name="password"
+          rules={{ required: true }}
         />
 
         <Input
           placeholder="Confirma tu contraseña"
           keyboardType="default"
           isPassword
-          onChangeText={handleConfirmPassword}
-          value={confirmPassword}
+          control={control}
+          name="confirmPassword"
+          rules={{ required: true }}
         />
         <InputDate
           placeholder="Tu fecha de nacimiento"
@@ -133,7 +120,7 @@ const RegisterScreen = () => {
         />
         <ConditionTerms isSelected={isSelected} setSelection={setSelection} />
         {error && <Text text={errorMessage} styles={styles.error} />}
-        <Button buttonText="Crear cuenta" action={handleSubmit} outlined />
+        <Button buttonText="Crear cuenta" outlined action={handleSubmit(onSubmit)}  />
         <SignUserDetails
           to="Login"
           text="¿Ya tienes una cuenta?"

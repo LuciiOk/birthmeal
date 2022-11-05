@@ -73,7 +73,11 @@ const LoginScreen = () => {
           alignText="right"
         />
       </View>
-      <Button buttonText="Iniciar sesión" action={handleSubmit(onSubmit)} />
+      <Button
+        buttonText="Iniciar sesión"
+        outlined
+        action={handleSubmit(onSubmit)}
+      />
       <SignUserDetails
         to="Register"
         text="¿No tienes una cuenta?"
