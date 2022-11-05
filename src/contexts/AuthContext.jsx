@@ -24,8 +24,10 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem("token", access_token);
       await AsyncStorage.setItem("user", JSON.stringify(user));
       ToastAndroid.show("Has iniciado sesión", ToastAndroid.SHORT);
+      return true;
     } catch ({ response }) {
       setError(response);
+      return false;
     } finally {
       setLoading(false);
     }

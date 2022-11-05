@@ -8,11 +8,11 @@ export const FavoritesContext = createContext();
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { isLogged, token } = React.useContext(AuthContext);
+  const { isLogged, token, user } = React.useContext(AuthContext);
 
   const getFavorites = useCallback(async () => {
     try {
-      if (await isLogged()) {
+      if (token && user) {
         const {
           data: { data },
         } = await AxiosInstance.get("user/favorite");
@@ -28,11 +28,11 @@ export const FavoritesProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [token, user]);
 
   const onFavorite = async (company) => {
     try {
-      if (await isLogged()) {
+      if ((await isLogged()) && token && user) {
         await AxiosInstance.post("user/favorite", {
           company: company.id,
         });

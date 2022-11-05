@@ -12,27 +12,20 @@ import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
 import LoadingScreen from "./LoadingScreen";
 
+import { useForm } from "react-hook-form";
+
 const LoginScreen = () => {
   const { login, loading, error } = useContext(AuthContext);
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const navigation = useNavigation();
 
-  const handleSubmit = async () => {
-    await login(email, password);
-    if (!error) {
-      navigation.navigate("Home");
-      return;
+  const { handleSubmit, control, reset } = useForm();
+
+  const onSubmit = async ({ email, password }) => {
+    const success = await login(email, password);
+    if (success) {
+      navigation.navigate("Home", { screen: "Overview" });
+      reset();
     }
-    navigation.navigate("Login");
-  };
-
-  const handleEmail = (text) => {
-    setEmail(text);
-  };
-
-  const handlePassword = (text) => {
-    setPassword(text);
   };
 
   if (loading) {
@@ -54,15 +47,17 @@ const LoginScreen = () => {
         <Input
           placeholder="Tu correo electrónico"
           keyboardType="email-address"
-          value={email}
-          onChangeText={handleEmail}
+          control={control}
+          name="email"
+          rules={{ required: true }}
         />
         <Input
           placeholder="Tu contraseña"
           keyboardType="default"
           isPassword
-          value={password}
-          onChangeText={handlePassword}
+          control={control}
+          name="password"
+          rules={{ required: true }}
         />
         {error && (
           <View style={styles.errorContainer}>
@@ -72,15 +67,13 @@ const LoginScreen = () => {
             />
           </View>
         )}
-
         <SignUserDetails
           redirectText="Olvidaste tu contraseña?"
           to="ForgotPassword"
           alignText="right"
         />
       </View>
-
-      <Button buttonText="Iniciar sesión" action={handleSubmit} outlined />
+      <Button buttonText="Iniciar sesión" action={handleSubmit(onSubmit)} />
       <SignUserDetails
         to="Register"
         text="¿No tienes una cuenta?"

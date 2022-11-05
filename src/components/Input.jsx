@@ -6,26 +6,32 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
-const Input = ({ placeholder, keyboardType, isPassword = false, value, onChangeText }) => {
+import { Controller } from "react-hook-form";
+
+const Input = ({ placeholder, keyboardType, isPassword = false, control, name, rules }) => {
   const [isSecure, setIsSecure] = useState(true);
   const icon = !isPassword ? "user" : "lock";
-
-  const onChange = (text) => {
-    setValue(text);
-  };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <Icon name={icon} size={20} color={COLORS.dark} />
-        <TextInput
-          style={styles.input}
-          placeholder={placeholder}
-          keyboardType={keyboardType}
-          secureTextEntry={isPassword && isSecure}
-          value={value}
-          onChangeText={onChangeText}
-          placeholderTextColor={COLORS.grayDark}
+        <Controller
+          control={control}
+          render={({field: { onChange, onBlur, value }}) => (
+            <TextInput
+              style={styles.input}
+              placeholder={placeholder}
+              keyboardType={keyboardType}
+              secureTextEntry={isPassword && isSecure}
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              placeholderTextColor={COLORS.grayDark}
+            />
+          )}
+          name={name}
+          rules={rules}
         />
         {isPassword && (
           <TouchableOpacity
