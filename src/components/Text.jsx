@@ -3,7 +3,7 @@ import { StyleSheet, Text as T } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
-const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBold, cap, styles }) => {
+const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBold, cap, styles, error }) => {
   const textStyles = [
     stylesT.text,
     bold && stylesT.bold,
@@ -14,6 +14,7 @@ const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBo
     opaque && stylesT.opaque,
     semiBold && stylesT.semiBold,
     cap && stylesT.cap,
+    error && stylesT.error,
   ];
 
   return <T style={[textStyles, styles]}>{text}</T>;
@@ -52,6 +53,11 @@ const stylesT = StyleSheet.create({
   cap: {
     textTransform: "capitalize",
   },
+  error: {
+    color: COLORS.danger,
+    width: "100%",
+    fontSize: 14,
+  },
 });
 
 Text.propTypes = {
@@ -65,6 +71,7 @@ Text.propTypes = {
   semiBold: PropTypes.bool,
   styles: PropTypes.object,
   cap: PropTypes.bool,
+  error: PropTypes.bool,
 };
 
 export default Text;

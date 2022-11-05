@@ -70,12 +70,10 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem("token", access_token);
       await AsyncStorage.setItem("user", JSON.stringify(user));
       ToastAndroid.show("Usuario registrado", ToastAndroid.SHORT);
-      return {
-        success: true,
-      };
+      return true;
     } catch ({ response }) {
-      setError(response.data);
-      return response.data;
+      setError("Error al registrar usuario");
+      return false;
     } finally {
       setLoading(false);
     }

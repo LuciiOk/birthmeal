@@ -20,6 +20,7 @@ import { BirthdayContext } from "../contexts/BirthdayContext";
 import { scheduleUserBirthday } from "../hooks/useNotification";
 
 import * as Notifications from "expo-notifications";
+import { useForm, Controller } from "react-hook-form";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -30,34 +31,21 @@ Notifications.setNotificationHandler({
 });
 
 const AddModal = ({ onClose, visible }) => {
-  const [name, setName] = useState("");
-  const [date, setDate] = useState(null);
-  const [switchValue, setSwitchValue] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "all" });
   const { addBirthday, loading } = useContext(BirthdayContext);
 
-  const onDismiss = () => {
-    onClose();
-  };
-
-  const handleSubmit = async () => {
-    const birthday = {
-      name,
-      birthdate: date,
-      remind: switchValue,
-    };
-    if (birthday.remind) {
-      const notificationId = await scheduleUserBirthday(
-        birthday.birthdate,
-        birthday.name
-      );
-      birthday.notificationId = notificationId;
+  const onSubmit = async ({ name, birthdate, remind }) => {
+    const newBirthday = { name, birthdate, remind };
+    if (remind) {
+      const notificationId = await scheduleUserBirthday(birthdate, name);
+      newBirthday.notificationId = notificationId;
     }
-    await addBirthday(birthday);
+    await addBirthday(newBirthday);
     onClose();
-  };
-
-  const onChangeDate = (selectedDate) => {
-    setDate(selectedDate);
   };
 
   return (
@@ -74,7 +62,7 @@ const AddModal = ({ onClose, visible }) => {
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
             <Text text="Agregar nuevo cumpleaños" bold subtitle />
-            <TouchableOpacity onPress={onDismiss}>
+            <TouchableOpacity onPress={onClose}>
               <Icon name="close" size={20} color={COLORS.dark} />
             </TouchableOpacity>
           </View>
@@ -82,26 +70,45 @@ const AddModal = ({ onClose, visible }) => {
             <Input
               placeholder="Nombre"
               keyboardType="default"
-              value={name}
-              onChangeText={setName}
+              control={control}
+              name="name"
+              rules={{ required: true }}
             />
+            {errors.name && (
+              <Text text="El nombre es requerido" styles={styles.error} />
+            )}
             <InputDate
               placeholder="Fecha de nacimiento"
-              date={date}
-              changeDate={onChangeDate}
+              control={control}
+              name="birthdate"
+              rules={{ required: true }}
             />
+            {errors.birthdate && (
+              <Text text="La fecha es requerida" styles={styles.error} />
+            )}
             <View style={styles.switchContainer}>
               <Text text="Desea recibir notificaciones?" />
-              <Switch
-                trackColor={{ false: "#767577", true: COLORS.primary }}
-                thumbColor={COLORS.white}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={() => setSwitchValue(!switchValue)}
-                value={switchValue}
+              <Controller
+                control={control}
+                render={({ field }) => (
+                  <Switch
+                    trackColor={{ false: "#767577", true: COLORS.primary }}
+                    thumbColor={COLORS.white}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={field.onChange}
+                    value={field.value}
+                  />
+                )}
+                name="remind"
+                defaultValue={false}
               />
             </View>
             {!loading && (
-              <Button buttonText="Agregar" action={handleSubmit} outlined />
+              <Button
+                buttonText="Agregar"
+                action={handleSubmit(onSubmit)}
+                outlined
+              />
             )}
             {loading && (
               <LottieView
@@ -145,6 +152,11 @@ const styles = StyleSheet.create({
   },
   animation: {
     width: 200,
+  },
+  error: {
+    color: COLORS.danger,
+    fontSize: 14,
+    width: "100%",
   },
 });
 

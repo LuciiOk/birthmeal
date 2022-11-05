@@ -5,7 +5,14 @@ import PropTypes from "prop-types";
 import Text from "./Text";
 import { COLORS } from "../constants/colorSchema";
 
-const Button = ({ buttonText, action, outlined, filled, buttonStyles }) => {
+const Button = ({
+  buttonText,
+  action,
+  outlined,
+  filled,
+  buttonStyles,
+  disabled,
+}) => {
   const style = [
     styles.button,
     outlined && styles.outlined,
@@ -14,7 +21,7 @@ const Button = ({ buttonText, action, outlined, filled, buttonStyles }) => {
   ];
 
   return (
-    <TouchableOpacity style={style} onPress={action}>
+    <TouchableOpacity style={style} onPress={action} disabled={disabled}>
       <Text
         text={buttonText}
         bold
@@ -52,6 +59,7 @@ Button.propTypes = {
   outlined: PropTypes.bool,
   filled: PropTypes.bool,
   buttonStyles: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 export default Button;

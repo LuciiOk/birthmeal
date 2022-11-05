@@ -18,46 +18,38 @@ import LoadingScreen from "./LoadingScreen";
 import { useForm } from "react-hook-form";
 
 const RegisterScreen = () => {
-  const { handleSubmit, control, reset } = useForm();
-  const [date, setDate] = useState(null);
-  const [isSelected, setSelection] = useState(false);
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({ mode: "all" });
   const navigation = useNavigation();
-  const [errorMessage, setErrorMessage] = useState(null);
-
 
   const { register, loading, error } = useContext(AuthContext);
 
-  const onSubmit = async ({ email, password, name, confirmPassword }) => {
-    if (password !== confirmPassword) {
-      setErrorMessage("Las contraseñas no coinciden");
-      return;
-    }
-
-    if (!isSelected) {
-      setErrorMessage("Debes aceptar los términos y condiciones");
-      return;
-    }
+  const onSubmit = async ({
+    email,
+    password,
+    name,
+    confirmPassword,
+    birthdate,
+  }) => {
     const newUser = {
       name,
-      birthdate: date,
+      birthdate,
       userAuth: {
         email,
         password,
         confirmPassword,
       },
     };
-    await register(newUser);
-    if (!error) {
+    const success = await register(newUser);
+    if (success) {
       navigation.navigate("Home");
       reset();
       return;
     }
-    setErrorMessage("El email ingresado ya existe.");
-    navigation.navigate("Register");
-  };
-
-  const onChangeDate = (selectedDate) => {
-    setDate(selectedDate);
   };
 
   if (loading) {
@@ -90,38 +82,84 @@ const RegisterScreen = () => {
           name="name"
           rules={{ required: true }}
         />
+        {errors.name && <Text text="El nombre es requerido" error />}
         <Input
           placeholder="Tu email"
           keyboardType="email-address"
           control={control}
           name="email"
-          rules={{ required: true }}
+          rules={{ required: true, pattern: /^\S+@\S+$/i }}
         />
+        {(errors?.email?.type === "required" && (
+          <Text text="El correo electrónico es requerido" error />
+        )) ||
+          (errors.email && errors?.email?.type === "pattern" && (
+            <Text text="El correo electrónico no es válido" error />
+          ))}
         <Input
           placeholder="Tu contraseña"
           keyboardType="default"
           isPassword
           control={control}
           name="password"
-          rules={{ required: true }}
+          rules={{ required: true, minLength: 6 }}
         />
-
+        {errors.password?.type === "required" && (
+          <Text text="La contraseña es requerida" error />
+        )}
+        {errors?.password?.type === "minLength" && (
+          <Text text="La contraseña debe tener al menos 6 caracteres" error />
+        )}
         <Input
           placeholder="Confirma tu contraseña"
           keyboardType="default"
           isPassword
           control={control}
           name="confirmPassword"
-          rules={{ required: true }}
+          rules={{ required: true, minLength: 6 }}
         />
+        {errors?.confirmPassword?.type === "required" && (
+          <Text text="La contraseña es requerida" error />
+        )}
+        {errors?.confirmPassword?.type === "minLength" && (
+          <Text text="La contraseña debe tener al menos 6 caracteres" error />
+        )}
         <InputDate
           placeholder="Tu fecha de nacimiento"
-          date={date}
-          changeDate={onChangeDate}
+          control={control}
+          name="birthdate"
+          rules={{ required: true }}
         />
-        <ConditionTerms isSelected={isSelected} setSelection={setSelection} />
-        {error && <Text text={errorMessage} styles={styles.error} />}
-        <Button buttonText="Crear cuenta" outlined action={handleSubmit(onSubmit)}  />
+        {errors.birthdate && (
+          <Text text="La fecha de nacimiento es requerida" error />
+        )}
+        <ConditionTerms
+          control={control}
+          name="conditionTerms"
+          rules={{
+            required: "Debes aceptar los términos y condiciones",
+          }}
+        />
+        <Button
+          buttonText="Crear cuenta"
+          outlined
+          action={handleSubmit(onSubmit)}
+          disabled={false}
+        />
+        {errors.conditionTerms && (
+          <Text
+            text={errors.conditionTerms.message}
+            styles={{ width: "50%", textAlign: "center" }}
+            error
+          />
+        )}
+        {error && (
+          <Text
+            text={error}
+            error
+            styles={{ width: "50%", textAlign: "center" }}
+          />
+        )}
         <SignUserDetails
           to="Login"
           text="¿Ya tienes una cuenta?"
@@ -162,10 +200,6 @@ const styles = StyleSheet.create({
   },
   formHeaderSubText: {
     color: COLORS.dark,
-    fontSize: 16,
-  },
-  error: {
-    color: COLORS.danger,
     fontSize: 16,
   },
 });

@@ -18,7 +18,12 @@ const LoginScreen = () => {
   const { login, loading, error } = useContext(AuthContext);
   const navigation = useNavigation();
 
-  const { handleSubmit, control, reset } = useForm();
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({ mode: "all" });
 
   const onSubmit = async ({ email, password }) => {
     const success = await login(email, password);
@@ -49,8 +54,14 @@ const LoginScreen = () => {
           keyboardType="email-address"
           control={control}
           name="email"
-          rules={{ required: true }}
+          rules={{ required: true, pattern: /^\S+@\S+$/i }}
         />
+        {(errors?.email?.type === "required" && (
+          <Text text="El correo electrónico es requerido" error />
+        )) ||
+          (errors.email && errors?.email?.type === "pattern" && (
+            <Text text="El correo electrónico no es válido" error />
+          ))}
         <Input
           placeholder="Tu contraseña"
           keyboardType="default"
@@ -59,6 +70,7 @@ const LoginScreen = () => {
           name="password"
           rules={{ required: true }}
         />
+        {errors.password && <Text text="La contraseña es requerida" error />}
         {error && (
           <View style={styles.errorContainer}>
             <Text
