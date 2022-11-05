@@ -25,6 +25,11 @@ const HomeScreen = () => {
 
   const onQuery = async (category) => {
     let categories = query?.categories ?? [];
+    if (category === "Reiniciar") {
+      setQuery(null);
+      await fetchData();
+      return;
+    }
     if (categories.includes(category)) {
       const index = categories.indexOf(category);
       categories.splice(index, 1);
@@ -33,9 +38,11 @@ const HomeScreen = () => {
       } else {
         setQuery({ ...query, categories });
       }
-    } else {
-      categories = [...categories, category];
+      await fetchData({ categories });
+      setQuery({ categories });
+      return;
     }
+    categories = [...categories, category];
     await fetchData({ categories });
     setQuery({ categories });
   };
@@ -56,7 +63,11 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} showHideTransition/>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={COLORS.white}
+        showHideTransition
+      />
       <FlatList
         refreshControl={
           <RefreshControl refreshing={loading} onRefresh={onRefresh} />

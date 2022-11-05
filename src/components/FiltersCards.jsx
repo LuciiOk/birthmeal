@@ -8,6 +8,10 @@ import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 const FiltersCards = ({ filter, setQuery, isSelected }) => {
   const handlePress = () => {
+    if (filter.name === "Reiniciar") {
+      setQuery("Reiniciar");
+      return;
+    }
     setQuery(filter.name);
   };
 
