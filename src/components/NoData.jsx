@@ -8,7 +8,9 @@ const NoData = ({ text }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../assets/images/Burger-sleeping.png")}
+        source={{
+          uri: "https://i.imgur.com/GitA8TW.png",
+        }}
         style={styles.image}
       />
       <Text

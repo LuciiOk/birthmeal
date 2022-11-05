@@ -61,10 +61,12 @@ const ItemSlide = ({ item }) => {
   return (
     <View style={{ width, alignItems: "center", padding: 20 }}>
       <View
-        style={{ flex: 0.60, justifyContent: "center", alignItems: "center" }}
+        style={{ flex: 0.6, justifyContent: "center", alignItems: "center" }}
       >
         <Image
-          source={item.image}
+          source={{
+            uri: item.image,
+          }}
           style={{ width: width / 1.2, height: height, resizeMode: "contain" }}
         />
       </View>
@@ -112,7 +114,11 @@ const ItemSlide = ({ item }) => {
               }}
               onPress={toLogin}
             >
-              <Text style={{ fontSize: 18, fontWeight: "bold", fontFamily: "Lato" }}>Iniciar sesión</Text>
+              <Text
+                style={{ fontSize: 18, fontWeight: "bold", fontFamily: "Lato" }}
+              >
+                Iniciar sesión
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -121,11 +127,15 @@ const ItemSlide = ({ item }) => {
                 borderRadius: 30,
                 width: width / 2 - 50,
                 alignItems: "center",
-                fontFamily: "Lato"
+                fontFamily: "Lato",
               }}
               onPress={toHome}
             >
-              <Text style={{ fontSize: 18, fontWeight: "bold", fontFamily: "Lato" }}>Comenzar</Text>
+              <Text
+                style={{ fontSize: 18, fontWeight: "bold", fontFamily: "Lato" }}
+              >
+                Comenzar
+              </Text>
             </TouchableOpacity>
           </View>
         )}
