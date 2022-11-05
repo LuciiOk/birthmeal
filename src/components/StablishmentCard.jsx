@@ -15,7 +15,6 @@ const StablishmentCard = ({ stablishment }) => {
       stablishment,
     });
   };
-  console.log(stablishment);
   return (
     <TouchableOpacity style={styles.container} onPress={redirecTo}>
       <Image
