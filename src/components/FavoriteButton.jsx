@@ -19,7 +19,7 @@ const FavoriteButton = ({ company }) => {
         animation.current.play(0, 0);
       }
     }
-  }, [isFavorite, company]);
+  }, [company, favorites]);
 
   const handleFavorite = async () => {
     try {
