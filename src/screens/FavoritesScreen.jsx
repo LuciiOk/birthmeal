@@ -1,34 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 
 import NoData from "../components/NoData";
 import StablishmentCard from "../components/StablishmentCard";
-import useRequestHttp from "../hooks/useRequestHttp";
-import LoadingScreen from "./LoadingScreen";
 import { COLORS } from "../constants/colorSchema";
+import { FavoritesContext } from "../contexts/FavoritesProvider";
 
 const FavoritesScreen = () => {
-  const {
-    data: favorites,
-    loading,
-    fetchData,
-  } = useRequestHttp("user/favorite", "get");
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  if (loading && favorites.length === 0)
-    return <LoadingScreen backgroundColor="transparent" />;
+  const { favorites, loading, getFavorites } =
+    React.useContext(FavoritesContext);
 
   return (
     <View style={styles.container}>
       <View style={styles.favoritesList}>
         <FlatList
           refreshControl={
-            <RefreshControl refreshing={loading} onRefresh={fetchData} />
+            <RefreshControl refreshing={loading} onRefresh={getFavorites} />
           }
-          data={favorites.data}
+          data={favorites}
           keyExtractor={({ id }) => id + "favorites"}
           renderItem={({ item }) => <StablishmentCard stablishment={item} />}
           ListEmptyComponent={

@@ -59,7 +59,7 @@ const StablishmentDetail = ({ route }) => {
         <View style={styles.infoContainer}>
           <View style={styles.infoHeader}>
             <Text text="Información" title bold />
-            <FavoriteButton id={route.params.stablishment.id} />
+            <FavoriteButton company={route.params.stablishment} />
           </View>
           <View style={{ ...styles.info, ...styles.locationSection }}>
             <Text text="Ubicaciones" semiBold />

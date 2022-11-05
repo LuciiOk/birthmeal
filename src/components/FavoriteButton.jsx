@@ -3,33 +3,30 @@ import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import LottieView from "lottie-react-native";
 import PropTypes from "prop-types";
 
-import useFavorite from "../hooks/useFavorite";
-import { AuthContext } from "../contexts/AuthContext";
 import LoginMessage from "./LoginMessage";
+import { FavoritesContext } from "../contexts/FavoritesProvider";
 
-const FavoriteButton = ({ id }) => {
+const FavoriteButton = ({ company }) => {
   const animation = useRef(null);
-  const { isFavorite, onFavorite } = useFavorite(id);
   const [showLoginMessage, setShowLoginMessage] = useState(false);
-
-  const { isLogged } = useContext(AuthContext);
+  const { isFavorite, onFavorite, favorites } = useContext(FavoritesContext);
 
   useEffect(() => {
     if (animation.current) {
-      if (isFavorite) {
+      if (isFavorite(company)) {
         animation.current.play(0, 30);
       } else {
         animation.current.play(0, 0);
       }
     }
-  }, [isFavorite]);
+  }, [isFavorite, company]);
 
   const handleFavorite = async () => {
-    if (!(await isLogged())) {
-      setShowLoginMessage(true);
-      return;
+    try {
+      if (!(await onFavorite(company))) setShowLoginMessage(true);
+    } catch (error) {
+      console.log(error);
     }
-    onFavorite();
   };
 
   return (
@@ -67,7 +64,7 @@ const styles = StyleSheet.create({
 });
 
 FavoriteButton.propTypes = {
-  id: PropTypes.string.isRequired,
+  company: PropTypes.object.isRequired,
 };
 
 export default FavoriteButton;

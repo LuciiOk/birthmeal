@@ -1,19 +1,26 @@
 import React, { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AxiosInstance from "../utils/AxiosInstance";
+import { AuthContext } from "./AuthContext";
 
 export const BirthdayContext = createContext();
 
 const BirthdayProvider = ({ children }) => {
+  const { token, isLogged } = React.useContext(AuthContext);
   const [birthdays, setBirthdays] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchBirthdays();
-  }, []);
+  }, [token]);
 
   const fetchBirthdays = async () => {
     try {
+      if (!(await isLogged())) {
+        setLoading(false);
+        setBirthdays([]);
+        return;
+      }
       const { data } = await AxiosInstance.get("birthdays/profile");
       setBirthdays(data || []);
       setLoading(false);

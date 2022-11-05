@@ -1,11 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
 import * as Location from "expo-location";
 
+// import { getDistance } from 'geolib'
+
 export const LocationContext = createContext();
 
 export const LocationProvider = ({ children }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [companiesLocation, setCompaniesLocation] = useState(null);
 
   useEffect(() => {
     _getLocationAsync();
@@ -25,6 +28,20 @@ export const LocationProvider = ({ children }) => {
 
     setLocation([coords.longitude, coords.latitude]);
   };
+
+  // const getCurrentDistance = (companyLocation) => {
+  //   if (location) {
+  //     const [longitude, latitude] = location;
+  //     const [companyLongitude, companyLatitude] = companyLocation;
+
+  //     const distance = getDistance(
+  //       { latitude, longitude },
+  //       { latitude: companyLatitude, longitude: companyLongitude }
+  //     );
+
+  //     return distance;
+  //   }
+  // }
 
   return (
     <LocationContext.Provider

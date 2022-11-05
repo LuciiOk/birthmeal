@@ -8,6 +8,7 @@ import { Platform } from "react-native";
 import * as Device from "expo-device";
 // device import
 import * as Notifications from "expo-notifications";
+import { FavoritesProvider } from "./src/contexts/FavoritesProvider";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -67,7 +68,9 @@ export default function App() {
   return (
     <LocationProvider>
       <AuthProvider>
-        <AppNav />
+        <FavoritesProvider>
+          <AppNav />
+        </FavoritesProvider>
       </AuthProvider>
     </LocationProvider>
   );
