@@ -49,6 +49,7 @@ const RegisterScreen = () => {
     await register(newUser);
     if (!error) {
       navigation.navigate("Home");
+      reset();
       return;
     }
     setErrorMessage("El email ingresado ya existe.");
