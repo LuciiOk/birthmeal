@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
 import Text from "./Text";
-import { getFormattedDate } from "../utils/formatDate";
+import { getFormattedDate, getTimeLeft } from "../utils/formatDate";
 import { COLORS } from "../constants/colorSchema";
 import { BirthdayContext } from "../contexts/BirthdayContext";
 
@@ -24,7 +24,10 @@ const BirthItem = ({ id, name, date }) => {
         />
         <View style={styles.itemText}>
           <Text text={name} subtitle bold cap />
-          <Text text={getFormattedDate(date)} opaque light cap />
+          <Text text={getFormattedDate(date)} semiBold styles={{
+            fontSize: 12,
+          }} />
+          <Text text={getTimeLeft(date)} opaque light />
         </View>
       </View>
       <View style={styles.itemRight}>
@@ -70,6 +73,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     marginLeft: 10,
+    width: "100%",
   },
   deleteButton: {
     padding: 10,
