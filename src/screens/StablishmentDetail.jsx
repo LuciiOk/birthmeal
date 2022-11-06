@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 
 import { COLORS } from "../constants/colorSchema";
@@ -10,6 +10,7 @@ import Text from "../components/Text";
 import FavoriteButton from "../components/FavoriteButton";
 import Valoration from "../components/Valoration";
 import AxiosInstance from "../utils/AxiosInstance";
+import Tooltip from "react-native-walkthrough-tooltip";
 
 import { LocationContext } from "../contexts/LocationProvider";
 
@@ -17,6 +18,7 @@ const StablishmentDetail = ({ route }) => {
   const navigation = useNavigation();
   const [nearLocation, setNearLocation] = useState(null);
   const { location: coordinates } = useContext(LocationContext);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const redirect = () => {
     WebBrowser.openBrowserAsync(route.params.stablishment.webUrl);
@@ -69,7 +71,7 @@ const StablishmentDetail = ({ route }) => {
                 light
                 opaque
               />
-              <FontAwesome
+              <Icon
                 name="angle-right"
                 size={24}
                 color={COLORS.primary}
@@ -81,7 +83,7 @@ const StablishmentDetail = ({ route }) => {
             <Text text="Ir al sitio web" semiBold />
             <TouchableOpacity onPress={redirect}>
               <Text text={route.params.stablishment.webUrl} light opaque />
-              <FontAwesome
+              <Icon
                 name="angle-right"
                 size={24}
                 color={COLORS.primary}
@@ -90,7 +92,55 @@ const StablishmentDetail = ({ route }) => {
             </TouchableOpacity>
           </View>
           <View style={{ ...styles.info }}>
-            <Text text="Beneficios" semiBold />
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginRight: 10,
+              }}
+            >
+              <Text text="Beneficios" semiBold />
+              <Tooltip
+                isVisible={tooltipVisible}
+                onClose={() => setTooltipVisible(false)}
+                backgroundColor="transparent"
+                content={
+                  <View
+                  >
+                    <Text
+                      text="Requisitos para obtener el beneficio:"
+                      semiBold
+                    />
+                    {route.params.stablishment.benefits.map((benefit) => (
+                      <Text
+                        text={`• ${benefit}`}
+                        light
+                        key={benefit}
+                        styles={{ marginTop: 10 }}
+                      />
+                    ))}
+                  </View>
+                }
+                contentStyle={{
+                  backgroundColor: COLORS.white,
+                  padding: 10,
+                  borderRadius: 20,
+                  borderWidth: 1,
+                  borderColor: COLORS.danger,
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => setTooltipVisible(!tooltipVisible)}
+                >
+                  <Icon
+                    name="info-circle"
+                    size={24}
+                    color={`${COLORS.dark}90`}
+                  />
+                </TouchableOpacity>
+              </Tooltip>
+            </View>
             <Text text={route.params.stablishment.description} opaque light />
           </View>
         </View>
