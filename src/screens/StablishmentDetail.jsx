@@ -44,6 +44,10 @@ const StablishmentDetail = ({ route }) => {
     getNearLocation();
   }, []);
 
+  const removeHttp = (url) => {
+    return url.replace(/(^\w+:|^)\/\//, "");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -82,7 +86,7 @@ const StablishmentDetail = ({ route }) => {
           <View style={{ ...styles.info }}>
             <Text text="Ir al sitio web" semiBold />
             <TouchableOpacity onPress={redirect}>
-              <Text text={route.params.stablishment.webUrl} light opaque />
+              <Text text={removeHttp(route.params.stablishment.webUrl)} light opaque />
               <Icon
                 name="angle-right"
                 size={24}
@@ -106,8 +110,7 @@ const StablishmentDetail = ({ route }) => {
                 onClose={() => setTooltipVisible(false)}
                 backgroundColor="transparent"
                 content={
-                  <View
-                  >
+                  <View>
                     <Text
                       text="Requisitos para obtener el beneficio:"
                       semiBold
