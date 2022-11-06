@@ -4,11 +4,19 @@ import PropTypes from "prop-types";
 
 import Text from "../components/Text";
 import FiltersCards from "../components/FiltersCards";
+import { COLORS } from "../constants/colorSchema";
 
 const FiltersContainer = ({ filters, setQuery, categoriesSelected }) => {
   return (
     <View style={styles.header}>
-      <Text text="Categorías" bold title />
+      <Text
+        styles={{
+          fontSize: 35,
+          width: "100%",
+        }}
+        text="Encuentra tu establecimiento"
+        bold
+      />
       <FlatList
         data={filters}
         keyExtractor={(item) => item.id}
@@ -36,7 +44,6 @@ const FiltersContainer = ({ filters, setQuery, categoriesSelected }) => {
 
 const styles = StyleSheet.create({
   header: {
-    marginVertical: 10,
     marginHorizontal: 10,
   },
 });

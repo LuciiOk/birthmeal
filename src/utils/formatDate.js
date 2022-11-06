@@ -17,7 +17,7 @@ export const getTimeLeft = (birthday) => {
   const days = timeLeft / (1000 * 3600 * 24);
   
   if (days < 1) {
-    return 'Hoy es tu cumpleaños! 🎉';
+    return 'Hoy es el cumple! 🎉';
   }
 
   if (days < 7) {

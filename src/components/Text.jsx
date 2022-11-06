@@ -25,6 +25,7 @@ const stylesT = StyleSheet.create({
     fontFamily: "Lato",
     fontSize: 16,
     color: COLORS.dark,
+    letterSpacing: 0.7,
   },
   bold: {
     fontFamily: "Lato-Bold",
