@@ -2,7 +2,7 @@
   "expo": {
     "name": "Birthmeal",
     "slug": "Birthmeal",
-    "version": "2.0.0",
+    "version": "2.0.4",
     "orientation": "portrait",
     "icon": "./assets/images/Burger-logo2.png",
     "userInterfaceStyle": "light",
