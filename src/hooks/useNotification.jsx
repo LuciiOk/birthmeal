@@ -7,7 +7,6 @@ const message = {
 };
 
 export const scheduleUserBirthday = async (date, name) => {
-  clearAllNotifications();
   if (Platform.OS === "android") {
     Notifications.setNotificationChannelAsync("birthday", {
       name: "birthday",

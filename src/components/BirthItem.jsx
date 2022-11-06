@@ -8,11 +8,14 @@ import { getFormattedDate, getTimeLeft } from "../utils/formatDate";
 import { COLORS } from "../constants/colorSchema";
 import { BirthdayContext } from "../contexts/BirthdayContext";
 
-const BirthItem = ({ id, name, date }) => {
+import { cancelNotification } from "../hooks/useNotification"
+
+const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
   const { deleteBirthday } = useContext(BirthdayContext);
 
   const onDelete = () => {
     deleteBirthday(id);
+    if (notificationId) cancelNotification(notificationId);
   };
 
   return (
@@ -24,10 +27,10 @@ const BirthItem = ({ id, name, date }) => {
         />
         <View style={styles.itemText}>
           <Text text={name} subtitle bold cap />
-          <Text text={getFormattedDate(date)} semiBold styles={{
+          <Text text={getFormattedDate(birthdate)} semiBold styles={{
             fontSize: 12,
           }} />
-          <Text text={getTimeLeft(date)} opaque light />
+          <Text text={getTimeLeft(birthdate)} opaque light />
         </View>
       </View>
       <View style={styles.itemRight}>
@@ -83,7 +86,8 @@ const styles = StyleSheet.create({
 BirthItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  birthdate: PropTypes.string.isRequired,
+  notificationId: PropTypes.string,
 };
 
 export default BirthItem;

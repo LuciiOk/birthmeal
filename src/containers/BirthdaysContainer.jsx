@@ -19,9 +19,7 @@ const BirthdaysContainer = () => {
         keyExtractor={({ id }) => id.toString()}
         renderItem={({ item }) => (
           <BirthItem
-            name={item.name}
-            date={item.birthdate}
-            id={item.id}
+            {...item}
             key={item.id}
           />
         )}
