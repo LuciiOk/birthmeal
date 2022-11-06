@@ -47,13 +47,14 @@ export const AuthProvider = ({ children }) => {
 
   const isLogged = async () => {
     try {
-      const user = await AsyncStorage.getItem("user");
-      const token = await AsyncStorage.getItem("token");
-      if (user && token) {
-        setUser(JSON.parse(user));
-        setToken(token);
+      const userData = await AsyncStorage.getItem("user");
+      const tokenData = await AsyncStorage.getItem("token");
+      if (userData && tokenData) {
+        setUser(JSON.parse(userData));
+        setToken(tokenData);
         return true;
       }
+      logout();
       return false;
     } catch (error) {
       console.log(error.message);
