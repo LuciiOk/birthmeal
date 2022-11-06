@@ -58,6 +58,8 @@ export const AuthProvider = ({ children }) => {
       return false;
     } catch (error) {
       console.log(error.message);
+      logout();
+      return false;
     }
   };
 
