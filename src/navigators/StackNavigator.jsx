@@ -14,6 +14,7 @@ import useOnboarding from "../hooks/useOnboarding";
 import { AuthContext } from "../contexts/AuthContext";
 import { COLORS } from "../constants/colorSchema";
 import { useNavigation } from "@react-navigation/native";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +75,7 @@ const StackNavigator = () => {
             <>
               <Stack.Screen name="Login" component={LoginScreen} />
               <Stack.Screen name="Register" component={RegisterScreen} />
+              <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
             </>
           )}
         </Stack.Group>
