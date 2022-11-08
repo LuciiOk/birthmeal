@@ -15,26 +15,28 @@ import Tooltip from "react-native-walkthrough-tooltip";
 import { LocationContext } from "../contexts/LocationProvider";
 
 const StablishmentDetail = ({ route }) => {
+  const { stablishment } = route.params;
   const navigation = useNavigation();
   const [nearLocation, setNearLocation] = useState(null);
   const { location: coordinates } = useContext(LocationContext);
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const redirect = () => {
-    WebBrowser.openBrowserAsync(route.params.stablishment.webUrl);
+    WebBrowser.openBrowserAsync(stablishment.webUrl);
   };
 
+  console.log("stablishment", stablishment);
   const goToLocations = () => {
     navigation.navigate("Locations", {
-      stablishment: route.params.stablishment,
-      business_name: route.params.stablishment.name,
-      companyId: route.params.stablishment.id,
+      stablishment: stablishment,
+      business_name: stablishment.name,
+      companyId: stablishment.id,
     });
   };
 
   const getNearLocation = async () => {
     const { data } = await AxiosInstance.post(
-      `location/nearest/${route.params.stablishment.id}`,
+      `location/nearest/${stablishment.id}`,
       { coordinates }
     );
     setNearLocation(data);
@@ -54,8 +56,8 @@ const StablishmentDetail = ({ route }) => {
         <Image
           style={styles.image}
           source={
-            (route.params.stablishment.imageUrl && {
-              uri: route.params.stablishment.imageUrl,
+            (stablishment.imageUrl && {
+              uri: stablishment.imageUrl,
             }) ||
             require("../../assets/images/Burger-logo.png")
           }
@@ -65,7 +67,7 @@ const StablishmentDetail = ({ route }) => {
         <View style={styles.infoContainer}>
           <View style={styles.infoHeader}>
             <Text text="Información" title bold />
-            <FavoriteButton company={route.params.stablishment} />
+            <FavoriteButton company={stablishment} />
           </View>
           <View style={{ ...styles.info, ...styles.locationSection }}>
             <Text text="Ubicaciones" semiBold />
@@ -86,7 +88,7 @@ const StablishmentDetail = ({ route }) => {
           <View style={{ ...styles.info }}>
             <Text text="Ir al sitio web" semiBold />
             <TouchableOpacity onPress={redirect}>
-              <Text text={removeHttp(route.params.stablishment.webUrl)} light opaque />
+              <Text text={removeHttp(stablishment.webUrl)} light opaque />
               <Icon
                 name="angle-right"
                 size={24}
@@ -115,7 +117,7 @@ const StablishmentDetail = ({ route }) => {
                       text="Requisitos para obtener el beneficio:"
                       semiBold
                     />
-                    {route.params.stablishment.benefits.map((benefit) => (
+                    {stablishment?.benefits?.map((benefit) => (
                       <Text
                         text={`• ${benefit}`}
                         light
@@ -144,12 +146,12 @@ const StablishmentDetail = ({ route }) => {
                 </TouchableOpacity>
               </Tooltip>
             </View>
-            <Text text={route.params.stablishment.description} opaque light />
+            <Text text={stablishment.description} opaque light />
           </View>
         </View>
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
-          <Valoration rating={route.params.stablishment.rating} />
+          <Valoration rating={stablishment.rating} />
         </View>
       </View>
     </View>
