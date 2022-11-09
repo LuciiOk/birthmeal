@@ -14,7 +14,7 @@ const Input = ({
   isPassword = false,
   control,
   name,
-  rules,
+  rules = null,
 }) => {
   const [isSecure, setIsSecure] = useState(true);
   const icon = !isPassword ? "user" : "lock";
@@ -102,6 +102,9 @@ Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
   keyboardType: PropTypes.string,
   isPassword: PropTypes.bool,
+  control: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  rules: PropTypes.object,
 };
 
 export default Input;

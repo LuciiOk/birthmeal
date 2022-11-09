@@ -8,7 +8,7 @@ import Text from "./Text";
 import { COLORS } from "../constants/colorSchema";
 import { getFormattedDate } from "../utils/formatDate";
 
-const InputDate = ({ placeholder, control, name, rules }) => {
+const InputDate = ({ placeholder, control, name, rules = null }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -68,8 +68,9 @@ const styles = StyleSheet.create({
 
 InputDate.propTypes = {
   placeholder: PropTypes.string,
-  date: PropTypes.object,
-  changeDate: PropTypes.func,
+  control: PropTypes.object,
+  name: PropTypes.string,
+  rules: PropTypes.object,
 };
 
 export default InputDate;

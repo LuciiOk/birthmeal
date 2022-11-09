@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Text from "../components/Text";
 import InputDate from "../components/InputDate";
 import Input from "../components/Input";
@@ -12,10 +13,8 @@ import NavForm from "../components/NavForm";
 import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
-
 import LoadingScreen from "./LoadingScreen";
-
-import { useForm } from "react-hook-form";
+import { ConfirmPasswordResolver } from "../utils/ConfirmPasswordResolver";
 
 const RegisterScreen = () => {
   const {
@@ -23,7 +22,10 @@ const RegisterScreen = () => {
     control,
     reset,
     formState: { errors },
-  } = useForm({ mode: "all" });
+  } = useForm({
+    resolver: yupResolver(ConfirmPasswordResolver),
+    mode: "all",
+  });
   const navigation = useNavigation();
 
   const { register, loading, error } = useContext(AuthContext);
@@ -80,66 +82,40 @@ const RegisterScreen = () => {
           keyboardType="default"
           control={control}
           name="name"
-          rules={{ required: true }}
         />
-        {errors.name && <Text text="El nombre es requerido" error />}
+        {errors.name && <Text text={errors.name.message} error />}
         <Input
           placeholder="Tu email"
           keyboardType="email-address"
           control={control}
           name="email"
-          rules={{ required: true, pattern: /^\S+@\S+$/i }}
         />
-        {(errors?.email?.type === "required" && (
-          <Text text="El correo electrónico es requerido" error />
-        )) ||
-          (errors.email && errors?.email?.type === "pattern" && (
-            <Text text="El correo electrónico no es válido" error />
-          ))}
+        {errors.email && <Text text={errors.email.message} error />}
         <Input
           placeholder="Tu contraseña"
           keyboardType="default"
           isPassword
           control={control}
           name="password"
-          rules={{ required: true, minLength: 6 }}
         />
-        {errors.password?.type === "required" && (
-          <Text text="La contraseña es requerida" error />
-        )}
-        {errors?.password?.type === "minLength" && (
-          <Text text="La contraseña debe tener al menos 6 caracteres" error />
-        )}
+        {errors.password && <Text text={errors.password.message} error />}
         <Input
           placeholder="Confirma tu contraseña"
           keyboardType="default"
           isPassword
           control={control}
           name="confirmPassword"
-          rules={{ required: true, minLength: 6 }}
         />
-        {errors?.confirmPassword?.type === "required" && (
-          <Text text="La contraseña es requerida" error />
-        )}
-        {errors?.confirmPassword?.type === "minLength" && (
-          <Text text="La contraseña debe tener al menos 6 caracteres" error />
+        {errors.confirmPassword && (
+          <Text text={errors.confirmPassword.message} error />
         )}
         <InputDate
           placeholder="Tu fecha de nacimiento"
           control={control}
           name="birthdate"
-          rules={{ required: true }}
         />
-        {errors.birthdate && (
-          <Text text="La fecha de nacimiento es requerida" error />
-        )}
-        <ConditionTerms
-          control={control}
-          name="conditionTerms"
-          rules={{
-            required: "Debes aceptar los términos y condiciones",
-          }}
-        />
+        {errors.birthdate && <Text text={errors.birthdate.message} error />}
+        <ConditionTerms control={control} name="conditionTerms" />
         <Button
           buttonText="Crear cuenta"
           outlined
@@ -149,8 +125,8 @@ const RegisterScreen = () => {
         {errors.conditionTerms && (
           <Text
             text={errors.conditionTerms.message}
-            styles={{ width: "50%", textAlign: "center" }}
             error
+            styles={{ width: "50%", textAlign: "center" }}
           />
         )}
         {error && (
