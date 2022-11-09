@@ -8,19 +8,32 @@ import { COLORS } from "../constants/colorSchema";
 
 import { Controller } from "react-hook-form";
 
-const Input = ({ placeholder, keyboardType, isPassword = false, control, name, rules }) => {
+const Input = ({
+  placeholder,
+  keyboardType,
+  isPassword = false,
+  control,
+  name,
+  rules,
+}) => {
   const [isSecure, setIsSecure] = useState(true);
   const icon = !isPassword ? "user" : "lock";
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
+      <View
+        style={
+          {
+            width: isPassword ? "90%" : "100%",
+            ...styles.inputContainer,
+          }
+        }
+      >
         <Icon name={icon} size={20} color={COLORS.dark} />
         <Controller
           control={control}
-          render={({field: { onChange, onBlur, value }}) => (
+          render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              style={styles.input}
               placeholder={placeholder}
               keyboardType={keyboardType}
               secureTextEntry={isPassword && isSecure}
@@ -33,19 +46,19 @@ const Input = ({ placeholder, keyboardType, isPassword = false, control, name, r
           name={name}
           rules={rules}
         />
-        {isPassword && (
-          <TouchableOpacity
-            style={styles.showPassword}
-            onPress={() => setIsSecure(!isSecure)}
-          >
-            <Icon
-              name={isSecure ? "eye-slash" : "eye"}
-              size={20}
-              color={COLORS.dark}
-            />
-          </TouchableOpacity>
-        )}
       </View>
+      {isPassword && (
+        <TouchableOpacity
+          style={styles.showPassword}
+          onPress={() => setIsSecure(!isSecure)}
+        >
+          <Icon
+            name={isSecure ? "eye-slash" : "eye"}
+            size={20}
+            color={COLORS.dark}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -56,30 +69,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingRight: 0,
-    marginTop: 10,
     borderWidth: 2,
     borderColor: COLORS.dark,
-    width: "100%",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginVertical: 5,
   },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
+    backgroundColor: COLORS.grayLight,
+    paddingHorizontal: 10,
+    borderRadius: 10,
   },
   input: {
-    width: "100%",
-    height: 40,
-    paddingLeft: 10,
-    fontSize: 16,
+    flex: 1,
+    marginLeft: 10,
     color: COLORS.dark,
   },
   showPassword: {
-    position: "absolute",
-    right: 10,
-    padding: 10,
+    width: "10%",
+    paddingHorizontal: 5,
   },
 });
 
