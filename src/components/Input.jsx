@@ -41,6 +41,7 @@ const Input = ({
               onChangeText={(value) => onChange(value)}
               value={value}
               placeholderTextColor={COLORS.grayDark}
+              style={styles.input}
             />
           )}
           name={name}
