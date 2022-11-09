@@ -42,5 +42,7 @@ export const clearAllNotifications = async () => {
 };
 
 export const cancelNotification = async (notificationId) => {
-  await Notifications.cancelScheduledNotificationAsync(notificationId);
+  if (notificationId) {
+    await Notifications.cancelScheduledNotificationAsync(notificationId);
+  }
 };

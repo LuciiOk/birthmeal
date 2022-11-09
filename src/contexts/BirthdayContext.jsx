@@ -44,14 +44,14 @@ const BirthdayProvider = ({ children }) => {
   const updateBirthday = async (birthday) => {
     try {
       setLoading(true);
-      const { data } = await AxiosInstance.put(
-        `birthdays/${birthday._id}`,
-        birthday
-      );
-      const newBirthdays = birthdays.map((item) =>
-        item._id === birthday._id ? data : item
-      );
-      setBirthdays(newBirthdays);
+      const index = birthdays.findIndex((b) => b.id === birthday.id);
+      setBirthdays([
+        ...birthdays.slice(0, index),
+        birthday,
+        ...birthdays.slice(index + 1),
+      ]);
+
+      await AxiosInstance.put(`birthdays/${birthday.id}`, birthday);
     } catch (error) {
       console.log(error);
     } finally {

@@ -50,26 +50,19 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
 
   const onSubmit = async ({ name, birthdate, remind }) => {
     if (dataEdit) {
+      const birthday = {
+        id: dataEdit.id,
+        name,
+        birthdate: new Date(birthdate).toISOString(),
+        remind,
+        notificationId: (remind && dataEdit.notificationId) || null,
+      };
       if (remind) {
-        const notificationId = await scheduleUserBirthday(
-          name,
-          birthdate,
-          dataEdit.notificationId
-        );
-        cancelNotification(dataEdit.notificationId);
-        updateBirthday({
-          name,
-          birthdate,
-          notificationId,
-        });
-      } else {
-        cancelNotification(dataEdit.notificationId);
-        updateBirthday({
-          name,
-          birthdate,
-          notificationId: null,
-        });
+        await cancelNotification(dataEdit.notificationId);
+        birthday.notificationId = await scheduleUserBirthday(new Date(birthdate), name);
       }
+      cancelNotification(dataEdit.notificationId);
+      await updateBirthday({ ...birthday, notificationId: null });
     } else {
       const newBirthday = { name, birthdate, remind };
       if (remind) {
