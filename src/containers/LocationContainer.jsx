@@ -14,7 +14,7 @@ const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
       </View>
       <FlatList
         data={locations}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.place_id + item.id}
         renderItem={({ item }) => (
           <LocationItem
             name={item.name}

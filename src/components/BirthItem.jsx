@@ -8,10 +8,13 @@ import { getFormattedDate, getTimeLeft } from "../utils/formatDate";
 import { COLORS } from "../constants/colorSchema";
 import { BirthdayContext } from "../contexts/BirthdayContext";
 
-import { cancelNotification } from "../hooks/useNotification"
+import { cancelNotification } from "../hooks/useNotification";
+import AddModal from "../containers/AddBirthday";
 
 const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
   const { deleteBirthday } = useContext(BirthdayContext);
+
+  const [showModal, setShowModal] = React.useState(false);
 
   const onDelete = () => {
     deleteBirthday(id);
@@ -19,7 +22,7 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
   };
 
   return (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={() => setShowModal(true)}>
       <View style={styles.itemLeft}>
         <Image
           source={require("../../assets/images/Burger-logo.png")}
@@ -27,9 +30,13 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
         />
         <View style={styles.itemText}>
           <Text text={name} subtitle bold cap />
-          <Text text={getFormattedDate(birthdate)} semiBold styles={{
-            fontSize: 12,
-          }} />
+          <Text
+            text={getFormattedDate(birthdate)}
+            semiBold
+            styles={{
+              fontSize: 12,
+            }}
+          />
           <Text text={getTimeLeft(birthdate)} opaque light />
         </View>
       </View>
@@ -41,7 +48,12 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
           <Icon name="close" size={24} color="red" />
         </TouchableOpacity>
       </View>
-    </View>
+      <AddModal
+        dataEdit={{ id, name, birthdate, notificationId }}
+        onClose={() => setShowModal(false)}
+        visible={showModal}
+      />
+    </TouchableOpacity>
   );
 };
 

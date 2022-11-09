@@ -41,6 +41,24 @@ const BirthdayProvider = ({ children }) => {
     }
   };
 
+  const updateBirthday = async (birthday) => {
+    try {
+      setLoading(true);
+      const { data } = await AxiosInstance.put(
+        `birthdays/${birthday._id}`,
+        birthday
+      );
+      const newBirthdays = birthdays.map((item) =>
+        item._id === birthday._id ? data : item
+      );
+      setBirthdays(newBirthdays);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const deleteBirthday = async (id) => {
     try {
       setLoading(true);
@@ -61,6 +79,7 @@ const BirthdayProvider = ({ children }) => {
         fetchBirthdays,
         addBirthday,
         deleteBirthday,
+        updateBirthday,
       }}
     >
       {children}

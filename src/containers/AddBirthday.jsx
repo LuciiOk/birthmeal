@@ -17,7 +17,10 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import InputDate from "../components/InputDate";
 import { BirthdayContext } from "../contexts/BirthdayContext";
-import { scheduleUserBirthday } from "../hooks/useNotification";
+import {
+  scheduleUserBirthday,
+  cancelNotification,
+} from "../hooks/useNotification";
 
 import * as Notifications from "expo-notifications";
 import { useForm, Controller } from "react-hook-form";
@@ -30,21 +33,52 @@ Notifications.setNotificationHandler({
   }),
 });
 
-const AddModal = ({ onClose, visible }) => {
+const AddModal = ({ onClose, visible, dataEdit = null }) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "all" });
-  const { addBirthday, loading } = useContext(BirthdayContext);
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      name: dataEdit?.name || "",
+      birthdate: dataEdit?.birthdate || new Date(),
+      remind: dataEdit?.notificationId ? true : false,
+    },
+  });
+  const { addBirthday, loading, updateBirthday } = useContext(BirthdayContext);
 
   const onSubmit = async ({ name, birthdate, remind }) => {
-    const newBirthday = { name, birthdate, remind };
-    if (remind) {
-      const notificationId = await scheduleUserBirthday(birthdate, name);
-      newBirthday.notificationId = notificationId;
+    if (dataEdit) {
+      if (remind) {
+        const notificationId = await scheduleUserBirthday(
+          name,
+          birthdate,
+          dataEdit.notificationId
+        );
+        cancelNotification(dataEdit.notificationId);
+        updateBirthday({
+          name,
+          birthdate,
+          notificationId,
+        });
+      } else {
+        cancelNotification(dataEdit.notificationId);
+        updateBirthday({
+          name,
+          birthdate,
+          notificationId: null,
+        });
+      }
+    } else {
+      const newBirthday = { name, birthdate, remind };
+      if (remind) {
+        const notificationId = await scheduleUserBirthday(birthdate, name);
+        newBirthday.notificationId = notificationId;
+      }
+      await addBirthday(newBirthday);
     }
-    await addBirthday(newBirthday);
+
     onClose();
   };
 
@@ -163,6 +197,7 @@ const styles = StyleSheet.create({
 AddModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
+  dataEdit: PropTypes.object,
 };
 
 export default AddModal;

@@ -55,7 +55,10 @@ const StackNavigator = () => {
                   displayTitle
                   cap
                   bold
-                  text={route.params.name || route.name}
+                  text={
+                    route.params.name ||
+                    (route.name === "Locations" ? "Ubicaciones" : route.name)
+                  }
                 />
               </View>
               <Image
@@ -75,7 +78,10 @@ const StackNavigator = () => {
             <>
               <Stack.Screen name="Login" component={LoginScreen} />
               <Stack.Screen name="Register" component={RegisterScreen} />
-              <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+              <Stack.Screen
+                name="ForgotPassword"
+                component={ForgotPasswordScreen}
+              />
             </>
           )}
         </Stack.Group>

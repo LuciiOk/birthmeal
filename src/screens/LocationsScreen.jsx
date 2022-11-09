@@ -46,9 +46,9 @@ const LocationsScreen = ({ route }) => {
         latitude={selectedLocation?.coordinates[1] || 0}
         longitude={selectedLocation?.coordinates[0] || 0}
       >
-        {locationsData.map(({ geometry, name, address, _id }) => (
+        {locationsData.map(({ geometry, name, address, id }) => (
           <MapView.Marker
-            key={_id + name + address}
+            key={id}
             coordinate={{
               latitude: geometry.coordinates[1],
               longitude: geometry.coordinates[0],
