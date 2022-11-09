@@ -150,7 +150,10 @@ const StablishmentDetail = ({ route }) => {
         </View>
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
-          <Valoration rating={stablishment.rating} />
+          <Valoration
+            rating={stablishment.rating}
+            stablishmentId={stablishment.id}
+          />
         </View>
       </View>
     </View>
