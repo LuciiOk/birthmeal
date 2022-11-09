@@ -25,7 +25,6 @@ const StablishmentDetail = ({ route }) => {
     WebBrowser.openBrowserAsync(stablishment.webUrl);
   };
 
-  console.log("stablishment", stablishment);
   const goToLocations = () => {
     navigation.navigate("Locations", {
       stablishment: stablishment,

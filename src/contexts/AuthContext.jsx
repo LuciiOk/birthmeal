@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
-      const { user, access_token } = data;
-      setUser(user);
+      const { user: userData, access_token } = data;
+      setUser(userData);
       setToken(access_token);
       await AsyncStorage.setItem("token", access_token);
-      await AsyncStorage.setItem("user", JSON.stringify(user));
+      await AsyncStorage.setItem("user", JSON.stringify(userData));
       ToastAndroid.show("Has iniciado sesión", ToastAndroid.SHORT);
       return true;
     } catch ({ response }) {
@@ -54,7 +54,6 @@ export const AuthProvider = ({ children }) => {
         setToken(tokenData);
         return true;
       }
-      logout();
       return false;
     } catch (error) {
       console.log(error.message);
