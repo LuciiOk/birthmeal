@@ -87,10 +87,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     color: COLORS.dark,
+    fontSize: 16,
+    paddingVertical: 2,
+    fontFamily: "Lato",
   },
   showPassword: {
     width: "10%",
     paddingHorizontal: 5,
+    paddingVertical: 5,
   },
 });
 
