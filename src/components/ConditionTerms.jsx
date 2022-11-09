@@ -7,7 +7,7 @@ import { Controller } from "react-hook-form";
 import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
 
-const ConditionTerms = ({ control, name, rules }) => {
+const ConditionTerms = ({ control, name, rules = null }) => {
   return (
     <View style={styles.checkboxContainer}>
       <Controller
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 ConditionTerms.propTypes = {
   control: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
-  rules: PropTypes.object.isRequired,
+  rules: PropTypes.object,
 };
 
 export default ConditionTerms;

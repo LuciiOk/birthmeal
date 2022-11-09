@@ -6,7 +6,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import SignUserDetails from "../components/SignUserDetails";
 import Text from "../components/Text";
 import Input from "../components/Input";
-import NavForm from "../components/NavForm";
 import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
@@ -39,7 +38,6 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <NavForm />
       <View style={styles.form}>
         <View style={styles.formHeader}>
           <Text

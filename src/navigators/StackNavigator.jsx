@@ -56,8 +56,14 @@ const StackNavigator = () => {
                   cap
                   bold
                   text={
-                    route.params.name ||
-                    (route.name === "Locations" ? "Ubicaciones" : route.name)
+                    route?.params?.name ||
+                    (route.name === "Locations"
+                      ? "Ubicaciones"
+                      : route.name === "Login"
+                      ? "Iniciar sesión"
+                      : route.name === "Register"
+                      ? "Registrarse"
+                      : route.name)
                   }
                 />
               </View>
@@ -74,6 +80,8 @@ const StackNavigator = () => {
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
           )}
           <Stack.Screen name="Home" component={TabNavigator} />
+        </Stack.Group>
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
           {!user && !token && (
             <>
               <Stack.Screen name="Login" component={LoginScreen} />

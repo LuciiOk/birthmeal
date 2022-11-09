@@ -9,7 +9,6 @@ import InputDate from "../components/InputDate";
 import Input from "../components/Input";
 import SignUserDetails from "../components/SignUserDetails";
 import ConditionTerms from "../components/ConditionTerms";
-import NavForm from "../components/NavForm";
 import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
@@ -60,7 +59,6 @@ const RegisterScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <NavForm />
       <ScrollView
         contentContainerStyle={styles.form}
         showsVerticalScrollIndicator={false}
