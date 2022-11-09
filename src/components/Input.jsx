@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   showPassword: {
     position: "absolute",
     right: 10,
+    padding: 10,
   },
 });
 

@@ -22,7 +22,7 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
   };
 
   return (
-    <TouchableOpacity style={styles.item} onPress={() => setShowModal(true)}>
+    <TouchableOpacity style={styles.item} onLongPress={() => setShowModal(true)}>
       <View style={styles.itemLeft}>
         <Image
           source={require("../../assets/images/Burger-logo.png")}
