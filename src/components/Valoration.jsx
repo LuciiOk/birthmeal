@@ -17,7 +17,6 @@ const Valoration = ({ rating = 3, stablishmentId }) => {
           valoration,
         }
       );
-      console.log(response.data);
       setValoration(response.data);
     } catch (error) {
       console.log(error);
