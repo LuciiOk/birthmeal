@@ -55,7 +55,7 @@ const Input = ({
         >
           <Icon
             name={isSecure ? "eye-slash" : "eye"}
-            size={20}
+            size={23}
             color={COLORS.dark}
           />
         </TouchableOpacity>
