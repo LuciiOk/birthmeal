@@ -54,7 +54,7 @@ const RegisterScreen = () => {
   };
 
   if (loading) {
-    return <LoadingScreen />;
+    return <LoadingScreen backgroundColor="#fff" />;
   }
 
   return (

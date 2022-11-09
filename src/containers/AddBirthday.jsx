@@ -59,7 +59,10 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
       };
       if (remind) {
         await cancelNotification(dataEdit.notificationId);
-        birthday.notificationId = await scheduleUserBirthday(new Date(birthdate), name);
+        birthday.notificationId = await scheduleUserBirthday(
+          new Date(birthdate),
+          name
+        );
       }
       cancelNotification(dataEdit.notificationId);
       await updateBirthday({ ...birthday, notificationId: null });
@@ -90,7 +93,12 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
           <View style={styles.modalHeader}>
             <Text text="Agregar nuevo cumpleaños" bold subtitle />
             <TouchableOpacity onPress={onClose}>
-              <Icon name="close" size={20} color={COLORS.dark} />
+              <Icon
+                name="close"
+                size={25}
+                color={COLORS.dark}
+                style={{ padding: 5 }}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.modalBody}>

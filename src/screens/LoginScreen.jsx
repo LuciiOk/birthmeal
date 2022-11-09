@@ -33,7 +33,7 @@ const LoginScreen = () => {
   };
 
   if (loading) {
-    return <LoadingScreen />;
+    return <LoadingScreen backgroundColor="#fff" />;
   }
 
   return (

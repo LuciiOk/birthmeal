@@ -7,22 +7,27 @@ import Text from "./Text";
 import { getFormattedDate, getTimeLeft } from "../utils/formatDate";
 import { COLORS } from "../constants/colorSchema";
 import { BirthdayContext } from "../contexts/BirthdayContext";
-
 import { cancelNotification } from "../hooks/useNotification";
 import AddModal from "../containers/AddBirthday";
+import ConfirmModal from "../containers/ConfirmModal";
 
 const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
   const { deleteBirthday } = useContext(BirthdayContext);
 
   const [showModal, setShowModal] = React.useState(false);
+  const [showConfirmModal, setShowConfirmModal] = React.useState(false);
 
   const onDelete = () => {
     deleteBirthday(id);
     if (notificationId) cancelNotification(notificationId);
+    setShowConfirmModal(false);
   };
 
   return (
-    <TouchableOpacity style={styles.item} onLongPress={() => setShowModal(true)}>
+    <TouchableOpacity
+      style={styles.item}
+      onLongPress={() => setShowModal(true)}
+    >
       <View style={styles.itemLeft}>
         <Image
           source={require("../../assets/images/Burger-logo.png")}
@@ -42,11 +47,17 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
       </View>
       <View style={styles.itemRight}>
         <TouchableOpacity
-          onPress={() => onDelete()}
+          onPress={() => setShowConfirmModal(true)}
           style={styles.deleteButton}
         >
           <Icon name="close" size={24} color="red" />
         </TouchableOpacity>
+        <ConfirmModal
+          show={showConfirmModal}
+          setShow={setShowConfirmModal}
+          onAccept={onDelete}
+          message="Estas seguro de eliminar este cumpleaños?"
+        />
       </View>
       <AddModal
         dataEdit={{ id, name, birthdate, notificationId }}
