@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "90%",
+    alignSelf: "center",
   },
   footerText: {
     textAlign: "center",
