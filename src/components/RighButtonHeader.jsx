@@ -41,7 +41,7 @@ const RighButtonHeader = ({ marginRight }) => {
 
   return (
     <View style={{ flexDirection: "row", alignItems: "center", marginRight }}>
-      {currentRoute !== "Profile" && (
+      {currentRoute !== "Profile" && currentRoute !== "Login" && currentRoute !== "Register" && (
         <TouchableOpacity onPress={() => setModalVisible(true)}>
           <FontAwesomeIcon
             icon={faAngleDown}
