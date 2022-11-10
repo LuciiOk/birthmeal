@@ -71,11 +71,11 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const response = await Axios.post(`/auth/register`, newUser);
-      const { user, access_token } = response.data;
-      setUser(user);
+      const { user: userData, access_token } = response.data;
+      setUser(userData);
       setToken(access_token);
       await AsyncStorage.setItem("token", access_token);
-      await AsyncStorage.setItem("user", JSON.stringify(user));
+      await AsyncStorage.setItem("user", JSON.stringify(userData));
       ToastAndroid.show("Usuario registrado", ToastAndroid.SHORT);
       return true;
     } catch ({ response }) {
