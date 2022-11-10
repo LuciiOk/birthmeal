@@ -23,7 +23,7 @@ const MoreInfoScreen = () => {
     },
   ];
 
-  const appVersion = "1.0.0";
+  const appVersion = "2.0.2";
 
   const appLogo = require("../../assets/images/Burger-logo.png");
 
