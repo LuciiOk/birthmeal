@@ -5,11 +5,9 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Text from "../components/Text";
 import useClipBoard from "../hooks/useClipBoard";
 import { COLORS } from "../constants/colorSchema";
-import { useNavigation } from "@react-navigation/native";
 
 const MoreInfoScreen = () => {
   const { copyToClipBoard } = useClipBoard();
-  const navigation = useNavigation();
 
   const appDescription = `Birthmeal es una aplicación desarrollada por estudiantes de la Pontificia Universidad Católica de Valparaíso, con el objetivo facilitar la búsqueda de establecimientos que ofrezcan descuentos por encontrarse de cumpleaños.`;
   const developers = [
@@ -26,10 +24,6 @@ const MoreInfoScreen = () => {
   const appVersion = "2.0.2";
 
   const appLogo = require("../../assets/images/Burger-logo.png");
-
-  const login = () => {
-    navigation.navigate("Login");
-  };
 
   return (
     <View style={styles.container}>
