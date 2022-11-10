@@ -14,9 +14,7 @@ const MoreInfoScreen = () => {
   const navigation = useNavigation();
   const { user, token, logout } = useContext(AuthContext);
 
-  const appDescription = `Birthmeal es una aplicación desarrollada
-  por estudiantes de la Pontificia Universidad Católica de Valparaíso, con el objetivo facilitar
-  la búsqueda de establecimientos que ofrezcan descuentos por encontrarse de cumpleaños.`;
+  const appDescription = `Birthmeal es una aplicación desarrollada por estudiantes de la Pontificia Universidad Católica de Valparaíso, con el objetivo facilitar la búsqueda de establecimientos que ofrezcan descuentos por encontrarse de cumpleaños.`;
   const developers = [
     {
       name: "Luciano Portales",
@@ -59,8 +57,8 @@ const MoreInfoScreen = () => {
             title
             styles={styles.titleBody}
           />
+          <Text text={appDescription} styles={styles.description} />
         </View>
-        <Text text={appDescription} styles={styles.description} />
         <View style={styles.developers}>
           <Icon name="android" size={24} color={COLORS.frost1} />
           <Text
@@ -109,41 +107,42 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   header: {
-    flex: 1.6,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: COLORS.dark,
-    paddingVertical: 5,
   },
   logo: {
     width: 100,
     height: 100,
-    borderRadius: 50,
   },
   title: {
-    color: COLORS.white,
+    color: COLORS.frost1,
     fontSize: 24,
+    marginTop: 10,
   },
   version: {
-    color: COLORS.white,
+    color: COLORS.frost1,
+    fontSize: 12,
+    marginTop: 10,
   },
   body: {
     flex: 2,
     padding: 20,
   },
   headerDescription: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     marginBottom: 10,
+    marginLeft: -15,
   },
   titleBody: {
+    fontSize: 18,
     marginLeft: 10,
-    fontSize: 20,
   },
   description: {
+    fontSize: 14,
     marginBottom: 20,
-    fontSize: 16,
-    textAlign: "center",
+    textAlign: "justify",
   },
   developers: {
     flexDirection: "row",
@@ -151,20 +150,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   developersTitle: {
+    fontSize: 18,
     marginLeft: 10,
-    fontSize: 20,
   },
   developer: {
     marginBottom: 10,
   },
   developerName: {
-    marginBottom: 5,
     fontSize: 16,
   },
   developerEmail: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
   },
   developerEmailIcon: {
     flexDirection: "row",
@@ -172,22 +169,20 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   developerEmailText: {
+    fontSize: 14,
     marginLeft: 5,
-    fontSize: 16,
-    textTransform: "lowercase",
   },
   developerEmailButton: {
+    borderRadius: 50,
     padding: 5,
   },
   footer: {
-    flex: 3,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "90%",
-    alignSelf: "center",
+    flex: 1,
+    padding: 20,
   },
   footerText: {
-    textAlign: "center",
+    color: COLORS.grayDark,
+    fontSize: 14,
   },
 });
 

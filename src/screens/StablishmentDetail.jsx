@@ -233,7 +233,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     right: 0,
   },
-  locationSection: {},
 });
 
 StablishmentDetail.propTypes = {
