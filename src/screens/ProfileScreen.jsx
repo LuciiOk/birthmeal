@@ -1,5 +1,12 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, StatusBar } from "react-native";
+import {
+  View,
+  StyleSheet,
+  StatusBar,
+  Image,
+  TouchableWithoutFeedback,
+  ToastAndroid,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { AuthContext } from "../contexts/AuthContext";
@@ -11,46 +18,38 @@ import { getTimeLeft } from "../utils/formatDate";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
-  const { user, token, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+  const [developer, setDeveloper] = React.useState(0);
 
   const handleLogout = async () => {
     await logout();
     navigation.navigate("Home");
   };
 
-  if (!token && !user && !user?.user) {
-    return (
-      <View style={styles.container}>
-        <StatusBar
-          barStyle="dark-content"
-          backgroundColor={COLORS.white}
-          hidden={false}
-        />
-        <View style={styles.header}>
-          <Text displayTitle bold text="Perfil" />
-          <Text text="Inicia sesión para ver tu perfil" bold subtitle />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            buttonText="Volver al inicio"
-            filled
-            action={() => navigation.navigate("Home")}
-          />
-          <Button
-            buttonText="Iniciar sesión"
-            outlined
-            action={() => navigation.navigate("Login")}
-            buttonStyles={{ marginTop: 10 }}
-          />
-        </View>
-      </View>
-    );
-  }
-
   const { user: profile, email } = user;
 
   return (
     <View style={styles.container}>
+      {developer >= 10 && <Text text={JSON.stringify(profile, null, 2)} />}
+      <TouchableWithoutFeedback
+        onPress={() => {
+          setDeveloper(developer + 1);
+          if (developer >= 10) {
+            ToastAndroid.show("¡Easter egg encontrado!", ToastAndroid.SHORT);
+          }
+          if (developer >= 20) {
+            ToastAndroid.show("¡Easter egg encontrado!", ToastAndroid.SHORT);
+            setDeveloper(0);
+          }
+        }}
+      >
+        <View style={styles.header}>
+          <Image
+            source={require("../../assets/images/Burger-logo.png")}
+            style={styles.image}
+          />
+        </View>
+      </TouchableWithoutFeedback>
       <Text text="Mi perfil" displayTitle bold />
       <View style={styles.profile}>
         <View style={{ flexDirection: "row" }}>
@@ -77,7 +76,6 @@ const ProfileScreen = () => {
         </View>
       </View>
       <Button buttonText="Cerrar sesión" filled action={() => handleLogout()} />
-      <Text text={JSON.stringify(profile, null, 2)} />
     </View>
   );
 };
@@ -89,23 +87,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: COLORS.white,
   },
-  profile: {
-    width: "80%",
-    marginVertical: 20,
-    flex: 0.7,
-    textAlign: "center",
-  },
   header: {
-    flex: 0.6,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 60,
+  },
+  profile: {
+    width: "100%",
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 20,
   },
   buttonContainer: {
-    flex: 0.3,
-    width: "80%",
-    flexDirection: "column",
-    marginVertical: 20,
-    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 20,
   },
 });
 
