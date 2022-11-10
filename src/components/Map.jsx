@@ -219,6 +219,16 @@ const Map = ({ latitude, longitude, ...props }) => {
         },
       ],
     },
+    // remove all labels
+    {
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
   ];
 
   return (
