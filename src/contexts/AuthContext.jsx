@@ -54,6 +54,10 @@ export const AuthProvider = ({ children }) => {
         setToken(tokenData);
         return true;
       }
+      await AsyncStorage.removeItem("user");
+      await AsyncStorage.removeItem("token");
+      setUser(null);
+      setToken(null); 
       return false;
     } catch (error) {
       console.log(error.message);

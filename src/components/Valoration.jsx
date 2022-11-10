@@ -5,19 +5,26 @@ import PropTypes from "prop-types";
 import Text from "./Text";
 
 import AxiosInstance from "../utils/AxiosInstance";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Valoration = ({ rat, stablishmentId }) => {
   const [rating, setRating] = useState(rat);
+  const { token, user, isLogged } = useContext(AuthContext);
 
   const onStarPress = async (valoration) => {
     try {
-      const response = await AxiosInstance.post(
-        `companies/rating/${stablishmentId}`,
-        {
-          valoration,
-        }
-      );
-      setRating(response.data);
+      if ((await isLogged()) && token && user) {
+        const response = await AxiosInstance.post(
+          `companies/rating/${stablishmentId}`,
+          {
+            valoration,
+          }
+        );
+        setRating(response.data);
+      } else {
+        alert("Debes iniciar sesión para valorar");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +38,7 @@ const Valoration = ({ rat, stablishmentId }) => {
           <Icons
             key={i}
             name="star"
-            size={20}
+            size={26}
             color="#FFD700"
             onPress={() => onStarPress(i)}
           />
@@ -41,7 +48,7 @@ const Valoration = ({ rat, stablishmentId }) => {
           <Icons
             key={i}
             name="star-half-o"
-            size={20}
+            size={26}
             color="#FFD700"
             onPress={() => onStarPress(i)}
           />
@@ -51,7 +58,7 @@ const Valoration = ({ rat, stablishmentId }) => {
           <Icons
             key={i}
             name="star-o"
-            size={20}
+            size={26}
             color="#FFD700"
             onPress={() => onStarPress(i)}
           />
