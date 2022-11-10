@@ -18,7 +18,7 @@ export const TABS = {
   },
   MORE_INFO: {
     name: "More Info",
-    title: "Mas Información",
+    title: "Información",
     icon: "information-circle",
     component: MoreInfoScreen,
   },
