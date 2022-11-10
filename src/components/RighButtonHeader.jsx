@@ -5,29 +5,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 
 import { COLORS } from "../constants/colorSchema";
-const RighButtonHeader = ({ route, marginRight }) => {
+const RighButtonHeader = ({ marginRight }) => {
   const navigation = useNavigation();
 
   return (
     <View style={{ flexDirection: "row", alignItems: "center", marginRight }}>
-      <FontAwesomeIcon
-        icon={faAngleDown}
-        size={30}
-        color={COLORS.dark}
-        style={{
-          marginRight: 10,
-          borderRadius: 50,
-          borderColor: COLORS.dark,
-          padding: 5,
-        }}
-      />
+      <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+        <FontAwesomeIcon
+          icon={faAngleDown}
+          size={30}
+          color={COLORS.dark}
+          style={styles.icon}
+        />
+      </TouchableOpacity>
       <TouchableOpacity
         style={styles.logo}
-        onPress={() => {
-          route?.name !== "Profile" && navigation.navigate("Profile");
-          route?.name === "Profile" && navigation.navigate("Home");
-          !route && navigation.navigate("Profile");
-        }}
+        onPress={() => navigation.navigate("Home")}
       >
         <Image
           source={require("../../assets/images/Burger-logo.png")}
@@ -44,6 +37,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     borderColor: COLORS.dark,
+  },
+  icon: {
+    marginRight: 10,
+    borderRadius: 50,
+    borderColor: COLORS.dark,
+    padding: 5,
   },
 });
 
