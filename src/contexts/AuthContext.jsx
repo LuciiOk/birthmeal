@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }) => {
       ToastAndroid.show("Usuario registrado", ToastAndroid.SHORT);
       return true;
     } catch ({ response }) {
-      setError("Error al registrar usuario");
+      setError("Error al registrar usuario, el email ya existe.");
       return false;
     } finally {
       setLoading(false);
