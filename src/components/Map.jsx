@@ -242,7 +242,6 @@ const Map = ({ latitude, longitude, ...props }) => {
       }
       showsUserLocation
       showsCompass={false}
-      showsMyLocationButton
       showsBuildings={false}
       showsIndoors={false}
       showsTraffic={false}

@@ -6,7 +6,13 @@ import Text from "../components/Text";
 import LocationItem from "../components/LocationItem";
 import NoData from "../components/NoData";
 
-const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
+const LocationContainer = ({
+  locations,
+  selectedLocation,
+  setLocation,
+  selectedLocationId,
+  setSelectedLocationId,
+}) => {
   return (
     <View style={styles.locationsContainer}>
       <View style={styles.locationHeader}>
@@ -20,7 +26,10 @@ const LocationContainer = ({ locations, selectedLocation, setLocation }) => {
             name={item.name}
             address={item.address}
             selected={item.geometry === selectedLocation}
-            setLocation={() => setLocation(item.geometry)}
+            setLocation={() => {
+              setLocation(item.geometry);
+              setSelectedLocationId(item.id);
+            }}
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -71,6 +80,8 @@ LocationContainer.propTypes = {
   selectedLocation: PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   }),
+  selectedLocationId: PropTypes.string,
+  setSelectedLocationId: PropTypes.func.isRequired,
 };
 
 export default LocationContainer;
