@@ -51,7 +51,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text text="Perfil" displayTitle bold />
+      <Text text="Mi perfil" displayTitle bold />
       <View style={styles.profile}>
         <View style={{ flexDirection: "row" }}>
           <Text text="Nombre:" bold subtitle />
@@ -77,6 +77,7 @@ const ProfileScreen = () => {
         </View>
       </View>
       <Button buttonText="Cerrar sesión" filled action={() => handleLogout()} />
+      <Text text={JSON.stringify(profile, null, 2)} />
     </View>
   );
 };
