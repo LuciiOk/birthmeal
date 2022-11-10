@@ -13,7 +13,7 @@ const LoadingScreen = ({ backgroundColor = COLORS.primary }) => {
         backgroundColor,
       }}
     >
-      <StatusBar backgroundColor={backgroundColor} showHideTransition/>
+      <StatusBar backgroundColor={backgroundColor} hidden={false} />
       <LottieView
         source={require("../../assets/loties/burguer-loader.json")}
         autoPlay
@@ -49,6 +49,5 @@ const styles = StyleSheet.create({
 LoadingScreen.propTypes = {
   backgroundColor: PropTypes.string,
 };
-
 
 export default LoadingScreen;

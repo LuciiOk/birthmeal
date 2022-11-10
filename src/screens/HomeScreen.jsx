@@ -25,7 +25,7 @@ const HomeScreen = () => {
 
   const onQuery = async (category) => {
     let categories = query?.categories ?? [];
-    if (category === "Limpiar") {
+    if (category === "Limpar") {
       setQuery(null);
       await fetchData();
       return;
