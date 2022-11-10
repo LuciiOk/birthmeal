@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 import Text from "../components/Text";
 import FiltersCards from "../components/FiltersCards";
-import { COLORS } from "../constants/colorSchema";
 
 const FiltersContainer = ({ filters, setQuery, categoriesSelected }) => {
   return (
