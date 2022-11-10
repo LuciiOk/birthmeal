@@ -7,9 +7,12 @@ import Text from "./Text";
 import AxiosInstance from "../utils/AxiosInstance";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import ValorationConfirm from "../containers/ValorationConfirm";
 
 const Valoration = ({ rat, stablishmentId }) => {
   const [rating, setRating] = useState(rat);
+  const [starsSelected, setStarsSelected] = useState(0);
+  const [visible, setVisible] = useState(false);
   const { token, user, isLogged } = useContext(AuthContext);
 
   const onStarPress = async (valoration) => {
@@ -40,7 +43,10 @@ const Valoration = ({ rat, stablishmentId }) => {
             name="star"
             size={26}
             color="#FFD700"
-            onPress={() => onStarPress(i)}
+            onPress={() => {
+              setStarsSelected(i + 1);
+              setVisible(true);
+            }}
           />
         );
       } else if (i === Math.floor(rating)) {
@@ -50,7 +56,10 @@ const Valoration = ({ rat, stablishmentId }) => {
             name="star-half-o"
             size={26}
             color="#FFD700"
-            onPress={() => onStarPress(i)}
+            onPress={() => {
+              setStarsSelected(i + 1);
+              setVisible(true);
+            }}
           />
         );
       } else {
@@ -60,7 +69,10 @@ const Valoration = ({ rat, stablishmentId }) => {
             name="star-o"
             size={26}
             color="#FFD700"
-            onPress={() => onStarPress(i)}
+            onPress={() => {
+              setStarsSelected(i + 1);
+              setVisible(true);
+            }}
           />
         );
       }
@@ -74,6 +86,12 @@ const Valoration = ({ rat, stablishmentId }) => {
       <View style={styles.ratingContainer}>
         <Text style={styles.rating} text={rating.toFixed(2)} />
       </View>
+      <ValorationConfirm
+        visible={visible}
+        setVisible={setVisible}
+        onConfirm={() => onStarPress(starsSelected)}
+        starsSelected={starsSelected}
+      />
     </View>
   );
 };
