@@ -22,8 +22,8 @@ const ProfileScreen = () => {
   const [developer, setDeveloper] = React.useState(0);
 
   const handleLogout = async () => {
-    await logout();
     navigation.navigate("Home");
+    await logout();
   };
 
   const { user: profile, email } = user;
