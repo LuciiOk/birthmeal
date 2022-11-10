@@ -17,11 +17,12 @@ const Valoration = ({ rat, stablishmentId }) => {
 
   const onStarPress = async (valoration) => {
     try {
+      
       if ((await isLogged()) && token && user) {
         const response = await AxiosInstance.post(
           `companies/rating/${stablishmentId}`,
           {
-            valoration,
+            valoration: valoration - 1,
           }
         );
         setRating(response.data);
