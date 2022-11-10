@@ -18,7 +18,7 @@ const ProfileScreen = () => {
     navigation.navigate("Home");
   };
 
-  if (!token && !user && !user.user) {
+  if (!token && !user && !user?.user) {
     return (
       <View style={styles.container}>
         <StatusBar
