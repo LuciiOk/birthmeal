@@ -30,7 +30,7 @@ const FiltersContainer = ({ filters, setQuery, categoriesSelected }) => {
         showsHorizontalScrollIndicator={false}
         ListHeaderComponent={
           <FiltersCards
-            filter={{ name: "Limpar", id: "reset", icon: "faRedo" }}
+            filter={{ name: "Limpiar", id: "reset", icon: "faRedo" }}
             setQuery={setQuery}
           />
         }

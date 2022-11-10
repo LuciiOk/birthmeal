@@ -24,7 +24,7 @@ export const slides = [
   {
     key: "4",
     title: "¿Qué esperas?",
-    description: "¡Empieza a buscar y no te pierda de los mejores beneficios!",
+    description: "¡Empieza a buscar y no te pierdas de los mejores beneficios!",
     image: 'https://i.imgur.com/ktanxW0.png',
     backgroundColor: "#22bcb5",
   },

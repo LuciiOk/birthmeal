@@ -8,8 +8,8 @@ import * as Icons from "@fortawesome/free-solid-svg-icons";
 
 const FiltersCards = ({ filter, setQuery, isSelected }) => {
   const handlePress = () => {
-    if (filter.name === "Limpar") {
-      setQuery("Limpar");
+    if (filter.name === "Limpiar") {
+      setQuery("Limpiar");
       return;
     }
     setQuery(filter.name);
