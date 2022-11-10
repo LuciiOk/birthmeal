@@ -49,7 +49,7 @@ const Valoration = ({ rat, stablishmentId }) => {
             }}
           />
         );
-      } else if (i === Math.floor(rating)) {
+      } else if (i === Math.floor(rating) && rating % 1 !== 0) {
         stars.push(
           <Icons
             key={i}
