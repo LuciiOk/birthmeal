@@ -78,7 +78,7 @@ const MoreInfoScreen = () => {
         ))}
       </View>
       <View style={styles.footer}>
-        <Text text="* Disclaimer:" bold />
+        <Text text="* Aviso:" bold />
         <Text
           text=" No somos responsables de los descuentos ofrecidos por los establecimientos."
           styles={styles.footerText}
@@ -104,12 +104,10 @@ const styles = StyleSheet.create({
     borderRadius: 60,
   },
   title: {
-    color: COLORS.frost1,
     fontSize: 24,
     marginTop: 10,
   },
   version: {
-    color: COLORS.frost1,
     fontSize: 12,
     marginTop: 10,
   },
