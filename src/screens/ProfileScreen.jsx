@@ -6,17 +6,19 @@ import { AuthContext } from "../contexts/AuthContext";
 import Text from "../components/Text";
 import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
+import moment from "moment/moment";
+import { getTimeLeft } from "../utils/formatDate";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
-  const { user, token, isLogged, logout } = useContext(AuthContext);
+  const { user, token, logout } = useContext(AuthContext);
 
   const handleLogout = async () => {
     await logout();
     navigation.navigate("Home");
   };
 
-  if (!token && !user) {
+  if (!token && !user && !user.user) {
     return (
       <View style={styles.container}>
         <StatusBar
@@ -57,7 +59,21 @@ const ProfileScreen = () => {
         </View>
         <View style={{ flexDirection: "row" }}>
           <Text text="Email:" bold subtitle />
-          <Text text={email} cap subtitle styles={{ marginLeft: 10 }} />
+          <Text text={email} subtitle styles={{ marginLeft: 10 }} />
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <Text text="Tu cumpleaños:" bold subtitle />
+          <Text
+            text={moment(profile?.birthdate).format("DD/MM/YYYY")}
+            cap
+            subtitle
+            styles={{ marginLeft: 10 }}
+          />
+        </View>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          <Text
+            text={getTimeLeft(profile?.birthdate) + " para tu cumpleaños"}
+          />
         </View>
       </View>
       <Button buttonText="Cerrar sesión" filled action={() => handleLogout()} />
@@ -76,6 +92,7 @@ const styles = StyleSheet.create({
     width: "80%",
     marginVertical: 20,
     flex: 0.7,
+    textAlign: "center",
   },
   header: {
     flex: 0.6,
