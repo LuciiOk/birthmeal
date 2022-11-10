@@ -20,6 +20,7 @@ const StablishmentDetail = ({ route }) => {
   const [nearLocation, setNearLocation] = useState(null);
   const { location: coordinates } = useContext(LocationContext);
   const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [rating, setRating] = useState(stablishment.rating);
 
   const redirect = () => {
     WebBrowser.openBrowserAsync(stablishment.webUrl);
@@ -151,7 +152,8 @@ const StablishmentDetail = ({ route }) => {
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
           <Valoration
-            rating={stablishment.rating}
+            rating={rating}
+            setRating={setRating}
             stablishmentId={stablishment.id}
           />
         </View>

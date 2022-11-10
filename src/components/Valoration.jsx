@@ -6,8 +6,7 @@ import Text from "./Text";
 
 import AxiosInstance from "../utils/AxiosInstance";
 
-const Valoration = ({ rating = 3, stablishmentId }) => {
-  const [valoration, setValoration] = React.useState(rating);
+const Valoration = ({ rating = 3, setRating, stablishmentId }) => {
 
   const onStarPress = async (valoration) => {
     try {
@@ -17,7 +16,7 @@ const Valoration = ({ rating = 3, stablishmentId }) => {
           valoration,
         }
       );
-      setValoration(response.data);
+      setRating(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +25,7 @@ const Valoration = ({ rating = 3, stablishmentId }) => {
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (i < Math.floor(valoration)) {
+      if (i < Math.floor(rating)) {
         stars.push(
           <Icons
             key={i}
@@ -36,7 +35,7 @@ const Valoration = ({ rating = 3, stablishmentId }) => {
             onPress={() => onStarPress(i)}
           />
         );
-      } else if (i === Math.floor(valoration)) {
+      } else if (i === Math.floor(rating)) {
         stars.push(
           <Icons
             key={i}
@@ -65,7 +64,7 @@ const Valoration = ({ rating = 3, stablishmentId }) => {
     <View style={styles.container}>
       <View style={styles.starsContainer}>{renderStars()}</View>
       <View style={styles.ratingContainer}>
-        <Text style={styles.rating} text={valoration.toFixed(2)} />
+        <Text style={styles.rating} text={rating.toFixed(2)} />
       </View>
     </View>
   );
@@ -97,6 +96,7 @@ const styles = StyleSheet.create({
 Valoration.propTypes = {
   stablishmentId: PropTypes.string.isRequired,
   rating: PropTypes.number,
+  setRating: PropTypes.func.isRequired,
 };
 
 export default Valoration;
