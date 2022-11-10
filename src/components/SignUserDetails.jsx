@@ -5,11 +5,14 @@ import PropTypes from "prop-types";
 
 import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
+import { AuthContext } from "../contexts/AuthContext";
 
 const SignUserDetails = ({ to, text, redirectText, alignText = "center" }) => {
+  const { setError } = React.useContext(AuthContext);
   const navigation = useNavigation();
 
   const navigate = () => {
+    setError(null);
     navigation.navigate(to);
   };
 

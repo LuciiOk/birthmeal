@@ -101,6 +101,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         isLogged,
         register,
+        setError,
       }}
     >
       {children}
