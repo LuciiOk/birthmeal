@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Icons from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
@@ -6,7 +6,8 @@ import Text from "./Text";
 
 import AxiosInstance from "../utils/AxiosInstance";
 
-const Valoration = ({ rating = 3, setRating, stablishmentId }) => {
+const Valoration = ({ rat, stablishmentId }) => {
+  const [rating, setRating] = useState(rat);
 
   const onStarPress = async (valoration) => {
     try {
@@ -95,8 +96,7 @@ const styles = StyleSheet.create({
 
 Valoration.propTypes = {
   stablishmentId: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-  setRating: PropTypes.func.isRequired,
+  rat: PropTypes.number.isRequired,
 };
 
 export default Valoration;

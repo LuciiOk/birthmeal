@@ -11,16 +11,19 @@ import FavoriteButton from "../components/FavoriteButton";
 import Valoration from "../components/Valoration";
 import AxiosInstance from "../utils/AxiosInstance";
 import Tooltip from "react-native-walkthrough-tooltip";
-
 import { LocationContext } from "../contexts/LocationProvider";
+import LoadingScreen from "./LoadingScreen";
 
 const StablishmentDetail = ({ route }) => {
-  const { stablishment } = route.params;
+  const {
+    stablishment: { id },
+  } = route.params;
   const navigation = useNavigation();
   const [nearLocation, setNearLocation] = useState(null);
   const { location: coordinates } = useContext(LocationContext);
   const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [rating, setRating] = useState(stablishment.rating);
+  const [stablishment, setStablishment] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const redirect = () => {
     WebBrowser.openBrowserAsync(stablishment.webUrl);
@@ -35,20 +38,30 @@ const StablishmentDetail = ({ route }) => {
   };
 
   const getNearLocation = async () => {
-    const { data } = await AxiosInstance.post(
-      `location/nearest/${stablishment.id}`,
-      { coordinates }
-    );
+    const { data } = await AxiosInstance.post(`location/nearest/${id}`, {
+      coordinates,
+    });
+    setLoading(false);
     setNearLocation(data);
   };
 
   useEffect(() => {
+    const getStablishment = async () => {
+      const { data } = await AxiosInstance.get(`companies/${id}`);
+      setStablishment(data);
+      setLoading(false);
+    };
+    getStablishment();
     getNearLocation();
   }, []);
 
   const removeHttp = (url) => {
     return url.replace(/(^\w+:|^)\/\//, "");
   };
+
+  if (loading || !stablishment) {
+    return <LoadingScreen backgroundColor="#fff" />;
+  }
 
   return (
     <View style={styles.container}>
@@ -152,8 +165,7 @@ const StablishmentDetail = ({ route }) => {
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
           <Valoration
-            rating={rating}
-            setRating={setRating}
+            rat={stablishment.rating}
             stablishmentId={stablishment.id}
           />
         </View>
