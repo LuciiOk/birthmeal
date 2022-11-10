@@ -63,6 +63,8 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
           new Date(birthdate),
           name
         );
+        await updateBirthday(birthday);
+        return onClose();
       }
       cancelNotification(dataEdit.notificationId);
       await updateBirthday({ ...birthday, notificationId: null });
