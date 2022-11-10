@@ -8,16 +8,26 @@ import AxiosInstance from "../utils/AxiosInstance";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import ValorationConfirm from "../containers/ValorationConfirm";
+import LoginMessage from "./LoginMessage";
 
 const Valoration = ({ rat, stablishmentId }) => {
   const [rating, setRating] = useState(rat);
   const [starsSelected, setStarsSelected] = useState(0);
   const [visible, setVisible] = useState(false);
   const { token, user, isLogged } = useContext(AuthContext);
+  const [loginMessage, setLoginMessage] = useState(false);
+
+  const handleRating = async (stars) => {
+    if ((await isLogged()) && token && user) {
+      setStarsSelected(stars);
+      setVisible(true);
+    } else {
+      setLoginMessage(true);
+    }
+  };
 
   const onStarPress = async (valoration) => {
     try {
-      
       if ((await isLogged()) && token && user) {
         const response = await AxiosInstance.post(
           `companies/rating/${stablishmentId}`,
@@ -44,10 +54,7 @@ const Valoration = ({ rat, stablishmentId }) => {
             name="star"
             size={26}
             color="#FFD700"
-            onPress={() => {
-              setStarsSelected(i + 1);
-              setVisible(true);
-            }}
+            onPress={() => handleRating(i + 1)}
           />
         );
       } else if (i === Math.floor(rating) && rating % 1 !== 0) {
@@ -57,10 +64,7 @@ const Valoration = ({ rat, stablishmentId }) => {
             name="star-half-o"
             size={26}
             color="#FFD700"
-            onPress={() => {
-              setStarsSelected(i + 1);
-              setVisible(true);
-            }}
+            onPress={() => handleRating(i + 1)}
           />
         );
       } else {
@@ -70,10 +74,7 @@ const Valoration = ({ rat, stablishmentId }) => {
             name="star-o"
             size={26}
             color="#FFD700"
-            onPress={() => {
-              setStarsSelected(i + 1);
-              setVisible(true);
-            }}
+            onPress={() => handleRating(i + 1)}
           />
         );
       }
@@ -92,6 +93,10 @@ const Valoration = ({ rat, stablishmentId }) => {
         setVisible={setVisible}
         onConfirm={() => onStarPress(starsSelected)}
         starsSelected={starsSelected}
+      />
+      <LoginMessage
+        visible={loginMessage}
+        onClose={() => setLoginMessage(false)}
       />
     </View>
   );

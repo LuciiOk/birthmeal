@@ -17,8 +17,7 @@ const LoginMessage = ({ visible, onClose }) => {
             <Text style={styles.title}>¡Ups!</Text>
           </View>
           <Text style={styles.message}>
-            Debes iniciar sesión para poder agregar un establecimiento a tus
-            favoritos.
+            Debes iniciar sesión para poder realizar esta acción.
           </Text>
           <View style={styles.buttons}>
             <Icon.Button
