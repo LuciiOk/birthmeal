@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, Image, View } from "react-native";
+import { StyleSheet, Image, View, TouchableOpacity } from "react-native";
 import IonicIcon from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PropTypes from "prop-types";
@@ -7,6 +7,7 @@ import { TABS } from "../constants/tabsScreens";
 import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
 import Text from "../components/Text";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ const TabIcon = ({ focused, icon }) => {
 
 const TabNavigator = () => {
   const { user, token } = useContext(AuthContext);
-
+  const navigation = useNavigation();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -51,10 +52,12 @@ const TabNavigator = () => {
           headerTitleStyle: styles.headerTitle,
           headerStyle: styles.header,
           headerRight: () => (
-            <Image
-              source={require("../../assets/images/Burger-logo.png")}
-              style={styles.logo}
-            />
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+              <Image
+                source={require("../../assets/images/Burger-logo.png")}
+                style={styles.logo}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -75,10 +78,14 @@ const TabNavigator = () => {
               headerTitleStyle: styles.headerTitle,
               headerStyle: styles.header,
               headerRight: () => (
-                <Image
-                  source={require("../../assets/images/Burger-logo.png")}
-                  style={styles.logo}
-                />
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Profile")}
+                >
+                  <Image
+                    source={require("../../assets/images/Burger-logo.png")}
+                    style={styles.logo}
+                  />
+                </TouchableOpacity>
               ),
             }}
           />
@@ -97,10 +104,14 @@ const TabNavigator = () => {
               headerTitleStyle: styles.headerTitle,
               headerStyle: styles.header,
               headerRight: () => (
-                <Image
-                  source={require("../../assets/images/Burger-logo.png")}
-                  style={styles.logo}
-                />
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Profile")}
+                >
+                  <Image
+                    source={require("../../assets/images/Burger-logo.png")}
+                    style={styles.logo}
+                  />
+                </TouchableOpacity>
               ),
             }}
           />
@@ -121,10 +132,12 @@ const TabNavigator = () => {
           headerTitleStyle: styles.headerTitle,
           headerStyle: styles.header,
           headerRight: () => (
-            <Image
-              source={require("../../assets/images/Burger-logo.png")}
-              style={styles.logo}
-            />
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+              <Image
+                source={require("../../assets/images/Burger-logo.png")}
+                style={styles.logo}
+              />
+            </TouchableOpacity>
           ),
         }}
       />

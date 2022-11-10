@@ -12,6 +12,7 @@ const Button = ({
   filled,
   buttonStyles,
   disabled,
+  margin,
 }) => {
   const style = [
     styles.button,

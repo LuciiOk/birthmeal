@@ -15,6 +15,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { COLORS } from "../constants/colorSchema";
 import { useNavigation } from "@react-navigation/native";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -63,14 +64,23 @@ const StackNavigator = () => {
                       ? "Iniciar sesión"
                       : route.name === "Register"
                       ? "Registrarse"
+                      : route.name === "ForgotPassword"
+                      ? "Recuperar contraseña"
+                      : route.name === "Profile"
+                      ? "Perfil"
                       : route.name)
                   }
                 />
               </View>
-              <Image
-                source={require("../../assets/images/Burger-logo.png")}
+              <TouchableOpacity
                 style={styles.logo}
-              />
+                onPress={() => navigation.navigate("Profile")}
+              >
+                <Image
+                  source={require("../../assets/images/Burger-logo.png")}
+                  style={styles.logo}
+                />
+              </TouchableOpacity>
             </View>
           ),
         }}
@@ -96,6 +106,7 @@ const StackNavigator = () => {
         <Stack.Group screenOptions={{ headerShown: true }}>
           <Stack.Screen name="Details" component={StablishmentDetail} />
           <Stack.Screen name="Locations" component={LocationsScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
         </Stack.Group>
       </Stack.Navigator>
     )
