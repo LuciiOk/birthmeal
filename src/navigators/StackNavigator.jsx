@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Text from "../components/Text";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -16,6 +16,7 @@ import { COLORS } from "../constants/colorSchema";
 import { useNavigation } from "@react-navigation/native";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import RighButtonHeader from "../components/RighButtonHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -72,18 +73,7 @@ const StackNavigator = () => {
                   }
                 />
               </View>
-              <TouchableOpacity
-                style={styles.logo}
-                onPress={() => {
-                  route.name !== "Profile" && navigation.navigate("Profile");
-                  route.name === "Profile" && navigation.navigate("Home");
-                }}
-              >
-                <Image
-                  source={require("../../assets/images/Burger-logo.png")}
-                  style={styles.logo}
-                />
-              </TouchableOpacity>
+              <RighButtonHeader route={route} />
             </View>
           ),
         }}
@@ -137,11 +127,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     padding: 10,
-  },
-  logo: {
-    width: 60,
-    height: 60,
-    borderRadius: 25,
   },
 });
 

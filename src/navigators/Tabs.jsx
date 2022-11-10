@@ -8,6 +8,7 @@ import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
 import Text from "../components/Text";
 import { useNavigation } from "@react-navigation/native";
+import RighButtonHeader from "../components/RighButtonHeader";
 
 const Tab = createBottomTabNavigator();
 
@@ -52,12 +53,7 @@ const TabNavigator = () => {
           headerTitleStyle: styles.headerTitle,
           headerStyle: styles.header,
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-              <Image
-                source={require("../../assets/images/Burger-logo.png")}
-                style={styles.logo}
-              />
-            </TouchableOpacity>
+            <RighButtonHeader marginRight={10}/>
           ),
         }}
       />
@@ -78,14 +74,7 @@ const TabNavigator = () => {
               headerTitleStyle: styles.headerTitle,
               headerStyle: styles.header,
               headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Profile")}
-                >
-                  <Image
-                    source={require("../../assets/images/Burger-logo.png")}
-                    style={styles.logo}
-                  />
-                </TouchableOpacity>
+                <RighButtonHeader marginRight={10}/>
               ),
             }}
           />
@@ -104,14 +93,7 @@ const TabNavigator = () => {
               headerTitleStyle: styles.headerTitle,
               headerStyle: styles.header,
               headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Profile")}
-                >
-                  <Image
-                    source={require("../../assets/images/Burger-logo.png")}
-                    style={styles.logo}
-                  />
-                </TouchableOpacity>
+                <RighButtonHeader marginRight={10}/>
               ),
             }}
           />
@@ -132,12 +114,7 @@ const TabNavigator = () => {
           headerTitleStyle: styles.headerTitle,
           headerStyle: styles.header,
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-              <Image
-                source={require("../../assets/images/Burger-logo.png")}
-                style={styles.logo}
-              />
-            </TouchableOpacity>
+            <RighButtonHeader marginRight={10}/>
           ),
         }}
       />
