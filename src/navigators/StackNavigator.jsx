@@ -74,7 +74,10 @@ const StackNavigator = () => {
               </View>
               <TouchableOpacity
                 style={styles.logo}
-                onPress={() => navigation.navigate("Profile")}
+                onPress={() => {
+                  route.name !== "Profile" && navigation.navigate("Profile");
+                  route.name === "Profile" && navigation.navigate("Home");
+                }}
               >
                 <Image
                   source={require("../../assets/images/Burger-logo.png")}
