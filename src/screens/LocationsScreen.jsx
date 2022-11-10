@@ -49,44 +49,37 @@ const LocationsScreen = ({ route }) => {
         latitude={selectedLocation?.coordinates[1] || 0}
         longitude={selectedLocation?.coordinates[0] || 0}
       >
-        {locationsData.map(
-          ({ geometry, name, address, id }) => (
-            console.log(selectedLocationId === id),
-            (
-              <MapView.Marker
-                key={id}
-                coordinate={{
-                  latitude: geometry.coordinates[1],
-                  longitude: geometry.coordinates[0],
-                  latitudeDelta: 0.0000000757,
-                  longitudeDelta: 0.000066,
-                }}
-                title={address}
-                description={address}
-                pinColor={
-                  {
-                    true: "red",
-                    false: "blue",
-                  }[selectedLocationId === id]
-                }
-              >
-                <Image
-                  source={require("../../assets/images/marker.png")}
-                  style={[
-                    styles.marker,
-                    {
-                      tintColor:
-                        selectedLocationId === id
-                          ? COLORS.danger
-                          : COLORS.primary,
-                    },
-                  ]}
-                  resizeMode="contain"
-                />
-              </MapView.Marker>
-            )
-          )
-        )}
+        {locationsData.map(({ geometry, name, address, id }) => (
+          <MapView.Marker
+            key={id}
+            coordinate={{
+              latitude: geometry.coordinates[1],
+              longitude: geometry.coordinates[0],
+              latitudeDelta: 0.0000000757,
+              longitudeDelta: 0.000066,
+            }}
+            title={address}
+            description={address}
+            pinColor={
+              {
+                true: "red",
+                false: "blue",
+              }[selectedLocationId === id]
+            }
+          >
+            <Image
+              source={require("../../assets/images/marker.png")}
+              style={[
+                styles.marker,
+                {
+                  tintColor:
+                    selectedLocationId === id ? COLORS.danger : COLORS.primary,
+                },
+              ]}
+              resizeMode="contain"
+            />
+          </MapView.Marker>
+        ))}
       </Map>
       <LocationContainer
         locations={locationsData}
