@@ -5,25 +5,39 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  Alert,
   TouchableWithoutFeedback,
-  Text,
 } from "react-native";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 
 import { COLORS } from "../constants/colorSchema";
+import Text from "./Text";
+import { AuthContext } from "../contexts/AuthContext";
 
 const RighButtonHeader = ({ marginRight }) => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = React.useState(false);
+  const { token, user, logout } = React.useContext(AuthContext);
 
   // get current route name
   const currentRoute =
     navigation.getState().routes[navigation.getState().index].name;
 
-  console.log(currentRoute);
+  const handleLogout = () => {
+    logout();
+    setModalVisible(false);
+  };
+
+  const handleLogin = () => {
+    navigation.navigate("Login");
+    setModalVisible(false);
+  };
+
+  const handleProfile = () => {
+    navigation.navigate("Profile");
+    setModalVisible(false);
+  };
 
   return (
     <View style={{ flexDirection: "row", alignItems: "center", marginRight }}>
@@ -40,7 +54,6 @@ const RighButtonHeader = ({ marginRight }) => {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
               setModalVisible(!modalVisible);
             }}
           >
@@ -48,16 +61,15 @@ const RighButtonHeader = ({ marginRight }) => {
               <View style={styles.modal}></View>
             </TouchableWithoutFeedback>
             <View style={styles.topRight}>
-              {/* content [mi perfil] */}
-              <TouchableOpacity
-                style={styles.content}
-                onPress={() => {
-                  navigation.navigate("Profile");
-                  setModalVisible(false);
-                }}
-              >
-                <Text style={styles.text}>Mi perfil</Text>
-              </TouchableOpacity>
+              {token && user && (
+                <OptionButton label="Mi perfil" onPress={handleProfile} />
+              )}
+              {token && user && (
+                <OptionButton label="Cerrar sesión" onPress={handleLogout} />
+              )}
+              {!token && !user && (
+                <OptionButton label="Iniciar sesión" onPress={handleLogin} />
+              )}
             </View>
           </Modal>
         </TouchableOpacity>
@@ -74,6 +86,12 @@ const RighButtonHeader = ({ marginRight }) => {
     </View>
   );
 };
+
+const OptionButton = ({ icon, label, onPress }) => (
+  <TouchableOpacity style={styles.content} onPress={onPress}>
+    <Text style={styles.text} semiBold subtitle text={label} />
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
   logo: {
@@ -93,8 +111,7 @@ const styles = StyleSheet.create({
   },
   topRight: {
     backgroundColor: COLORS.white,
-    height: 50,
-    width: 200,
+    width: 150,
     position: "absolute",
     top: 50,
     right: 10,
