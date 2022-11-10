@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, Modal } from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { AuthContext } from "../contexts/AuthContext";
@@ -19,6 +19,11 @@ const ProfileScreen = () => {
   if (!token && !user) {
     return (
       <View style={styles.container}>
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor={COLORS.white}
+          hidden={false}
+        />
         <View style={styles.header}>
           <Text displayTitle bold text="Perfil" />
           <Text text="Inicia sesión para ver tu perfil" bold subtitle />
