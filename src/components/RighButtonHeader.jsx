@@ -24,6 +24,8 @@ const RighButtonHeader = ({ marginRight }) => {
   const currentRoute =
     navigation.getState().routes[navigation.getState().index].name;
 
+  console.log("currentRoute", currentRoute);
+
   const handleLogout = () => {
     logout();
     setModalVisible(false);
@@ -41,42 +43,48 @@ const RighButtonHeader = ({ marginRight }) => {
 
   return (
     <View style={{ flexDirection: "row", alignItems: "center", marginRight }}>
-      {currentRoute !== "Profile" && currentRoute !== "Login" && currentRoute !== "Register" && (
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <FontAwesomeIcon
-            icon={faAngleDown}
-            size={30}
-            color={COLORS.dark}
-            style={styles.icon}
-          />
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-              <View style={styles.modal}></View>
-            </TouchableWithoutFeedback>
-            <View style={styles.topRight}>
-              {token && user && (
-                <OptionButton label="Mi perfil" onPress={handleProfile} />
-              )}
-              {token && user && (
-                <OptionButton label="Cerrar sesión" onPress={handleLogout} />
-              )}
-              {!token && !user && (
-                <OptionButton label="Iniciar sesión" onPress={handleLogin} />
-              )}
-            </View>
-          </Modal>
-        </TouchableOpacity>
-      )}
+      {currentRoute !== "Profile" &&
+        currentRoute !== "Login" &&
+        currentRoute !== "Register" && (
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              size={30}
+              color={COLORS.dark}
+              style={styles.icon}
+            />
+            <Modal
+              animationType="fade"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+                <View style={styles.modal}></View>
+              </TouchableWithoutFeedback>
+              <View style={styles.topRight}>
+                {token && user && (
+                  <OptionButton label="Mi perfil" onPress={handleProfile} />
+                )}
+                {token && user && (
+                  <OptionButton label="Cerrar sesión" onPress={handleLogout} />
+                )}
+                {!token && !user && (
+                  <OptionButton label="Iniciar sesión" onPress={handleLogin} />
+                )}
+              </View>
+            </Modal>
+          </TouchableOpacity>
+        )}
       <TouchableOpacity
         style={styles.logo}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => {
+          currentRoute !== "Home" && navigation.navigate("Home");
+          currentRoute !== "Overview" && navigation.navigate("Overview");
+        }}
+        disabled={currentRoute === "Overview"}
       >
         <Image
           source={require("../../assets/images/Burger-logo.png")}
