@@ -93,23 +93,11 @@ const MoreInfoScreen = () => {
         ))}
       </View>
       <View style={styles.footer}>
-        {user && token && (
-          <Button
-            buttonText="Cerrar sesión"
-            action={closeSession}
-            filled
-            styles={styles.button}
-          />
-        )}
-
-        {!user && !token && (
-          <Button
-            buttonText="Iniciar sesión"
-            action={login}
-            filled
-            styles={styles.button}
-          />
-        )}
+        <Text text="* Disclaimer:" bold />
+        <Text
+          text=" No somos responsables de los descuentos ofrecidos por los establecimientos."
+          styles={styles.footerText}
+        />
       </View>
     </View>
   );
@@ -195,14 +183,10 @@ const styles = StyleSheet.create({
     flex: 3,
     alignItems: "center",
     justifyContent: "center",
+    width: "90%",
   },
-  button: {
-    width: "70%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    backgroundColor: COLORS.primary,
+  footerText: {
+    textAlign: "center",
   },
 });
 
