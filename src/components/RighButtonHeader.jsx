@@ -24,8 +24,6 @@ const RighButtonHeader = ({ marginRight }) => {
   const currentRoute =
     navigation.getState().routes[navigation.getState().index].name;
 
-  console.log("currentRoute", currentRoute);
-
   const handleLogout = () => {
     logout();
     setModalVisible(false);
