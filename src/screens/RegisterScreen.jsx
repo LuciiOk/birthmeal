@@ -129,7 +129,7 @@ const RegisterScreen = () => {
         )}
         {error && (
           <Text
-            text={error}
+            text="Error al crear la cuenta; el email ya existe"
             error
             styles={{ width: "50%", textAlign: "center" }}
           />
