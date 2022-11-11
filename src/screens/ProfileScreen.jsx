@@ -32,7 +32,7 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
-      {developer >= 10 && <Text style={styles.dev} text={burger} styles={{
+      {developer >= 11 && <Text style={styles.dev} text={burger} styles={{
         fontSize: 14, marginBottom: 10, textAlign: "center", color: COLORS.danger
       }} ></Text>}
       <TouchableWithoutFeedback
