@@ -43,7 +43,7 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
     defaultValues: {
       name: dataEdit?.name || "",
       birthdate: dataEdit?.birthdate || new Date(),
-      remind: dataEdit?.notificationId ? true : false,
+      remind: dataEdit?.remind || false,
     },
   });
   const { addBirthday, loading, updateBirthday } = useContext(BirthdayContext);
