@@ -8,7 +8,7 @@ export const ConfirmPasswordResolver = Yup.object().shape({
     .required('La confirmación de contraseña es requerida')
     .oneOf([Yup.ref('password')], 'Las contraseñas no coinciden'),
   name: Yup.string().required('El nombre es requerido'),
-  email: Yup.string().required('El email es requerido').email('El email no es válido'),
+  email: Yup.string().required('El email es requerido').email('El correo electrónico no es válido'),
   birthdate: Yup.date().required('La fecha de nacimiento es requerida'),
   conditionTerms: Yup.boolean().oneOf([true], 'Debes aceptar los términos y condiciones'),
 })
