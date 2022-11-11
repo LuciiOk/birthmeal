@@ -15,6 +15,7 @@ import Button from "../components/Button";
 import { COLORS } from "../constants/colorSchema";
 import moment from "moment/moment";
 import { getTimeLeft } from "../utils/formatDate";
+import { burger } from "../data/burger";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -30,7 +31,10 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      {developer >= 10 && <Text text={JSON.stringify(profile, null, 2)} />}
+      <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
+      {developer >= 10 && <Text style={styles.dev} text={burger} styles={{
+        fontSize: 14, marginBottom: 10, textAlign: "center", color: COLORS.danger
+      }} ></Text>}
       <TouchableWithoutFeedback
         onPress={() => {
           setDeveloper(developer + 1);
@@ -106,6 +110,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     paddingHorizontal: 20,
+  },
+  developer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 100,
+    height: 100,
   },
 });
 
