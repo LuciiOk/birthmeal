@@ -38,7 +38,7 @@ const ProfileScreen = () => {
       <TouchableWithoutFeedback
         onPress={() => {
           setDeveloper(developer + 1);
-          if (developer >= 10) {
+          if (developer === 10) {
             ToastAndroid.show("¡Easter egg encontrado!", ToastAndroid.SHORT);
           }
           if (developer >= 20) {
