@@ -21,14 +21,14 @@ const LocationItem = ({ name, address, selected, setLocation }) => {
           />
           <View style={styles.selectedLocationTextContainer}>
             <Text text={name} bold />
-            <Text text={address} light />
+            <Text text={address} opaque small />
           </View>
         </View>
       )}
       {!selected && (
         <>
           <Text text={name} bold />
-          <Text text={address} light />
+          <Text text={address} opaque small />
         </>
       )}
     </TouchableOpacity>
