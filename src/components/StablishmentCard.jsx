@@ -9,7 +9,8 @@ const StablishmentCard = ({ stablishment }) => {
   const navigator = useNavigation();
 
   const truncate = (str, n) => {
-    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+    // truncate the string to n characters or if it has dots, to the last dot
+    return str.length > n ? str.substr(0, str.lastIndexOf(" ", n)) + "..." : str;
   };
 
   const redirecTo = () => {
