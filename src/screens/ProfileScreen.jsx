@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
   },
   profile: {
+    flex: 1,
     width: "100%",
     padding: 20,
     borderRadius: 10,
