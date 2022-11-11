@@ -3,7 +3,7 @@ import { StyleSheet, Text as T } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
-const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBold, cap, styles, error }) => {
+const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBold, cap, styles, error, small, titleCase }) => {
   const textStyles = [
     stylesT.text,
     bold && stylesT.bold,
@@ -15,7 +15,13 @@ const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBo
     semiBold && stylesT.semiBold,
     cap && stylesT.cap,
     error && stylesT.error,
+    small && stylesT.small,
   ];
+
+  if (titleCase) {
+    // only capitalize the first word of the string or the first word after a . or : 
+    text = text.replace(/(^|\s)\S/g, (t) => t.toUpperCase());
+  }
 
   return <T style={[textStyles, styles]}>{text}</T>;
 };
@@ -57,6 +63,9 @@ const stylesT = StyleSheet.create({
   error: {
     color: COLORS.danger,
     width: "100%",
+    fontSize: 14,
+  },
+  small: {
     fontSize: 14,
   },
 });

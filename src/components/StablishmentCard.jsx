@@ -8,6 +8,10 @@ import { useNavigation } from "@react-navigation/native";
 const StablishmentCard = ({ stablishment }) => {
   const navigator = useNavigation();
 
+  const truncate = (str, n) => {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  };
+
   const redirecTo = () => {
     navigator.navigate("Details", {
       title: stablishment.name,
@@ -25,8 +29,8 @@ const StablishmentCard = ({ stablishment }) => {
         }
       />
       <View style={styles.textContainer}>
-        <Text text={stablishment.name} subtitle bold cap />
-        <Text text={stablishment.description} opaque cap />
+        <Text text={stablishment.name} subtitle bold cap titleCase/>
+        <Text text={truncate(stablishment.description, 100)} subtitle small opaque titleCase/>
       </View>
     </TouchableOpacity>
   );
@@ -37,19 +41,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: COLORS.white,
-    height: 70,
-    borderRadius: 15,
+    borderRadius: 10,
     padding: 10,
-    marginVertical: 10,
-    marginHorizontal: 10,
+    marginBottom: 10,
   },
   image: {
     width: 60,
     height: 60,
     borderRadius: 25,
+    marginRight: 10,
   },
   textContainer: {
-    marginLeft: 10,
+    flex: 1,
+    width: "100%",
+    overflow: "hidden",
   },
 });
 

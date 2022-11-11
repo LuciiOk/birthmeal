@@ -1,5 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -56,7 +62,8 @@ const StablishmentDetail = ({ route }) => {
   }, []);
 
   const removeHttp = (url) => {
-    return url.replace(/(^\w+:|^)\/\//, "");
+    // remove http:// or https:// and www. and /
+    return url.replace(/(^\w+:|^)\/\//, "").replace("www.", "").split("/")[0];
   };
 
   if (loading || !stablishment) {
@@ -76,91 +83,85 @@ const StablishmentDetail = ({ route }) => {
           }
         />
       </View>
-      <View style={styles.detailsContainer}>
-        <View style={styles.infoContainer}>
-          <View style={styles.infoHeader}>
-            <Text text="Información" title bold />
-            <FavoriteButton company={stablishment} />
-          </View>
-          <View style={{ ...styles.info, ...styles.locationSection }}>
-            <Text text="Ubicaciones" semiBold />
-            <TouchableOpacity onPress={goToLocations}>
-              <Text
-                text={nearLocation?.address || "No hay ubicaciones"}
-                light
-                opaque
-              />
-              <Icon
-                name="angle-right"
-                size={24}
-                color={COLORS.primary}
-                style={styles.arrowIcon}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{ ...styles.info }}>
-            <Text text="Ir al sitio web" semiBold />
-            <TouchableOpacity onPress={redirect}>
-              <Text text={removeHttp(stablishment.webUrl)} light opaque />
-              <Icon
-                name="angle-right"
-                size={24}
-                color={COLORS.primary}
-                style={styles.arrowIcon}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{ ...styles.info }}>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginRight: 10,
+      <ScrollView
+        style={styles.detailsContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.infoHeader}>
+          <Text text="Información" title bold />
+          <FavoriteButton company={stablishment} />
+        </View>
+        <View style={{ ...styles.info, ...styles.locationSection }}>
+          <Text text="Ubicaciones" semiBold />
+          <TouchableOpacity onPress={goToLocations}>
+            <Text
+              text={nearLocation?.address || "No hay ubicaciones"}
+              light
+              opaque
+            />
+            <Icon
+              name="angle-right"
+              size={24}
+              color={COLORS.primary}
+              style={styles.arrowIcon}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={{ ...styles.info }}>
+          <Text text="Ir al sitio web" semiBold />
+          <TouchableOpacity onPress={redirect}>
+            <Text text={removeHttp(stablishment.webUrl)} light opaque />
+            <Icon
+              name="angle-right"
+              size={24}
+              color={COLORS.primary}
+              style={styles.arrowIcon}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={{ ...styles.info }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginRight: 10,
+            }}
+          >
+            <Text text="Beneficios" semiBold />
+            <Tooltip
+              isVisible={tooltipVisible}
+              onClose={() => setTooltipVisible(false)}
+              backgroundColor="transparent"
+              content={
+                <View>
+                  <Text text="Requisitos para obtener el beneficio:" semiBold />
+                  {stablishment?.benefits?.map((benefit) => (
+                    <Text
+                      text={`• ${benefit}`}
+                      light
+                      key={benefit}
+                      styles={{ marginTop: 10 }}
+                    />
+                  ))}
+                </View>
+              }
+              contentStyle={{
+                backgroundColor: COLORS.white,
+                padding: 10,
+                borderRadius: 20,
+                borderWidth: 1,
+                borderColor: COLORS.danger,
               }}
             >
-              <Text text="Beneficios" semiBold />
-              <Tooltip
-                isVisible={tooltipVisible}
-                onClose={() => setTooltipVisible(false)}
-                backgroundColor="transparent"
-                content={
-                  <View>
-                    <Text
-                      text="Requisitos para obtener el beneficio:"
-                      semiBold
-                    />
-                    {stablishment?.benefits?.map((benefit) => (
-                      <Text
-                        text={`• ${benefit}`}
-                        light
-                        key={benefit}
-                        styles={{ marginTop: 10 }}
-                      />
-                    ))}
-                  </View>
-                }
-                contentStyle={{
-                  backgroundColor: COLORS.white,
-                  padding: 10,
-                  borderRadius: 20,
-                  borderWidth: 1,
-                  borderColor: COLORS.danger,
-                }}
+              <TouchableOpacity
+                onPress={() => setTooltipVisible(!tooltipVisible)}
               >
-                <TouchableOpacity
-                  onPress={() => setTooltipVisible(!tooltipVisible)}
-                >
-                  <Icon
-                    name="info-circle"
-                    size={24}
-                    color={`${COLORS.dark}90`}
-                  />
-                </TouchableOpacity>
-              </Tooltip>
-            </View>
-            <Text text={stablishment.description} opaque light />
+                <Icon name="info-circle" size={24} color={`${COLORS.dark}90`} />
+              </TouchableOpacity>
+            </Tooltip>
           </View>
+          <Text text={stablishment.description} opaque light />
         </View>
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
@@ -169,7 +170,7 @@ const StablishmentDetail = ({ route }) => {
             stablishmentId={stablishment.id}
           />
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -219,6 +220,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingTop: 10,
+    marginBottom: 50,
   },
   starsContainer: {
     flexDirection: "row",
