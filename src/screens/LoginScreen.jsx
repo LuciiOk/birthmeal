@@ -82,11 +82,11 @@ const LoginScreen = () => {
             />
           </View>
         )}
-        <SignUserDetails
+        {/* <SignUserDetails
           redirectText="Olvidaste tu contraseña?"
           to="ForgotPassword"
           alignText="right"
-        />
+        /> */}
       </View>
       <Button
         buttonText="Iniciar sesión"
