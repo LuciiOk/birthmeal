@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 
 import NoData from "../components/NoData";
@@ -19,7 +19,9 @@ const FavoritesScreen = () => {
           }
           data={favorites}
           keyExtractor={({ id }) => id + "favorites"}
-          renderItem={({ item }) => <StablishmentCard stablishment={item} />}
+          renderItem={({ item }) => (
+            <StablishmentCard stablishment={item} favortie />
+          )}
           ListEmptyComponent={
             <NoData text="Ups... No hay establecimientos favoritos 😢💔" />
           }

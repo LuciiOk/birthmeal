@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 import Text from "./Text";
 import { useNavigation } from "@react-navigation/native";
+import FavoriteButton from "./FavoriteButton";
 
-const StablishmentCard = ({ stablishment }) => {
+const StablishmentCard = ({ stablishment, favortie = false }) => {
   const navigator = useNavigation();
-
   const redirecTo = () => {
     navigator.navigate("Details", {
       title: stablishment.name,
@@ -34,6 +34,11 @@ const StablishmentCard = ({ stablishment }) => {
           titleCase
           trunc={80}
         />
+      </View>
+      <View style={styles.favoriteContainer}>
+        {favortie && (
+          <FavoriteButton company={stablishment} noAnimate/>
+        )}
       </View>
     </TouchableOpacity>
   );

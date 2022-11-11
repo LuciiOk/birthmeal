@@ -6,18 +6,22 @@ import PropTypes from "prop-types";
 import LoginMessage from "./LoginMessage";
 import { FavoritesContext } from "../contexts/FavoritesProvider";
 
-const FavoriteButton = ({ company }) => {
+const FavoriteButton = ({ company, noAnimate }) => {
   const animation = useRef(null);
   const [showLoginMessage, setShowLoginMessage] = useState(false);
   const { isFavorite, onFavorite, favorites } = useContext(FavoritesContext);
 
   useEffect(() => {
-    if (animation.current) {
-      if (isFavorite(company)) {
-        animation.current.play(0, 30);
-      } else {
-        animation.current.play(0, 0);
+    if (!noAnimate) {
+      if (animation.current) {
+        if (isFavorite(company)) {
+          animation.current.play(0, 30);
+        } else {
+          animation.current.play(0, 0);
+        }
       }
+    } else {
+      animation.current.play(30, 30);
     }
   }, [company, favorites]);
 
