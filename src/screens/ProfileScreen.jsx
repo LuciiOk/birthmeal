@@ -32,9 +32,18 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
-      {developer >= 11 && <Text style={styles.dev} text={burger} styles={{
-        fontSize: 14, marginBottom: 10, textAlign: "center", color: COLORS.danger
-      }} ></Text>}
+      {developer >= 11 && (
+        <Text
+          style={styles.dev}
+          text={burger}
+          styles={{
+            fontSize: 14,
+            marginBottom: 10,
+            textAlign: "center",
+            color: COLORS.danger,
+          }}
+        ></Text>
+      )}
       <TouchableWithoutFeedback
         onPress={() => {
           setDeveloper(developer + 1);
@@ -79,7 +88,13 @@ const ProfileScreen = () => {
           />
         </View>
       </View>
-      <Button buttonText="Cerrar sesión" filled action={() => handleLogout()} />
+      <View style={styles.buttons}>
+        <Button
+          buttonText="Cerrar sesión"
+          filled
+          action={() => handleLogout()}
+        />
+      </View>
     </View>
   );
 };
@@ -87,6 +102,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLORS.white,
   },
@@ -116,6 +132,20 @@ const styles = StyleSheet.create({
     right: 0,
     width: 100,
     height: 100,
+  },
+  dev: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 100,
+    height: 100,
+  },
+  buttons: {
+    flex: 1,
+    width: "100%",
+    paddingHorizontal: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
