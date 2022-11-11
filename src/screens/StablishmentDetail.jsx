@@ -145,11 +145,11 @@ const StablishmentDetail = ({ route }) => {
               backgroundColor="transparent"
               content={
                 <View>
-                  <Text text="Requisitos para obtener el beneficio:" semiBold titleCase/>
+                  <Text text="Requisitos para obtener el beneficio:" bold titleCase/>
                   {stablishment?.benefits?.map((benefit) => (
                     <Text
                       text={`• ${benefit}`}
-                      light
+                      small
                       key={benefit}
                       styles={{ marginTop: 10 }}
                     />
@@ -160,8 +160,16 @@ const StablishmentDetail = ({ route }) => {
                 backgroundColor: COLORS.white,
                 padding: 10,
                 borderRadius: 20,
-                borderWidth: 1,
-                borderColor: COLORS.danger,
+                borderWidth: 2,
+                borderColor: COLORS.dark,
+                shadowColor: COLORS.dark,
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+                elevation: 5,
               }}
             >
               <TouchableOpacity
