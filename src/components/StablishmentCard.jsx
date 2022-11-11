@@ -9,6 +9,8 @@ const StablishmentCard = ({ stablishment }) => {
   const navigator = useNavigation();
 
   const truncate = (str, n) => {
+    // firs remove break lines
+    str = str.replace(/(\r\n|\n|\r)/gm, "");
     // truncate the string to n characters or if it has dots, to the last dot
     return str.length > n ? str.substr(0, str.lastIndexOf(" ", n)) + "..." : str;
   };
@@ -31,7 +33,7 @@ const StablishmentCard = ({ stablishment }) => {
       />
       <View style={styles.textContainer}>
         <Text text={stablishment.name} subtitle bold cap titleCase/>
-        <Text text={truncate(stablishment.description, 100)} subtitle small opaque titleCase/>
+        <Text text={truncate(stablishment.description, 80)} subtitle small opaque titleCase/>
       </View>
     </TouchableOpacity>
   );
