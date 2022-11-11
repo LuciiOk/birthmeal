@@ -37,7 +37,7 @@ const ProfileScreen = () => {
           style={styles.dev}
           text={burger}
           styles={{
-            fontSize: 14,
+            fontSize: 12,
             marginBottom: 10,
             textAlign: "center",
             color: COLORS.danger,
