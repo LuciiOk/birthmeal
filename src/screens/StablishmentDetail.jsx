@@ -43,6 +43,16 @@ const StablishmentDetail = ({ route }) => {
     });
   };
 
+  const processedText = (text) => {
+    // remove double spaces
+    text = text.replace(/\s\s+/g, " ");
+    // add space if theres no space before a comma, dot, colon or -
+    text = text.replace(/([.,:;])(\S)/g, "$1 $2");
+    // add breakline after a :
+    text = text.replace(/: /g, ": \n");
+    return text;
+  };
+
   const getNearLocation = async () => {
     const { data } = await AxiosInstance.post(`location/nearest/${id}`, {
       coordinates,
@@ -96,7 +106,7 @@ const StablishmentDetail = ({ route }) => {
           <TouchableOpacity onPress={goToLocations}>
             <Text
               text={nearLocation?.address || "No hay ubicaciones"}
-              light
+              small
               opaque
             />
             <Icon
@@ -110,7 +120,7 @@ const StablishmentDetail = ({ route }) => {
         <View style={{ ...styles.info }}>
           <Text text="Ir al sitio web" semiBold />
           <TouchableOpacity onPress={redirect}>
-            <Text text={removeHttp(stablishment.webUrl)} light opaque />
+            <Text text={removeHttp(stablishment.webUrl)} opaque small/>
             <Icon
               name="angle-right"
               size={24}
@@ -135,7 +145,7 @@ const StablishmentDetail = ({ route }) => {
               backgroundColor="transparent"
               content={
                 <View>
-                  <Text text="Requisitos para obtener el beneficio:" semiBold />
+                  <Text text="Requisitos para obtener el beneficio:" semiBold titleCase/>
                   {stablishment?.benefits?.map((benefit) => (
                     <Text
                       text={`• ${benefit}`}
@@ -161,7 +171,7 @@ const StablishmentDetail = ({ route }) => {
               </TouchableOpacity>
             </Tooltip>
           </View>
-          <Text text={stablishment.description} opaque light />
+          <Text text={processedText(stablishment?.description || "")} opaque small literal/>
         </View>
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />

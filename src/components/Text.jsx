@@ -3,7 +3,23 @@ import { StyleSheet, Text as T } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
-const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBold, cap, styles, error, small, titleCase }) => {
+const Text = ({
+  text,
+  bold,
+  light,
+  displayTitle,
+  title,
+  subtitle,
+  opaque,
+  semiBold,
+  cap,
+  styles,
+  error,
+  small,
+  titleCase,
+  trunc = null,
+  literal = false
+}) => {
   const textStyles = [
     stylesT.text,
     bold && stylesT.bold,
@@ -19,11 +35,31 @@ const Text = ({ text, bold, light, displayTitle, title, subtitle, opaque, semiBo
   ];
 
   if (titleCase) {
-    // only capitalize the first word of the string or the first word after a . or : 
+    // only capitalize the first word of the string or the first word after a . or :
     text = text.replace(/(^|\s)\S/g, (t) => t.toUpperCase());
   }
 
-  return <T style={[textStyles, styles]}>{text}</T>;
+
+  const truncate = (str, n) => {
+    // remove break lines
+    str = str.replace(/(\r\n|\n|\r)/gm, "");
+    // add space after each comma, :, ; and .
+    str = str.replace(/([,;:.])/g, "$1 ");
+
+    // truncate the string to n characters or if it has dots, to the last dot
+    return str.length > n
+      ? str.substr(0, str.lastIndexOf(" ", n)) + "..."
+      : str;
+  };
+
+  if (trunc) {
+    text = truncate(text, trunc);
+  }
+
+  return <T style={[textStyles, styles]}>
+    {!literal && text}
+    {literal && `${text}`}
+  </T>;
 };
 
 const stylesT = StyleSheet.create({
