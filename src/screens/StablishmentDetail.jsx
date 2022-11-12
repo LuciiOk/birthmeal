@@ -106,7 +106,7 @@ const StablishmentDetail = ({ route }) => {
         </View>
         <View style={{ ...styles.info, ...styles.locationSection }}>
           <Text text="Ubicaciones" semiBold styles={{ marginBottom: 5 }} />
-          <TouchableOpacity onPress={goToLocations}>
+          <TouchableOpacity onPress={goToLocations} style={styles.touch}>
             <Text
               text={nearLocation?.address || "No hay ubicaciones"}
               small
@@ -114,7 +114,7 @@ const StablishmentDetail = ({ route }) => {
             />
             <Icon
               name="angle-right"
-              size={24}
+              size={20}
               color={COLORS.primary}
               style={styles.arrowIcon}
             />
@@ -122,11 +122,11 @@ const StablishmentDetail = ({ route }) => {
         </View>
         <View style={{ ...styles.info }}>
           <Text text="Ir al sitio web" semiBold styles={{ marginBottom: 5 }} />
-          <TouchableOpacity onPress={redirect}>
+          <TouchableOpacity onPress={redirect} style={styles.touch}>
             <Text text={removeHttp(stablishment.webUrl)} opaque small />
             <Icon
               name="angle-right"
-              size={24}
+              size={20}
               color={COLORS.primary}
               style={styles.arrowIcon}
             />
@@ -266,6 +266,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 20,
     right: 0,
+  },
+  touch: {
+    justifyContent: "center",
   },
 });
 
