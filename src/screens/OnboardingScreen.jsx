@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Animated,
   Dimensions,
@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import { useNavigation } from "@react-navigation/native";
+import { OnboardingContext } from "../contexts/OnboardingProvider";
 
 import { slides } from "../data/slides";
 const bgs = ["#ebcb8b", "#a3be8c", "#bf616a", "#59b2ab", "#ebcb8b"];
@@ -46,6 +47,7 @@ const OnboardingScreen = () => {
 };
 
 const ItemSlide = ({ item }) => {
+  const { onFinished } = useContext(OnboardingContext);
   const index = slides.findIndex((slide) => slide.key === item.key);
 
   const navigation = useNavigation();
@@ -112,7 +114,10 @@ const ItemSlide = ({ item }) => {
                 width: width / 2 - 50,
                 alignItems: "center",
               }}
-              onPress={toLogin}
+              onPress={() => {
+                toLogin();
+                onFinished();
+              }}
             >
               <Text
                 style={{ fontSize: 18, fontWeight: "bold", fontFamily: "Lato" }}
@@ -129,7 +134,10 @@ const ItemSlide = ({ item }) => {
                 alignItems: "center",
                 fontFamily: "Lato",
               }}
-              onPress={toHome}
+              onPress={() => {
+                toHome();
+                onFinished();
+              }}
             >
               <Text
                 style={{ fontSize: 18, fontWeight: "bold", fontFamily: "Lato" }}

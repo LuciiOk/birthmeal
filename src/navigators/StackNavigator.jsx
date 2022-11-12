@@ -10,21 +10,21 @@ import StablishmentDetail from "../screens/StablishmentDetail";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import LocationsScreen from "../screens/LocationsScreen";
-import useOnboarding from "../hooks/useOnboarding";
 import { AuthContext } from "../contexts/AuthContext";
 import { COLORS } from "../constants/colorSchema";
 import { useNavigation } from "@react-navigation/native";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import RighButtonHeader from "../components/RighButtonHeader";
+import { OnboardingContext } from "../contexts/OnboardingProvider";
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   const { user, token } = useContext(AuthContext);
+  const { isFirstLaunch } = useContext(OnboardingContext);
   const navigation = useNavigation();
 
-  const isFirstLaunch = useOnboarding();
 
   return (
     isFirstLaunch !== null && (

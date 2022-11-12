@@ -17,14 +17,9 @@ const BirthdaysContainer = () => {
       <FlatList
         data={birthdays}
         keyExtractor={({ id }) => id.toString()}
-        renderItem={({ item }) => (
-          <BirthItem
-            {...item}
-            key={item.id}
-          />
-        )}
+        renderItem={({ item }) => <BirthItem {...item} key={item.id} />}
         ListEmptyComponent={
-          <NoData text="Ups... Parece que no hay nada por aquí, agrega un nuevo cumpleaños! 🥳" />
+          <NoData text="Ups... Parece que no hay nada por aquí, ¡Agrega un nuevo cumpleaños y recibe notificaciones de los cumpleaños de tus contactos! 🥳🎂" />
         }
         ListFooterComponent={<View style={{ height: 20 }} />}
       />

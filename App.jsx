@@ -9,6 +9,7 @@ import * as Device from "expo-device";
 // device import
 import * as Notifications from "expo-notifications";
 import { FavoritesProvider } from "./src/contexts/FavoritesProvider";
+import { OnboardingProvider } from "./src/contexts/OnboardingProvider";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -66,12 +67,14 @@ export default function App() {
   }
 
   return (
-    <LocationProvider>
-      <AuthProvider>
-        <FavoritesProvider>
-          <AppNav />
-        </FavoritesProvider>
-      </AuthProvider>
-    </LocationProvider>
+    <OnboardingProvider>
+      <LocationProvider>
+        <AuthProvider>
+          <FavoritesProvider>
+            <AppNav />
+          </FavoritesProvider>
+        </AuthProvider>
+      </LocationProvider>
+    </OnboardingProvider>
   );
 }
