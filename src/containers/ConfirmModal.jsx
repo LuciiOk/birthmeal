@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Modal, View, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
@@ -15,10 +15,11 @@ const ConfirmModal = ({ show, onAccept, setShow, message }) => {
     <Modal
       visible={show}
       transparent
-      animationType="slide"
+      animationType="fade"
       onRequestClose={() => {}}
     >
       <View style={styles.container}>
+        <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
         <View style={styles.card}>
           <Text styles={styles.text} text={message} titleCase bold />
           <View style={styles.buttonsContainer}>
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   card: {
     backgroundColor: "#fff",

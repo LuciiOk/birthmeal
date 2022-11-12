@@ -1,6 +1,6 @@
 import React from "react";
 import Icons from "react-native-vector-icons/FontAwesome";
-import { View, StyleSheet, Modal, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Modal, TouchableOpacity, StatusBar } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 import Text from "../components/Text";
@@ -24,8 +24,9 @@ const ValorationConfirm = ({
   };
 
   return (
-    <Modal visible={visible} transparent={true}>
+    <Modal visible={visible} transparent={true} animationType="fade">
       <View style={styles.container}>
+        <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
         <View style={styles.modal}>
           <View style={styles.header}>
             <Text styles={styles.title} text="¿Estás seguro?" bold />

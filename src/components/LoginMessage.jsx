@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, StyleSheet, Modal } from "react-native";
+import { View, StyleSheet, Modal, StatusBar } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import { COLORS } from "../constants/colorSchema";
@@ -12,6 +12,7 @@ const LoginMessage = ({ visible, onClose }) => {
   return (
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.container}>
+        <StatusBar backgroundColor="rgba(0,0,0,0.5)" animated={true} />
         <View style={styles.modal}>
           <View style={styles.header}>
             <Icon
