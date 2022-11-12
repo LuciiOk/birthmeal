@@ -6,53 +6,92 @@ import PropTypes from "prop-types";
 const Map = ({ latitude, longitude, ...props }) => {
   const mapStyle = [
     {
+      featureType: "all",
       elementType: "geometry",
       stylers: [
         {
-          color: "#ebe3cd",
-        },
-      ],
-    },
-    {
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#523735",
-        },
-      ],
-    },
-    {
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#f5f1e6",
+          visibility: "on",
         },
       ],
     },
     {
       featureType: "administrative",
+      elementType: "all",
+      stylers: [
+        {
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "administrative.country",
       elementType: "geometry.stroke",
       stylers: [
         {
-          color: "#c9b2a6",
+          color: "#afafaf",
+        },
+      ],
+    },
+    {
+      featureType: "administrative.province",
+      elementType: "all",
+      stylers: [
+        {
+          visibility: "off",
         },
       ],
     },
     {
       featureType: "administrative.land_parcel",
-      elementType: "geometry.stroke",
+      elementType: "geometry",
       stylers: [
         {
-          color: "#dcd2be",
+          visibility: "on",
         },
       ],
     },
     {
-      featureType: "administrative.land_parcel",
-      elementType: "labels.text.fill",
+      featureType: "landscape",
+      elementType: "all",
       stylers: [
         {
-          color: "#ae9e90",
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "landscape.man_made",
+      elementType: "geometry",
+      stylers: [
+        {
+          saturation: "25",
+        },
+        {
+          lightness: "46",
+        },
+        {
+          gamma: "1.26",
+        },
+      ],
+    },
+    {
+      featureType: "landscape.man_made",
+      elementType: "geometry.fill",
+      stylers: [
+        {
+          visibility: "on",
+        },
+        {
+          hue: "#ff0000",
+        },
+      ],
+    },
+    {
+      featureType: "landscape.man_made",
+      elementType: "geometry.stroke",
+      stylers: [
+        {
+          hue: "#ff0000",
         },
       ],
     },
@@ -61,7 +100,16 @@ const Map = ({ latitude, longitude, ...props }) => {
       elementType: "geometry",
       stylers: [
         {
-          color: "#dfd2ae",
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "poi",
+      elementType: "all",
+      stylers: [
+        {
+          visibility: "on",
         },
       ],
     },
@@ -70,44 +118,229 @@ const Map = ({ latitude, longitude, ...props }) => {
       elementType: "geometry",
       stylers: [
         {
-          color: "#dfd2ae",
+          visibility: "on",
+        },
+        {
+          color: "#b6edb6",
+        },
+        {
+          weight: "0.33",
+        },
+        {
+          lightness: "16",
+        },
+        {
+          saturation: "-17",
         },
       ],
     },
     {
-      featureType: "poi",
-      elementType: "labels.text.fill",
+      featureType: "poi.attraction",
+      elementType: "labels",
       stylers: [
         {
-          color: "#93817c",
+          visibility: "off",
         },
       ],
     },
     {
-      featureType: "poi.park",
+      featureType: "poi.business",
+      elementType: "geometry",
+      stylers: [
+        {
+          visibility: "on",
+        },
+        {
+          color: "#ede4e4",
+        },
+        {
+          saturation: "-63",
+        },
+        {
+          gamma: "0.38",
+        },
+        {
+          lightness: "61",
+        },
+      ],
+    },
+    {
+      featureType: "poi.medical",
       elementType: "geometry.fill",
       stylers: [
         {
-          color: "#a5b076",
+          color: "#f4b4b4",
+        },
+        {
+          saturation: "-16",
+        },
+        {
+          lightness: "20",
         },
       ],
     },
-    // water color
     {
-      featureType: "poi.park",
-      elementType: "labels.text.fill",
+      featureType: "poi.medical",
+      elementType: "labels.icon",
       stylers: [
         {
-          color: "#447530",
+          visibility: "on",
         },
       ],
     },
     {
-      featureType: "road",
+      featureType: "poi.park",
       elementType: "geometry",
       stylers: [
         {
-          color: "#f5f1e6",
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "poi.park",
+      elementType: "labels.text",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "poi.school",
+      elementType: "geometry",
+      stylers: [
+        {
+          visibility: "on",
+        },
+        {
+          color: "#fbc99b",
+        },
+        {
+          lightness: "12",
+        },
+        {
+          gamma: "2.39",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "all",
+      stylers: [
+        {
+          color: "#fdcb9b",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "geometry",
+      stylers: [
+        {
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "geometry.fill",
+      stylers: [
+        {
+          visibility: "on",
+        },
+        {
+          color: "#f2af67",
+        },
+        {
+          lightness: "47",
+        },
+        {
+          saturation: "64",
+        },
+        {
+          gamma: "0.95",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "geometry.stroke",
+      stylers: [
+        {
+          visibility: "on",
+        },
+        {
+          saturation: "-18",
+        },
+        {
+          lightness: "61",
+        },
+        {
+          gamma: "7.93",
+        },
+        {
+          weight: "0.30",
+        },
+        {
+          color: "#db8828",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "labels.text",
+      stylers: [
+        {
+          weight: "0.79",
+        },
+        {
+          gamma: "3.19",
+        },
+        {
+          lightness: "-73",
+        },
+        {
+          saturation: "-76",
+        },
+        {
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          invert_lightness: true,
+        },
+        {
+          weight: "2.90",
+        },
+        {
+          color: "#786e6e",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "labels.text.stroke",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "labels.icon",
+      stylers: [
+        {
+          visibility: "off",
+        },
+        {
+          color: "#5da554",
         },
       ],
     },
@@ -116,88 +349,16 @@ const Map = ({ latitude, longitude, ...props }) => {
       elementType: "geometry",
       stylers: [
         {
-          color: "#fdfcf8",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#f8c967",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#e9bc62",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway.controlled_access",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#e98d58",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway.controlled_access",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#db8555",
+          visibility: "on",
         },
       ],
     },
     {
       featureType: "road.local",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#806b63",
-        },
-      ],
-    },
-    {
-      featureType: "transit.line",
       elementType: "geometry",
       stylers: [
         {
-          color: "#dfd2ae",
-        },
-      ],
-    },
-    {
-      featureType: "transit.line",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#8f7d77",
-        },
-      ],
-    },
-    {
-      featureType: "transit.line",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#ebe3cd",
-        },
-      ],
-    },
-    {
-      featureType: "transit.station",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#dfd2ae",
+          visibility: "on",
         },
       ],
     },
@@ -206,20 +367,68 @@ const Map = ({ latitude, longitude, ...props }) => {
       elementType: "geometry.fill",
       stylers: [
         {
-          color: "#b9d3c2",
+          color: "#7fd4ef",
+        },
+        {
+          saturation: "13",
+        },
+        {
+          lightness: "-3",
+        },
+        {
+          gamma: "1.13",
+        },
+        {
+          weight: "0.30",
+        },
+      ],
+    },
+    // remove labels
+    {
+      featureType: "administrative",
+      elementType: "labels",
+      stylers: [
+        {
+          visibility: "off",
         },
       ],
     },
     {
-      featureType: "water",
-      elementType: "labels.text.fill",
+      featureType: "administrative.country",
+      elementType: "labels",
       stylers: [
         {
-          color: "#92998d",
+          visibility: "off",
         },
       ],
     },
-    // remove all labels
+    {
+      featureType: "administrative.province",
+      elementType: "labels",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "administrative.locality",
+      elementType: "labels",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "administrative.neighborhood",
+      elementType: "labels",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
     {
       featureType: "poi",
       elementType: "labels",
@@ -272,7 +481,7 @@ Map.propTypes = {
 const styles = StyleSheet.create({
   map: {
     width: "100%",
-    height: "45%",
+    height: "50%",
   },
 });
 
