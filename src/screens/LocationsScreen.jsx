@@ -52,7 +52,9 @@ const LocationsScreen = ({ route }) => {
   }, []);
 
   useEffect(() => {
-    sortLocations();
+    if(coordinates) {
+      sortLocations();
+    }
   }, [coordinates]);
 
   if (loading) return <LoadingScreen backgroundColor="white" />;
