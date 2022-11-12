@@ -1,7 +1,9 @@
 import React from "react";
-import { Modal, View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Modal, View, StyleSheet, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
+
+import Text from "../components/Text";
 
 // textos en español
 const ConfirmModal = ({ show, onAccept, setShow, message }) => {
@@ -18,13 +20,13 @@ const ConfirmModal = ({ show, onAccept, setShow, message }) => {
     >
       <View style={styles.container}>
         <View style={styles.card}>
-          <Text style={styles.text}>{message}</Text>
+          <Text styles={styles.text} text={message} titleCase bold />
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity onPress={onAccept}>
-              <Text style={styles.buttonAccept}>Aceptar</Text>
-            </TouchableOpacity>
             <TouchableOpacity onPress={onDecline}>
-              <Text style={styles.buttonCancel}>Cancelar</Text>
+              <Text styles={styles.buttonCancel} text="Cancelar" small bold />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onAccept}>
+              <Text styles={styles.buttonAccept} text="Aceptar" small bold />
             </TouchableOpacity>
           </View>
         </View>
@@ -43,11 +45,10 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 20,
     width: "80%",
   },
   text: {
-    fontSize: 18,
     marginBottom: 20,
     textAlign: "center",
   },
@@ -57,17 +58,17 @@ const styles = StyleSheet.create({
   },
   buttonAccept: {
     color: "white",
-    fontSize: 18,
     backgroundColor: COLORS.success,
     padding: 10,
-    borderRadius: 5,
+    paddingHorizontal: 20,
+    borderRadius: 10,
   },
   buttonCancel: {
     color: "white",
-    fontSize: 18,
     backgroundColor: COLORS.danger,
     padding: 10,
-    borderRadius: 5,
+    paddingHorizontal: 20,
+    borderRadius: 10,
   },
 });
 

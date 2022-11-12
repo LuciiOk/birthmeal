@@ -1,8 +1,9 @@
 import React from "react";
 import Icons from "react-native-vector-icons/FontAwesome";
-import { View, StyleSheet, Modal, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Modal, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
+import Text from "../components/Text";
 
 const ValorationConfirm = ({
   visible,
@@ -27,21 +28,28 @@ const ValorationConfirm = ({
       <View style={styles.container}>
         <View style={styles.modal}>
           <View style={styles.header}>
-            <Text style={styles.title}>¿Estás seguro?</Text>
+            <Text styles={styles.title} text="¿Estás seguro?" bold />
           </View>
           <View style={styles.body}>
-            <Text style={styles.text}>
-              Estás a punto de valorar con {starsSelected} estrellas
-            </Text>
+            <Text
+              styles={styles.text}
+              text={`Vas a valorar con ${starsSelected} estrellas`}
+              small
+            />
             <View style={styles.starsContainer}>{renderStars()}</View>
-            <Text style={styles.text}>¿Quieres confirmar la valoración?</Text>
+            <Text
+              styles={styles.text}
+              text="¿Deseas confirmar tu valoración?"
+              small
+              bold
+            />
           </View>
           <View style={styles.footer}>
             <TouchableOpacity
               style={styles.buttonCancel}
               onPress={() => setVisible(false)}
             >
-              <Text style={styles.textButton}>Cancelar</Text>
+              <Text styles={styles.textButton} text="Cancelar" small />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.buttonConfirm}
@@ -50,7 +58,7 @@ const ValorationConfirm = ({
                 onConfirm();
               }}
             >
-              <Text style={styles.textButton}>Confirmar</Text>
+              <Text styles={styles.textButton} text="Confirmar" small bold />
             </TouchableOpacity>
           </View>
         </View>
@@ -77,16 +85,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 26,
     fontWeight: "bold",
   },
   body: {
     marginBottom: 20,
   },
   text: {
-    fontSize: 18,
     marginBottom: 10,
     textAlign: "center",
+    width: "100%",
   },
   starsContainer: {
     flexDirection: "row",
@@ -101,18 +108,17 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.danger,
     paddingVertical: 10,
     paddingHorizontal: 25,
-    borderRadius: 5,
+    borderRadius: 10,
     marginRight: 10,
   },
   buttonConfirm: {
     backgroundColor: COLORS.success,
     paddingVertical: 10,
     paddingHorizontal: 25,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   textButton: {
     color: COLORS.white,
-    fontSize: 16,
   },
 });
 

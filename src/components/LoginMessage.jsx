@@ -1,9 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Text, StyleSheet, Modal } from "react-native";
+import { View, StyleSheet, Modal } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import { COLORS } from "../constants/colorSchema";
+import Text from "./Text";
 
 const LoginMessage = ({ visible, onClose }) => {
   const navigate = useNavigation();
@@ -13,12 +14,19 @@ const LoginMessage = ({ visible, onClose }) => {
       <View style={styles.container}>
         <View style={styles.modal}>
           <View style={styles.header}>
-            <Icon name="exclamation-triangle" size={30} color={COLORS.warning} />
-            <Text style={styles.title}>¡Ups!</Text>
+            <Icon
+              name="exclamation-triangle"
+              size={30}
+              color={COLORS.warning}
+            />
+            <Text styles={styles.title} text="¡Atención!" bold />
           </View>
-          <Text style={styles.message}>
-            Debes iniciar sesión para poder realizar esta acción.
-          </Text>
+          <Text
+            styles={styles.message}
+            text="Debes iniciar sesión para poder realizar esta acción"
+            bold
+            small
+          />
           <View style={styles.buttons}>
             <Icon.Button
               style={styles.button}
@@ -27,7 +35,7 @@ const LoginMessage = ({ visible, onClose }) => {
               onPress={onClose}
               borderRadius={15}
             >
-              <Text style={styles.buttonText}>Cancelar</Text>
+              <Text styles={styles.buttonText} text="Cancelar" small bold />
             </Icon.Button>
             <View style={styles.separator} />
             <Icon.Button
@@ -40,7 +48,12 @@ const LoginMessage = ({ visible, onClose }) => {
               }}
               borderRadius={15}
             >
-              <Text style={styles.buttonText}>Iniciar sesión</Text>
+              <Text
+                styles={styles.buttonText}
+                text="Iniciar sesión"
+                small
+                bold
+              />
             </Icon.Button>
           </View>
         </View>
@@ -69,12 +82,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10,
   },
   message: {
-    fontSize: 16,
     textAlign: "center",
     marginBottom: 20,
   },
@@ -87,10 +98,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     minWidth: "45%",
+    padding: 10,
   },
   buttonText: {
     color: "#fff",
-    fontSize: 16,
   },
   separator: {
     width: 10,
