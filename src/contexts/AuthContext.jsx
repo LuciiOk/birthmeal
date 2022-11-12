@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ToastAndroid } from "react-native";
 import Axios from "../utils/AxiosInstance";
+import { clearAllNotifications } from "../hooks/useNotification";
 
 export const AuthContext = createContext();
 
@@ -39,6 +40,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await AsyncStorage.removeItem("user");
       await AsyncStorage.removeItem("token");
+      clearAllNotifications();
       ToastAndroid.show("Sesión cerrada", ToastAndroid.SHORT);
     } catch (error) {
       console.log(error.response.data);
@@ -57,7 +59,7 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.removeItem("user");
       await AsyncStorage.removeItem("token");
       setUser(null);
-      setToken(null); 
+      setToken(null);
       return false;
     } catch (error) {
       console.log(error.message);
