@@ -43,8 +43,13 @@ const LocationsScreen = ({ route }) => {
   };
 
   const sortLocations = () => {
-    const sortedLocations = sortLocationsByDistance(locationsData, coordinates);
-    setLocationsData(sortedLocations);
+    if (coordinates) {
+      const sortedLocations = sortLocationsByDistance(
+        locationsData,
+        coordinates
+      );
+      setLocationsData(sortedLocations);
+    }
   };
 
   useEffect(() => {
@@ -52,7 +57,7 @@ const LocationsScreen = ({ route }) => {
   }, []);
 
   useEffect(() => {
-    if(coordinates) {
+    if (coordinates) {
       sortLocations();
     }
   }, [coordinates]);
