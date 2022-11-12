@@ -71,6 +71,12 @@ const StablishmentDetail = ({ route }) => {
     getNearLocation();
   }, []);
 
+  useEffect(() => {
+    if (coordinates) {
+      getNearLocation();
+    }
+  }, [coordinates]);
+
   const removeHttp = (url) => {
     // remove http:// or https:// and www. and /
     return url
