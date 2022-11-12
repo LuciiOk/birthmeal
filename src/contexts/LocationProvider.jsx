@@ -22,7 +22,7 @@ export const LocationProvider = ({ children }) => {
 
       setPermission(status);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 
@@ -37,7 +37,7 @@ export const LocationProvider = ({ children }) => {
       const newLocation = [latitude, longitude];
       setLocation(newLocation);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 
@@ -62,7 +62,7 @@ export const LocationProvider = ({ children }) => {
       );
       return location;
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 

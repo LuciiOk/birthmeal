@@ -14,7 +14,7 @@ const useFavorite = (company) => {
         setIsFavorite(data);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 
@@ -29,7 +29,7 @@ const useFavorite = (company) => {
         company,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
       ToastAndroid.show("Error al agregar a favoritos", ToastAndroid.SHORT);
     }
   };

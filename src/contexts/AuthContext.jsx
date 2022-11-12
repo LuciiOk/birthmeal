@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.removeItem("token");
       ToastAndroid.show("Sesión cerrada", ToastAndroid.SHORT);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 

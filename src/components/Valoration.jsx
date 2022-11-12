@@ -40,7 +40,7 @@ const Valoration = ({ rat, stablishmentId }) => {
         alert("Debes iniciar sesión para valorar");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 

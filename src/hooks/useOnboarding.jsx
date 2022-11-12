@@ -18,7 +18,7 @@ const useOnboarding = () => {
         setIsFirstLaunch(false);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 

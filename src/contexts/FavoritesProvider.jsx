@@ -23,7 +23,7 @@ export const FavoritesProvider = ({ children }) => {
         setFavorites([]);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
       ToastAndroid.show("Error al obtener los favoritos", ToastAndroid.SHORT);
     } finally {
       setLoading(false);
@@ -47,7 +47,7 @@ export const FavoritesProvider = ({ children }) => {
       }
       return false;
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
       ToastAndroid.show("Error al agregar a favoritos", ToastAndroid.SHORT);
     }
   };

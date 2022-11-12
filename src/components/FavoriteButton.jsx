@@ -29,7 +29,7 @@ const FavoriteButton = ({ company, noAnimate }) => {
     try {
       if (!(await onFavorite(company))) setShowLoginMessage(true);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 

@@ -25,17 +25,18 @@ const BirthdayProvider = ({ children }) => {
       setBirthdays(data || []);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 
   const addBirthday = async (birthday) => {
     try {
       setLoading(true);
+      birthday.birthdate = new Date(birthday.birthdate).toISOString();
       const { data } = await AxiosInstance.post("birthdays", birthday);
       setBirthdays([...birthdays, data]);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     } finally {
       setLoading(false);
     }
@@ -53,7 +54,7 @@ const BirthdayProvider = ({ children }) => {
 
       await AxiosInstance.put(`birthdays/${birthday.id}`, birthday);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     } finally {
       setLoading(false);
     }
@@ -65,7 +66,7 @@ const BirthdayProvider = ({ children }) => {
       await AxiosInstance.delete(`birthdays/${id}`);
       setBirthdays(birthdays.filter((birthday) => birthday.id !== id));
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     } finally {
       setLoading(false);
     }
