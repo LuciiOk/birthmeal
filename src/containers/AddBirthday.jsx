@@ -144,7 +144,7 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
             </View>
             {!loading && (
               <Button
-                buttonText="Agregar"
+                buttonText={dataEdit ? "Actualizar" : "Agregar"}
                 action={handleSubmit(onSubmit)}
                 outlined
               />

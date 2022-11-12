@@ -26,7 +26,7 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
   return (
     <TouchableOpacity
       style={styles.item}
-      onLongPress={() => setShowModal(true)}
+      onPress={() => setShowModal(true)}
     >
       <View style={styles.itemLeft}>
         <Image
