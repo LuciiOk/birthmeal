@@ -191,8 +191,8 @@ const Map = ({ latitude, longitude, ...props }) => {
           ? {
               latitude,
               longitude,
-              latitudeDelta: 0.000060757,
-              longitudeDelta: 0.009366,
+              latitudeDelta: 0.000100757,
+              longitudeDelta: 0.01209,
             }
           : null
       }
