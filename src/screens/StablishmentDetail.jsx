@@ -160,6 +160,7 @@ const StablishmentDetail = ({ route }) => {
                       small
                       key={benefit}
                       styles={{ marginTop: 5 }}
+                      titleCase
                     />
                   ))}
                 </View>

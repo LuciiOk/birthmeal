@@ -41,19 +41,27 @@ const Text = ({
   if (titleCase) {
     // only capitalize the first word of the string, not the whole string
     text = text.toLowerCase();
+    //trim the string
+    text = text.trim();
+    text = text.replace(/\s\s+/g, " ");
 
     // only capitalize the first word of the string or the first word after a dot
 
-    text = text.replace(/(^\w{1})|(\.\s*\w{1})|(\-\s*\w{1})/g, (match) =>
-      match.toUpperCase()
+    text = text.replace(
+      /(^\w{1})|(\.\s*\w{1})|(\-\s*\w{1})|(\• \s*\w{1})/g,
+      (match) => match.toUpperCase()
     );
   }
 
   const truncate = (str, n) => {
     // remove break lines
+
     str = str.replace(/(\r\n|\n|\r)/gm, "");
     // add space after each comma, :, ; and .
-    str = str.replace(/([,;:.])/g, "$1 ");
+    str = str.replace(/([,;:.-])/g, "$1 ");
+
+    // remove double spaces
+    str = str.replace(/\s\s+/g, " ");
 
     // truncate the string to n characters or if it has dots, to the last dot
     return str.length > n
