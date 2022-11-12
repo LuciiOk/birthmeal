@@ -28,6 +28,10 @@ export const LocationProvider = ({ children }) => {
 
   const getLocation = async () => {
     try {
+      if (permission !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      } 
       const location = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = location.coords;
       const newLocation = [latitude, longitude];
