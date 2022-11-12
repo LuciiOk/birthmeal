@@ -1,53 +1,75 @@
 import React, { createContext, useEffect, useState } from "react";
 import * as Location from "expo-location";
 
-// import { getDistance } from 'geolib'
-
 export const LocationContext = createContext();
 
 export const LocationProvider = ({ children }) => {
+  const [permission, setPermission] = useState(null);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [companiesLocation, setCompaniesLocation] = useState(null);
 
   useEffect(() => {
-    _getLocationAsync();
+    getPermissions();
   }, []);
 
-  const _getLocationAsync = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
+  const getPermissions = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
 
-    if (status !== "granted") {
-      setErrorMsg("Permission to access location was denied");
-      return;
+      setPermission(status);
+    } catch (error) {
+      console.log(error);
     }
-
-    const userLocation = await Location.getCurrentPositionAsync({});
-
-    const { coords } = userLocation;
-
-    setLocation([coords.longitude, coords.latitude]);
   };
 
-  // const getCurrentDistance = (companyLocation) => {
-  //   if (location) {
-  //     const [longitude, latitude] = location;
-  //     const [companyLongitude, companyLatitude] = companyLocation;
+  const getLocation = async () => {
+    try {
+      const location = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
+      const newLocation = [latitude, longitude];
+      setLocation(newLocation);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //     const distance = getDistance(
-  //       { latitude, longitude },
-  //       { latitude: companyLatitude, longitude: companyLongitude }
-  //     );
+  const watchLocation = async () => {
+    try {
+      const location = await Location.watchPositionAsync(
+        {
+          accuracy: Location.Accuracy.BestForNavigation,
+          timeInterval: 25000, // 25 seconds
+          distanceInterval: 10, // 10 meters
+        },
+        (updatedLocation) => {
+          const { latitude, longitude } = updatedLocation.coords;
+          const newLocation = [latitude, longitude];
+          setLocation(newLocation);
+        }
+      );
+      return location;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //     return distance;
-  //   }
-  // }
+  useEffect(() => {
+    if (permission === "granted") {
+      getLocation();
+      watchLocation();
+    }
+  }, [permission]);
 
   return (
     <LocationContext.Provider
       value={{
         location,
-        errorMsg,
+        getLocation,
+        watchLocation,
       }}
     >
       {children}

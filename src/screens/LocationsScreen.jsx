@@ -14,6 +14,7 @@ import Text from "../components/Text";
 import * as Linking from "expo-linking";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faDirections } from "@fortawesome/free-solid-svg-icons";
+import { sortLocationsByDistance } from "../utils/distance";
 
 const LocationsScreen = ({ route }) => {
   const { params } = route;
@@ -41,9 +42,18 @@ const LocationsScreen = ({ route }) => {
     }
   };
 
+  const sortLocations = () => {
+    const sortedLocations = sortLocationsByDistance(locationsData, coordinates);
+    setLocationsData(sortedLocations);
+  };
+
   useEffect(() => {
     getLocations();
   }, []);
+
+  useEffect(() => {
+    sortLocations();
+  }, [coordinates]);
 
   if (loading) return <LoadingScreen backgroundColor="white" />;
 
