@@ -10,6 +10,10 @@ import AxiosInstance from "./../utils/AxiosInstance";
 import LoadingScreen from "./LoadingScreen";
 import { LocationContext } from "../contexts/LocationProvider";
 import { COLORS } from "../constants/colorSchema";
+import Text from "../components/Text";
+import * as Linking from "expo-linking";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faDirections } from "@fortawesome/free-solid-svg-icons";
 
 const LocationsScreen = ({ route }) => {
   const { params } = route;
@@ -82,6 +86,25 @@ const LocationsScreen = ({ route }) => {
               ]}
               resizeMode="contain"
             />
+            {/* card */}
+            <MapView.Callout
+              tooltip
+              onPress={() => {
+                // redirect to google maps
+                Linking.openURL(
+                  `https://www.google.com/maps/dir/?api=1&destination=${geometry.coordinates[1]},${geometry.coordinates[0]}`
+                );
+              }}
+            >
+              <View style={styles.callout}>
+                <Text bold moreSmall trunc={25} text={`Ir a ${name}`} />
+                <FontAwesomeIcon
+                  icon={faDirections}
+                  size={20}
+                  color={COLORS.info}
+                />
+              </View>
+            </MapView.Callout>
           </MapView.Marker>
         ))}
       </Map>
@@ -103,6 +126,24 @@ const styles = StyleSheet.create({
   marker: {
     width: 30,
     height: 30,
+  },
+  callout: {
+    backgroundColor: COLORS.white,
+    padding: 5,
+    borderRadius: 10,
+    zIndex: 100,
+    width: 200,
+    height: 50,
+    justifyContent: "space-between",
+    alignItems: "center",
+    shadowColor: COLORS.dark,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
 
