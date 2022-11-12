@@ -192,6 +192,7 @@ const StablishmentDetail = ({ route }) => {
             opaque
             small
             literal
+            titleCase
           />
         </View>
         <View style={styles.ratingContainer}>

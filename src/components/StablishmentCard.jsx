@@ -31,6 +31,7 @@ const StablishmentCard = ({ stablishment, favortie = false }) => {
           subtitle
           moreSmall
           opaque
+          semiBold
           titleCase
           trunc={80}
         />

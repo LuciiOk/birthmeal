@@ -39,10 +39,15 @@ const Text = ({
   ];
 
   if (titleCase) {
-    // only capitalize the first word of the string or the first word after a . or :
-    text = text.replace(/(^|\s)\S/g, (t) => t.toUpperCase());
-  }
+    // only capitalize the first word of the string, not the whole string
+    text = text.toLowerCase();
 
+    // only capitalize the first word of the string or the first word after a dot
+
+    text = text.replace(/(^\w{1})|(\.\s*\w{1})|(\-\s*\w{1})/g, (match) =>
+      match.toUpperCase()
+    );
+  }
 
   const truncate = (str, n) => {
     // remove break lines
@@ -60,10 +65,12 @@ const Text = ({
     text = truncate(text, trunc);
   }
 
-  return <T style={[textStyles, styles]}>
-    {!literal && text}
-    {literal && `${text}`}
-  </T>;
+  return (
+    <T style={[textStyles, styles]}>
+      {!literal && text}
+      {literal && `${text}`}
+    </T>
+  );
 };
 
 const stylesT = StyleSheet.create({

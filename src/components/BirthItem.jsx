@@ -37,12 +37,10 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
           <Text text={name} subtitle bold cap />
           <Text
             text={getFormattedDate(birthdate)}
+            moreSmall
             semiBold
-            styles={{
-              fontSize: 12,
-            }}
           />
-          <Text text={getTimeLeft(birthdate)} opaque light />
+          <Text text={getTimeLeft(birthdate)} opaque small bold/>
         </View>
       </View>
       <View style={styles.itemRight}>
