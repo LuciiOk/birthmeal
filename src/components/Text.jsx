@@ -45,6 +45,11 @@ const Text = ({
     text = text.trim();
     text = text.replace(/\s\s+/g, " ");
 
+    // add \n before a -
+    text = text.replace(/-/g, "\n-");
+    // remove double \n
+    text = text.replace(/\n\n/g, "\n");
+
     // only capitalize the first word of the string or the first word after a dot
 
     text = text.replace(
