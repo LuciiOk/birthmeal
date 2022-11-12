@@ -66,6 +66,10 @@ const LocationsScreen = ({ route }) => {
                 false: "blue",
               }[selectedLocationId === id]
             }
+            onPress={() => {
+              setSelectedLocation(geometry);
+              setSelectedLocationId(id);
+            }}
           >
             <Image
               source={require("../../assets/images/marker.png")}
