@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
+    paddingHorizontal: 10,
   },
   header: {
     marginTop: 20,

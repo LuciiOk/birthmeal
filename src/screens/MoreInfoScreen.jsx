@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
   titleBody: {
     marginBottom: 10,
   },
-  description: {},
   developers: {
     flexDirection: "row",
     alignItems: "center",

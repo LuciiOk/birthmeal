@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 10,
   },
   favoritesList: {
     flex: 10,

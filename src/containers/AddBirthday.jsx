@@ -126,7 +126,7 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
               <Text text="La fecha es requerida" styles={styles.error} />
             )}
             <View style={styles.switchContainer}>
-              <Text text="Desea recibir notificaciones?" />
+              <Text text="Desea recibir notificaciones?" small/>
               <Controller
                 control={control}
                 render={({ field }) => (

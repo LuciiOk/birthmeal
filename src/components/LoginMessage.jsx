@@ -13,7 +13,7 @@ const LoginMessage = ({ visible, onClose }) => {
       <View style={styles.container}>
         <View style={styles.modal}>
           <View style={styles.header}>
-            <Icon name="exclamation-triangle" size={30} color={COLORS.danger} />
+            <Icon name="exclamation-triangle" size={30} color={COLORS.warning} />
             <Text style={styles.title}>¡Ups!</Text>
           </View>
           <Text style={styles.message}>
@@ -25,6 +25,7 @@ const LoginMessage = ({ visible, onClose }) => {
               name="close"
               backgroundColor={COLORS.danger}
               onPress={onClose}
+              borderRadius={15}
             >
               <Text style={styles.buttonText}>Cancelar</Text>
             </Icon.Button>
@@ -37,6 +38,7 @@ const LoginMessage = ({ visible, onClose }) => {
                 onClose();
                 navigate.navigate("Login");
               }}
+              borderRadius={15}
             >
               <Text style={styles.buttonText}>Iniciar sesión</Text>
             </Icon.Button>
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: "#fff",
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 20,
     width: "80%",
   },
   header: {
@@ -84,7 +86,6 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 5,
     minWidth: "45%",
   },
   buttonText: {

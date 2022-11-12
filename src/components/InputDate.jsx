@@ -21,14 +21,13 @@ const InputDate = ({ placeholder, control, name, rules = null }) => {
       <Text
         text={placeholder}
         bold
-        opaque
-        styles={{ color: COLORS.grayDark, fontSize: 16 }}
+        small
       />
       <Controller
         control={control}
         render={({ field }) => (
           <>
-            <Text text={getFormattedDate(field.value)} bold opaque />
+            <Text text={getFormattedDate(field.value)} semiBold moreSmall opaque />
             {show && (
               <RNDateTimePicker
                 testID="dateTimePicker"

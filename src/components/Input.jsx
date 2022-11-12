@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     color: COLORS.dark,
-    fontSize: 16,
+    fontSize: 14,
     paddingVertical: 2,
     fontFamily: "Lato",
   },
