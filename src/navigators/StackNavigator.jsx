@@ -30,11 +30,6 @@ const StackNavigator = () => {
     isFirstLaunch !== null && (
       <Stack.Navigator
         screenOptions={{
-          headerTitleStyle: {
-            fontFamily: "Lato",
-            fontSize: 30,
-            color: COLORS.dark,
-          },
           header: ({ route }) => (
             <View style={styles.header}>
               <View style={styles.headerLeft}>
@@ -49,12 +44,12 @@ const StackNavigator = () => {
                 >
                   <FontAwesomeIcon
                     icon={faAngleLeft}
-                    size={25}
+                    size={24}
                     color={COLORS.dark}
                   />
                 </TouchableOpacity>
                 <Text
-                  displayTitle
+                  title
                   cap
                   bold
                   text={
@@ -118,6 +113,7 @@ const styles = StyleSheet.create({
   },
   headerLeft: {
     flexDirection: "row",
+    alignItems: "center",
   },
   headerTitle: {
     fontFamily: "Lato-Bold",

@@ -47,7 +47,7 @@ const RighButtonHeader = ({ marginRight }) => {
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <FontAwesomeIcon
               icon={faAngleDown}
-              size={30}
+              size={25}
               color={COLORS.dark}
               style={styles.icon}
             />
@@ -81,8 +81,9 @@ const RighButtonHeader = ({ marginRight }) => {
         onPress={() => {
           currentRoute !== "Home" && navigation.navigate("Home");
           currentRoute !== "Overview" && navigation.navigate("Overview");
+          user && token && currentRoute === "Overview" && navigation.navigate("Profile");
         }}
-        disabled={currentRoute === "Overview"}
+        disabled={currentRoute === "Overview" && !user && !token}
       >
         <Image
           source={require("../../assets/images/Burger-logo.png")}
@@ -95,7 +96,7 @@ const RighButtonHeader = ({ marginRight }) => {
 
 const OptionButton = ({ icon, label, onPress }) => (
   <TouchableOpacity style={styles.content} onPress={onPress}>
-    <Text style={styles.text} semiBold subtitle text={label} />
+    <Text style={styles.text} bold text={label} />
   </TouchableOpacity>
 );
 
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
   },
   topRight: {
     backgroundColor: COLORS.white,
-    width: 150,
     position: "absolute",
     top: 50,
     right: 10,
@@ -132,10 +132,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   content: {
-    height: 50,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   text: {
     fontSize: 20,
