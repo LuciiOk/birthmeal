@@ -5,10 +5,12 @@ import PropTypes from "prop-types";
 
 import LoginMessage from "./LoginMessage";
 import { FavoritesContext } from "../contexts/FavoritesProvider";
+import ConfirmModal from "../containers/ConfirmModal";
 
 const FavoriteButton = ({ company, noAnimate }) => {
   const animation = useRef(null);
   const [showLoginMessage, setShowLoginMessage] = useState(false);
+  const [confirm, setConfirm] = useState(false);
   const { isFavorite, onFavorite, favorites } = useContext(FavoritesContext);
 
   useEffect(() => {
@@ -34,7 +36,9 @@ const FavoriteButton = ({ company, noAnimate }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handleFavorite}>
+    <TouchableWithoutFeedback
+      onPress={noAnimate ? () => setConfirm(true) : handleFavorite}
+    >
       <View style={styles.container}>
         <LottieView
           ref={animation}
@@ -46,6 +50,14 @@ const FavoriteButton = ({ company, noAnimate }) => {
           visible={showLoginMessage}
           onClose={() => setShowLoginMessage(false)}
         />
+        {noAnimate && (
+          <ConfirmModal
+            show={confirm}
+            setShow={setConfirm}
+            onAccept={handleFavorite}
+            message="¿Deseas agregar esta empresa a tus favoritos?"
+          />
+        )}
       </View>
     </TouchableWithoutFeedback>
   );

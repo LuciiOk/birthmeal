@@ -54,7 +54,7 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
           show={showConfirmModal}
           setShow={setShowConfirmModal}
           onAccept={onDelete}
-          message="Estas seguro de eliminar este cumpleaños?"
+          message="¿Estás seguro de eliminar este cumpleaños?"
         />
       </View>
       <AddModal
