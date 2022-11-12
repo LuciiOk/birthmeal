@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ToastAndroid } from "react-native";
 import Icons from "react-native-vector-icons/FontAwesome";
 import PropTypes from "prop-types";
 import Text from "./Text";
@@ -30,16 +30,23 @@ const Valoration = ({ rat, stablishmentId }) => {
     try {
       if ((await isLogged()) && token && user) {
         const response = await AxiosInstance.post(
-          `companies/rating/${stablishmentId}`,
-          {
-            valoration: valoration - 1,
-          }
+          `valoration/${stablishmentId}`,
+          { valoration }
         );
-        setRating(response.data);
+
+        const { data } = response;
+
+        const result = Number(data);
+        setRating(result);
       } else {
         alert("Debes iniciar sesión para valorar");
       }
     } catch (error) {
+      if (
+        error.response.data.message === "Ya calificaste con esta puntuación"
+      ) {
+        ToastAndroid.show(error.response.data.message, ToastAndroid.SHORT);
+      }
       console.log(error.response.data);
     }
   };

@@ -65,10 +65,10 @@ const StablishmentDetail = ({ route }) => {
     const getStablishment = async () => {
       const { data } = await AxiosInstance.get(`companies/${id}`);
       setStablishment(data);
+      await getNearLocation();
       setLoading(false);
     };
     getStablishment();
-    getNearLocation();
   }, []);
 
   useEffect(() => {
