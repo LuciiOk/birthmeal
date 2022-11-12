@@ -117,6 +117,7 @@ const StablishmentDetail = ({ route }) => {
               text={nearLocation?.address || "No hay ubicaciones"}
               small
               opaque
+              styles={styles.location}
             />
             <Icon
               name="angle-right"
@@ -267,16 +268,25 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  arrowIcon: {
-    backgroundColor: `${COLORS.primary}10`,
-    position: "absolute",
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    borderRadius: 20,
-    right: 0,
-  },
   touch: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  location: {
+    width: "90%",
+  },
+  arrowIcon: {
+    width: "10%",
+    backgroundColor: `${COLORS.primary}10`,
+    borderRadius: 50,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
+    textAlign: "center",
   },
 });
 
