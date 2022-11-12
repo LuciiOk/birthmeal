@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -43,7 +43,7 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
     defaultValues: {
       name: dataEdit?.name || "",
       birthdate: dataEdit?.birthdate || new Date(),
-      remind: dataEdit?.remind || false,
+      remind: dataEdit?.remind ? true : false,
     },
   });
   const { addBirthday, loading, updateBirthday } = useContext(BirthdayContext);
@@ -63,6 +63,7 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
           new Date(birthdate),
           name,
         );
+        birthday.remind = true;
         birthday.notificationId = birthday.notificationId.toString();
         await updateBirthday(birthday);
         onClose();
@@ -139,7 +140,6 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
                   />
                 )}
                 name="remind"
-                defaultValue={false}
               />
             </View>
             {!loading && (

@@ -11,7 +11,7 @@ import { cancelNotification } from "../hooks/useNotification";
 import AddModal from "../containers/AddBirthday";
 import ConfirmModal from "../containers/ConfirmModal";
 
-const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
+const BirthItem = ({ id, name, birthdate, remind, notificationId = null }) => {
   const { deleteBirthday } = useContext(BirthdayContext);
 
   const [showModal, setShowModal] = React.useState(false);
@@ -58,7 +58,7 @@ const BirthItem = ({ id, name, birthdate, notificationId = null }) => {
         />
       </View>
       <AddModal
-        dataEdit={{ id, name, birthdate, notificationId }}
+        dataEdit={{ id, name, birthdate, notificationId, remind }}
         onClose={() => setShowModal(false)}
         visible={showModal}
       />

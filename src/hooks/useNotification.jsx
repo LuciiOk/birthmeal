@@ -15,11 +15,12 @@ export const scheduleUserBirthday = async (date, name) => {
     });
   }
   const dob = new Date(date);
+  const today = new Date();
 
   const day = dob.getDate();
   const month = dob.getMonth();
-  const hour = dob.getHours();
-  const minute = dob.getMinutes() + 1 === 60 ? 0 : dob.getMinutes() + 1;
+  const hour = today.getHours();
+  const minute = today.getMinutes() + 1 === 60 ? 0 : dob.getMinutes() + 1;
 
   const notificationId = await Notifications.scheduleNotificationAsync({
     content: {
