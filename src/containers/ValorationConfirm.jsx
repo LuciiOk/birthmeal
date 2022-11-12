@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   modal: {
     width: "80%",
     backgroundColor: COLORS.white,
-    borderRadius: 10,
+    borderRadius: 20,
     padding: 20,
   },
   header: {
