@@ -46,7 +46,7 @@ const TabNavigator = () => {
           ),
           headerTitle: () => (
             <View style={styles.headerTitle}>
-              <Text text={TABS.HOME.title} displayTitle bold />
+              <Text text={TABS.HOME.title} title bold />
             </View>
           ),
 
@@ -68,7 +68,7 @@ const TabNavigator = () => {
               ),
               headerTitle: () => (
                 <View style={styles.headerTitle}>
-                  <Text text={TABS.FAVORITES.title} displayTitle bold />
+                  <Text text={TABS.FAVORITES.title} title bold />
                 </View>
               ),
               headerTitleStyle: styles.headerTitle,
@@ -87,7 +87,7 @@ const TabNavigator = () => {
               ),
               headerTitle: () => (
                 <View style={styles.headerTitle}>
-                  <Text text={TABS.BIRTH.title} displayTitle bold />
+                  <Text text={TABS.BIRTH.title} title bold />
                 </View>
               ),
               headerTitleStyle: styles.headerTitle,
@@ -108,7 +108,7 @@ const TabNavigator = () => {
           ),
           headerTitle: () => (
             <View style={styles.headerTitle}>
-              <Text text={TABS.MORE_INFO.title} displayTitle bold />
+              <Text text={TABS.MORE_INFO.title} title bold />
             </View>
           ),
           headerTitleStyle: styles.headerTitle,
@@ -156,8 +156,8 @@ const styles = StyleSheet.create({
     fontFamily: "Lato-Bold",
   },
   header: {
-    backgroundColor: COLORS.white,
     height: 80,
+    elevation: 0,
   },
   logo: {
     width: 60,

@@ -16,9 +16,11 @@ const Text = ({
   styles,
   error,
   small,
+  moreSmall,
   titleCase,
   trunc = null,
-  literal = false
+  literal = false,
+  justify = false,
 }) => {
   const textStyles = [
     stylesT.text,
@@ -32,6 +34,8 @@ const Text = ({
     cap && stylesT.cap,
     error && stylesT.error,
     small && stylesT.small,
+    moreSmall && stylesT.moreSmall,
+    justify && stylesT.justify,
   ];
 
   if (titleCase) {
@@ -103,6 +107,12 @@ const stylesT = StyleSheet.create({
   },
   small: {
     fontSize: 14,
+  },
+  moreSmall: {
+    fontSize: 12,
+  },
+  justify: {
+    textAlign: "justify",
   },
 });
 

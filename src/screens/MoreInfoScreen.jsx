@@ -1,10 +1,18 @@
 import React from "react";
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import Text from "../components/Text";
-import useClipBoard from "../hooks/useClipBoard";
 import { COLORS } from "../constants/colorSchema";
+import useClipBoard from "../hooks/useClipBoard";
+
+const { width, height } = Dimensions.get("window");
 
 const MoreInfoScreen = () => {
   const { copyToClipBoard } = useClipBoard();
@@ -30,24 +38,20 @@ const MoreInfoScreen = () => {
       <View style={styles.header}>
         <Image source={appLogo} style={styles.logo} />
         <Text text="Birthmeal" bold title styles={styles.title} />
-        <Text
-          text={`🤖 Versión ${appVersion} 🤖`}
-          opaque
-          styles={styles.version}
-        />
+        <Text text={`🤖 Versión ${appVersion} 🤖`} small opaque />
       </View>
       <View style={styles.body}>
-        <View style={styles.headerDescription}>
+        <View style={styles.description}>
           <Text
             text="Acerca de la aplicación"
             bold
             title
             styles={styles.titleBody}
           />
-          <Text text={appDescription} styles={styles.description} />
+          <Text text={appDescription} small justify />
         </View>
         <View style={styles.developers}>
-          <Icon name="android" size={24} color={COLORS.frost1} />
+          <Icon name="android" size={24} color={COLORS.grayDark}/>
           <Text
             text="Desarrolladores"
             bold
@@ -60,9 +64,10 @@ const MoreInfoScreen = () => {
             <Text text={developer.name} bold styles={styles.developerName} />
             <View style={styles.developerEmail}>
               <View style={styles.developerEmailIcon}>
-                <Icon name="envelope" size={18} color={COLORS.frost1} />
+                <Icon name="envelope" size={16} color={COLORS.dark} />
                 <Text
                   opaque
+                  small
                   text={developer.email}
                   styles={styles.developerEmailText}
                 />
@@ -71,17 +76,19 @@ const MoreInfoScreen = () => {
                 style={styles.developerEmailButton}
                 onPress={() => copyToClipBoard(developer.email)}
               >
-                <Icon name="copy" size={18} color={COLORS.frost3} />
+                <Icon name="copy" size={18} color={COLORS.grayDark}/>
               </TouchableOpacity>
             </View>
           </View>
         ))}
       </View>
       <View style={styles.footer}>
-        <Text text="* Aviso:" bold />
+        <Text text="* Aviso:" bold subtitle />
         <Text
           text=" No somos responsables de los descuentos ofrecidos por los establecimientos."
-          styles={styles.footerText}
+          opaque
+          small
+          semiBold
         />
       </View>
     </View>
@@ -90,64 +97,56 @@ const MoreInfoScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: COLORS.white,
+    width,
+    height: height,
+    backgroundColor: "#fff",
+    width: width,
+    paddingHorizontal: 25,
   },
   header: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 20,
   },
   logo: {
     width: 100,
     height: 100,
-    borderRadius: 60,
+    borderRadius: 50,
   },
   title: {
-    fontSize: 24,
     marginTop: 10,
   },
   version: {
-    fontSize: 12,
     marginTop: 10,
   },
   body: {
-    flex: 2,
-    padding: 20,
+    marginTop: 20,
   },
   headerDescription: {
-    flexDirection: "column",
-    alignItems: "center",
-    marginBottom: 10,
-    marginLeft: -15,
+    marginBottom: 20,
   },
   titleBody: {
-    fontSize: 18,
-    marginLeft: 10,
+    marginBottom: 10,
   },
-  description: {
-    fontSize: 14,
-    marginBottom: 20,
-    textAlign: "justify",
-  },
+  description: {},
   developers: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
   },
   developersTitle: {
-    fontSize: 18,
     marginLeft: 10,
   },
   developer: {
     marginBottom: 10,
   },
   developerName: {
-    fontSize: 16,
+    marginBottom: 5,
   },
   developerEmail: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   developerEmailIcon: {
     flexDirection: "row",
@@ -155,20 +154,16 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   developerEmailText: {
-    fontSize: 14,
     marginLeft: 5,
   },
   developerEmailButton: {
-    borderRadius: 50,
-    padding: 5,
+    marginLeft: 10,
   },
   footer: {
-    flex: 1,
-    padding: 20,
+    marginTop: 20,
   },
   footerText: {
-    color: COLORS.grayDark,
-    fontSize: 14,
+    marginTop: 5,
   },
 });
 

@@ -73,7 +73,10 @@ const StablishmentDetail = ({ route }) => {
 
   const removeHttp = (url) => {
     // remove http:// or https:// and www. and /
-    return url.replace(/(^\w+:|^)\/\//, "").replace("www.", "").split("/")[0];
+    return url
+      .replace(/(^\w+:|^)\/\//, "")
+      .replace("www.", "")
+      .split("/")[0];
   };
 
   if (loading || !stablishment) {
@@ -102,7 +105,7 @@ const StablishmentDetail = ({ route }) => {
           <FavoriteButton company={stablishment} />
         </View>
         <View style={{ ...styles.info, ...styles.locationSection }}>
-          <Text text="Ubicaciones" semiBold />
+          <Text text="Ubicaciones" semiBold styles={{ marginBottom: 5 }} />
           <TouchableOpacity onPress={goToLocations}>
             <Text
               text={nearLocation?.address || "No hay ubicaciones"}
@@ -118,9 +121,9 @@ const StablishmentDetail = ({ route }) => {
           </TouchableOpacity>
         </View>
         <View style={{ ...styles.info }}>
-          <Text text="Ir al sitio web" semiBold />
+          <Text text="Ir al sitio web" semiBold styles={{ marginBottom: 5 }} />
           <TouchableOpacity onPress={redirect}>
-            <Text text={removeHttp(stablishment.webUrl)} opaque small/>
+            <Text text={removeHttp(stablishment.webUrl)} opaque small />
             <Icon
               name="angle-right"
               size={24}
@@ -136,6 +139,7 @@ const StablishmentDetail = ({ route }) => {
               justifyContent: "space-between",
               alignItems: "center",
               marginRight: 10,
+              marginBottom: 5,
             }}
           >
             <Text text="Beneficios" semiBold />
@@ -145,13 +149,17 @@ const StablishmentDetail = ({ route }) => {
               backgroundColor="transparent"
               content={
                 <View>
-                  <Text text="Requisitos para obtener el beneficio:" bold titleCase/>
+                  <Text
+                    text="Requisitos para obtener el beneficio:"
+                    bold
+                    titleCase
+                  />
                   {stablishment?.benefits?.map((benefit) => (
                     <Text
                       text={`• ${benefit}`}
                       small
                       key={benefit}
-                      styles={{ marginTop: 10 }}
+                      styles={{ marginTop: 5 }}
                     />
                   ))}
                 </View>
@@ -179,7 +187,12 @@ const StablishmentDetail = ({ route }) => {
               </TouchableOpacity>
             </Tooltip>
           </View>
-          <Text text={processedText(stablishment?.description || "")} opaque small literal/>
+          <Text
+            text={processedText(stablishment?.description || "")}
+            opaque
+            small
+            literal
+          />
         </View>
         <View style={styles.ratingContainer}>
           <Text text="Valoración" title bold />
@@ -224,6 +237,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: 5,
   },
   info: {
     paddingBottom: 10,

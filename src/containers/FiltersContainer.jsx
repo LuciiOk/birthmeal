@@ -10,9 +10,9 @@ const FiltersContainer = ({ filters, setQuery, categoriesSelected }) => {
     <View style={styles.header}>
       <Text
         styles={{
-          fontSize: 35,
-          width: "100%",
+          width: "80%",
         }}
+        displayTitle
         text="Encuentra tu establecimiento"
         bold
       />

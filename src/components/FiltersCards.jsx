@@ -32,7 +32,7 @@ const FiltersCards = ({ filter, setQuery, isSelected }) => {
     >
       <FontAwesomeIcon
         icon={Icons[filter.icon || "faSearch"]}
-        size={24}
+        size={20}
         color={filter.color}
         style={styles.icon}
       />
@@ -54,16 +54,15 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     padding: 10,
     marginVertical: 7,
-    marginHorizontal: 5,
+    marginRight: 5,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
   },
   text: {
     color: COLORS.primary,
-    fontSize: 18,
     textAlign: "center",
-    marginLeft: 10,
+    marginLeft: 5,
     textTransform: "capitalize",
     backgroundColor: "transparent",
   },

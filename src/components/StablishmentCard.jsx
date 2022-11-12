@@ -29,7 +29,7 @@ const StablishmentCard = ({ stablishment, favortie = false }) => {
         <Text
           text={stablishment.description}
           subtitle
-          small
+          moreSmall
           opaque
           titleCase
           trunc={80}
