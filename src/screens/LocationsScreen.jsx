@@ -98,7 +98,7 @@ const LocationsScreen = ({ route }) => {
                 styles.marker,
                 {
                   tintColor:
-                    selectedLocationId === id ? COLORS.danger : COLORS.primary,
+                    selectedLocationId === id ? COLORS.darkDanger : COLORS.primary,
                 },
               ]}
               resizeMode="contain"
