@@ -20,14 +20,13 @@ const Input = ({
   const icon = !isPassword ? "user" : "lock";
 
   return (
-    <View style={styles.container}>
+    <View style={{ paddingRight: isPassword ? 0 : 10, ...styles.container }}>
       <View
-        style={
-          {
-            width: isPassword ? "90%" : "100%",
-            ...styles.inputContainer,
-          }
-        }
+        style={{
+          width: isPassword ? "86%" : "100%",
+
+          ...styles.inputContainer,
+        }}
       >
         <Icon name={icon} size={20} color={COLORS.dark} />
         <Controller
@@ -55,7 +54,7 @@ const Input = ({
         >
           <Icon
             name={isSecure ? "eye-slash" : "eye"}
-            size={23}
+            size={20}
             color={COLORS.dark}
           />
         </TouchableOpacity>
@@ -80,7 +79,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: COLORS.grayLight,
-    paddingHorizontal: 10,
     borderRadius: 10,
   },
   input: {
@@ -90,11 +88,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingVertical: 2,
     fontFamily: "Lato",
+    fontWeight: "bold",
   },
   showPassword: {
-    width: "10%",
+    width: "14%",
     paddingHorizontal: 5,
-    paddingVertical: 5,
+    paddingVertical: 7,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
