@@ -16,7 +16,7 @@ const LocationItem = ({ name, address, selected, setLocation }) => {
         <View style={styles.selectedLocation}>
           <FontAwesome
             name="map-marker"
-            size={24}
+            size={20}
             style={styles.selectedLocationIcon}
           />
           <View style={styles.selectedLocationTextContainer}>
@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
     color: `${COLORS.danger}`,
     marginRight: 10,
     backgroundColor: `${COLORS.danger}10`,
-    padding: 10,
-    paddingHorizontal: 15,
-    borderRadius: 50,
+    padding: 5,
+    paddingHorizontal: 10,
+    borderRadius: 15,
   },
   selectedLocationTextContainer: {
     flex: 1,

@@ -44,10 +44,10 @@ const RighButtonHeader = ({ marginRight }) => {
       {currentRoute !== "Profile" &&
         currentRoute !== "Login" &&
         currentRoute !== "Register" && (
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.button}>
             <FontAwesomeIcon
               icon={faAngleDown}
-              size={25}
+              size={20}
               color={COLORS.dark}
               style={styles.icon}
             />
@@ -107,11 +107,20 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: COLORS.dark,
   },
+  button: {
+    width: 25,
+    height: 25,
+    borderRadius: 25,
+    borderColor: COLORS.dark,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    marginRight: 2,
+  },
   icon: {
-    marginRight: 10,
     borderRadius: 50,
     borderColor: COLORS.dark,
-    padding: 5,
   },
   modal: {
     flex: 1,

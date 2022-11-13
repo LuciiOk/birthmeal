@@ -44,7 +44,7 @@ const StackNavigator = () => {
                 >
                   <FontAwesomeIcon
                     icon={faAngleLeft}
-                    size={24}
+                    size={20}
                     color={COLORS.dark}
                   />
                 </TouchableOpacity>
@@ -122,7 +122,9 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   backButton: {
-    padding: 10,
+    paddingLeft: 15,
+    paddingRight: 10,
+    paddingVertical: 15,
   },
 });
 

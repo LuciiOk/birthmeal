@@ -11,6 +11,7 @@ export const COLORS = {
   info: "#17a2b8",
   warning: "#ebcb8b",
   danger: "#bf616a",
+  darkDanger: "#bd4a55",
   light: "#f8f9fa",
   dark: "#2e3440",
   // frost colors by nordtheme

@@ -21,7 +21,7 @@ const TabIcon = ({ focused, icon }) => {
   return (
     <IonicIcon
       name={focused ? icon : icon + "-outline"}
-      size={26}
+      size={24}
       style={stylesT}
     />
   );
@@ -124,30 +124,31 @@ const TabNavigator = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
     backgroundColor: COLORS.white,
-    position: "absolute",
-    bottom: 10,
-    left: 20,
-    right: 20,
-    borderRadius: 15,
-    border: 0,
-    height: 75,
+    height: 60,
+    paddingBottom: 10,
+    paddingHorizontal: "5%",
     borderTopWidth: 0,
-    shadowColor: "transparent",
+    elevation: 0,
   },
   tabIcon: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 21,
+    color: COLORS.dark,
+    backgroundColor: COLORS.danger,
+    paddingHorizontal: 15,
     paddingVertical: 10,
-    paddingHorizontal: 13,
+    borderRadius: 20,
     color: COLORS.white,
   },
   tabIconFocused: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.darkDanger,
   },
   tabIconUnfocused: {
-    color: COLORS.dark,
     backgroundColor: COLORS.white,
+    color: COLORS.dark,
   },
   headerTitle: {
     color: COLORS.dark,
