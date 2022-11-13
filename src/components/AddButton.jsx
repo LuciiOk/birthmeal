@@ -27,14 +27,14 @@ const AddButton = () => {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 100,
+    bottom: 0,
     right: 0,
     margin: 20,
   },
   button: {
-    backgroundColor: COLORS.primary,
-    width: 60,
-    height: 60,
+    backgroundColor: COLORS.darkDanger,
+    width: 55,
+    height: 55,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
