@@ -16,7 +16,7 @@ const ConditionTerms = ({ control, name, rules = null }) => {
           <Checkbox
             value={field.value}
             onValueChange={(value) => field.onChange(value)}
-            color={COLORS.primary}
+            color={COLORS.danger}
           />
         )}
         name={name}

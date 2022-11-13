@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import Text from "./Text";
 import { COLORS } from "../constants/colorSchema";
+import LottieView from "lottie-react-native";
 
 const Button = ({
   buttonText,
@@ -13,6 +14,7 @@ const Button = ({
   buttonStyles,
   disabled,
   margin,
+  loading,
 }) => {
   const style = [
     styles.button,
@@ -22,15 +24,47 @@ const Button = ({
   ];
 
   return (
-    <TouchableOpacity style={style} onPress={action} disabled={disabled}>
-      <Text
-        text={buttonText}
-        bold
-        subtitle
-        styles={{
-          color: outlined ? COLORS.dark : COLORS.white,
-        }}
-      />
+    <TouchableOpacity
+      style={style}
+      onPress={action}
+      disabled={disabled || loading}
+    >
+      {!loading && (
+        <Text
+          text={buttonText}
+          bold
+          subtitle
+          styles={{
+            color: outlined ? COLORS.dark : COLORS.white,
+          }}
+        />
+      )}
+      {loading && (
+        <LottieView
+          source={require("../../assets/loties/loader.json")}
+          autoPlay
+          loop
+          style={styles.animation}
+          colorFilters={[
+            {
+              keypath: "Dot4",
+              color: COLORS.white,
+            },
+            {
+              keypath: "Dot3",
+              color: COLORS.white,
+            },
+            {
+              keypath: "Dot2",
+              color: COLORS.white,
+            },
+            {
+              keypath: "Dot1",
+              color: COLORS.white,
+            },
+          ]}
+        />
+      )}
     </TouchableOpacity>
   );
 };
@@ -51,6 +85,9 @@ const styles = StyleSheet.create({
   },
   filled: {
     backgroundColor: COLORS.dark,
+  },
+  animation: {
+    width: 200,
   },
 });
 

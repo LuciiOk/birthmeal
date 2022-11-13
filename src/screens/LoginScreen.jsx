@@ -90,8 +90,9 @@ const LoginScreen = () => {
       </View>
       <Button
         buttonText="Iniciar sesión"
-        outlined
+        filled
         action={handleSubmit(onSubmit)}
+        buttonStyles={styles.button}
       />
       <SignUserDetails
         to="Register"
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    backgroundColor: "white"
   },
   linearGradient: {
     flex: 1,
@@ -140,6 +142,11 @@ const styles = StyleSheet.create({
   errorText: {
     color: COLORS.danger,
     fontSize: 16,
+  },
+  button: {
+    width: "80%",
+    marginTop: 20,
+    backgroundColor: COLORS.danger,
   },
 });
 

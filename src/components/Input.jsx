@@ -87,8 +87,7 @@ const styles = StyleSheet.create({
     color: COLORS.dark,
     fontSize: 14,
     paddingVertical: 2,
-    fontFamily: "Lato",
-    fontWeight: "bold",
+    fontFamily: "Lato-Bold",
   },
   showPassword: {
     width: "14%",

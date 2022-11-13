@@ -24,6 +24,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 const { width: screenWidth } = Dimensions.get("window");
 
 const ForgotPasswordScreen = () => {
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: 4 });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -35,57 +36,137 @@ const ForgotPasswordScreen = () => {
   const {
     handleSubmit,
     control,
-    reset,
-    register,
     formState: { errors },
   } = useForm({ mode: "all" });
 
+  const [error, setError] = useState(null);
+
   const onSubmit = async ({ email }) => {
-    const response = await AxiosInstance.post("/auth/forgot-password", {
-      email,
-    });
-    if (response.status === 200) {
-      setStep(2);
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await AxiosInstance.post("/auth/forgot-password", {
+        email,
+      });
+      if (response.status === 201) {
+        setStep(2);
+        return;
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const onSubmitCode = async (data) => {
-    const response = await AxiosInstance.post("/auth/verify", {
-      code,
-      email: data.email,
-    });
-    if (response.status === 200) {
-      setStep(3);
+    try {
+      setLoading(true);
+      setError(null);
+      const code = value.toString();
+      const response = await AxiosInstance.post("/auth/verify", {
+        code,
+        email: data.email,
+      });
+      if (response.status === 200) {
+        setStep(3);
+        return;
+      }
+    } catch (e) {
+      console.log(e.response.data);
+      setError(e.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onSubmitNewPassword = async (data) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await AxiosInstance.post("/auth/reset-password", {
+        email: data.email,
+        password: data.password,
+      });
+      if (response.status === 200) {
+        setStep(4);
+        return;
+      }
+    } catch (e) {
+      setError(error.response.data);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text
+        text="Recuperar contraseña"
+        bold
+        displayTitle
+        styles={styles.title}
+      />
       {step === 1 && (
         <View style={styles.firstContainer}>
-          <Text text="Recuperar contraseña" bold title styles={styles.title} />
+          <Text
+            text="Ingresa un correo electrónico asociado a tu cuenta y te enviaremos un código de verificación para que puedas recuperar tu contraseña."
+            styles={styles.text}
+            bold
+            subtitle
+          />
+          <Text
+            text="Ingresa tu correo electrónico"
+            styles={{
+              ...styles.text,
+              marginBottom: 0,
+            }}
+            small
+            bold
+          />
           <Input
             placeholder="Tu correo electrónico"
             keyboardType="email-address"
             control={control}
             name="email"
-            rules={{ required: true, pattern: /^\S+@\S+$/i }}
+            rules={{
+              required: "El correo electrónico es requerido",
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: "Ingresa un correo electrónico válido",
+              },
+            }}
           />
           {errors.email && <Text text={errors.email.message} error />}
+          {error && <Text text={error} error titleCase />}
           <Button
             buttonText="Enviar"
             action={handleSubmit(onSubmit)}
-            outlined
+            filled
             buttonStyles={styles.button}
+            loading={loading}
           />
         </View>
       )}
       {step === 2 && (
         <View style={styles.secondContainer}>
-          <Icon name="check-circle" size={100} color={COLORS.success} />
-          <Text text="Recuperar contraseña" bold title />
-          <Text text="Se ha enviado un correo electrónico a tu cuenta" />
-          <Text text="Ingresa el código de verificación" />
+          <Text
+            text="Se ha enviado un correo electrónico a tu cuenta, por favor revisa tu bandeja de entrada."
+            subtitle
+            bold
+          />
+          <Text
+            text="Ingresa el código de verificación"
+            small
+            semiBold
+            styles={{
+              ...styles.text,
+              marginBottom: -20,
+              marginTop: 30,
+            }}
+          />
           <CodeField
             ref={ref}
             {...props}
@@ -105,8 +186,63 @@ const ForgotPasswordScreen = () => {
               </T>
             )}
           />
+          {error && <Text text={error} error titleCase />}
           <Text text="Reenviar código" small bold opaque />
-          <Button buttonText="Verificar" action={handleSubmit(onSubmitCode)} />
+          <Button
+            buttonText="Verificar"
+            action={handleSubmit(onSubmitCode)}
+            filled
+            buttonStyles={styles.button}
+          />
+        </View>
+      )}
+      {step === 3 && (
+        <View style={styles.thirdContainer}>
+          <Text
+            text="Ingresa tu nueva contraseña"
+            small
+            bold
+            styles={{
+              ...styles.text,
+              marginBottom: 0,
+            }}
+          />
+          <Input
+            isPassword
+            placeholder="Ingresa tu nueva contraseña"
+            secureTextEntry
+            control={control}
+            name="password"
+          />
+          {errors.password && <Text text={errors.password.message} error />}
+          <Input
+            isPassword
+            placeholder="Confirma tu nueva contraseña"
+            secureTextEntry
+            control={control}
+            name="confirmPassword"
+          />
+          {errors.confirmPassword && (
+            <Text text={errors.confirmPassword.message} error />
+          )}
+          <Button
+            buttonText="Cambiar contraseña"
+            filled
+            buttonStyles={styles.button}
+            action={handleSubmit(onSubmitNewPassword)}
+          />
+        </View>
+      )}
+      {step === 4 && (
+        <View style={styles.fourthContainer}>
+          <Icon name="check-circle" size={120} color={COLORS.success} />
+          <Text text="Tu contraseña ha sido cambiada con éxito" />
+          <Button
+            buttonText="Iniciar sesión"
+            filled
+            buttonStyles={styles.button}
+            action={() => navigation.navigate("Login")}
+          />
         </View>
       )}
     </SafeAreaView>
@@ -129,14 +265,21 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 20,
   },
+  text: {
+    textAlign: "left",
+    width: "100%",
+    marginBottom: 10,
+  },
   button: {
     marginTop: 20,
+    backgroundColor: COLORS.danger,
   },
   secondContainer: {
-    flex: 1,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    alignContent: "center",
+    alignSelf: "center",
   },
   codeFieldRoot: {
     marginTop: 20,
@@ -145,16 +288,27 @@ const styles = StyleSheet.create({
   cell: {
     width: "20%",
     fontSize: 24,
-    borderWidth: 2,
-    borderColor: COLORS.info,
-    borderRadius: 5,
+    borderWidth: 2.5,
+    borderColor: COLORS.dark,
+    borderRadius: 15,
     textAlign: "center",
-    padding: 10,
+    paddingVertical: 16,
     marginVertical: 10,
     marginBottom: 20,
+    fontFamily: "Lato-Bold",
   },
   focusCell: {
-    borderColor: COLORS.danger,
+    borderColor: COLORS.info,
+  },
+  thirdContainer: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  fourthContainer: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

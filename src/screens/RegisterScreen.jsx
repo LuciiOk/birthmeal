@@ -116,9 +116,10 @@ const RegisterScreen = () => {
         <ConditionTerms control={control} name="conditionTerms" />
         <Button
           buttonText="Crear cuenta"
-          outlined
+          filled
           action={handleSubmit(onSubmit)}
           disabled={false}
+          buttonStyles={styles.button}
         />
         {errors.conditionTerms && (
           <Text
@@ -147,6 +148,7 @@ const RegisterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   linearGradient: {
     flex: 1,
@@ -175,6 +177,11 @@ const styles = StyleSheet.create({
   formHeaderSubText: {
     color: COLORS.dark,
     fontSize: 16,
+  },
+  button: {
+    width: "80%",
+    marginTop: 20,
+    backgroundColor: COLORS.danger,
   },
 });
 
