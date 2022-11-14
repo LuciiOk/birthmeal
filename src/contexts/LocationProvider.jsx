@@ -34,7 +34,7 @@ export const LocationProvider = ({ children }) => {
       }
       const location = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = location.coords;
-      const newLocation = [latitude, longitude];
+      const newLocation = [longitude, latitude];
       setLocation(newLocation);
     } catch (error) {
       console.log(error.response.data);
@@ -56,7 +56,7 @@ export const LocationProvider = ({ children }) => {
         },
         (updatedLocation) => {
           const { latitude, longitude } = updatedLocation.coords;
-          const newLocation = [latitude, longitude];
+          const newLocation = [longitude, latitude];
           setLocation(newLocation);
         }
       );

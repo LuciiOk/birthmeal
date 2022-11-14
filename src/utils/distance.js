@@ -23,15 +23,15 @@ export const sortLocationsByDistance = (locations, userLocation) => {
     const distanceA = getDistanceFromLatLonInKm(
       userLocation[0],
       userLocation[1],
-      a.geometry.coordinates[1],
-      a.geometry.coordinates[0]
+      a.geometry.coordinates[0],
+      a.geometry.coordinates[1]
     );
 
     const distanceB = getDistanceFromLatLonInKm(
       userLocation[0],
       userLocation[1],
-      b.geometry.coordinates[1],
-      b.geometry.coordinates[0]
+      b.geometry.coordinates[0],
+      b.geometry.coordinates[1]
     );
 
     return distanceA - distanceB;
