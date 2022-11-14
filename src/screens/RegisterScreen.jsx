@@ -80,33 +80,31 @@ const RegisterScreen = () => {
           keyboardType="default"
           control={control}
           name="name"
+          error={errors.name}
         />
-        {errors.name && <Text text={errors.name.message} error />}
         <Input
           placeholder="Tu email"
           keyboardType="email-address"
           control={control}
           name="email"
+          error={errors.email}
         />
-        {errors.email && <Text text={errors.email.message} error />}
         <Input
           placeholder="Tu contraseña"
           keyboardType="default"
           isPassword
           control={control}
           name="password"
+          error={errors.password}
         />
-        {errors.password && <Text text={errors.password.message} error />}
         <Input
           placeholder="Confirma tu contraseña"
           keyboardType="default"
           isPassword
           control={control}
           name="confirmPassword"
+          error={errors.confirmPassword}
         />
-        {errors.confirmPassword && (
-          <Text text={errors.confirmPassword.message} error />
-        )}
         <InputDate
           placeholder="Tu fecha de nacimiento"
           control={control}
@@ -130,7 +128,7 @@ const RegisterScreen = () => {
         )}
         {error && (
           <Text
-            text="Error al crear la cuenta, el email ya existe"
+            text={JSON.stringify(error)}
             error
             styles={{ width: "50%", textAlign: "center" }}
           />

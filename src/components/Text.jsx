@@ -50,13 +50,16 @@ const Text = ({
     // remove double \n
     text = text.replace(/\n\n/g, "\n");
 
-
     // only capitalize the first word of the string or the first word after a dot
 
     text = text.replace(
       /(^\w{1})|(\.\s*\w{1})|(\-\s*\w{1})|(\• \s*\w{1})|(\?\w{1})|(\¿\w{1})/g,
       (match) => match.toUpperCase()
     );
+  }
+
+  if (error) {
+    text = text.replace(/"/g, "");
   }
 
   const truncate = (str, n) => {

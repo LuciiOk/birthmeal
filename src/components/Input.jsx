@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { COLORS } from "../constants/colorSchema";
 
 import { Controller } from "react-hook-form";
+import Text from "./Text";
 
 const Input = ({
   placeholder,
@@ -15,51 +16,55 @@ const Input = ({
   control,
   name,
   rules = null,
+  error
 }) => {
   const [isSecure, setIsSecure] = useState(true);
   const icon = !isPassword ? "user" : "lock";
 
   return (
-    <View style={{ paddingRight: isPassword ? 0 : 10, ...styles.container }}>
-      <View
-        style={{
-          width: isPassword ? "86%" : "100%",
+    <>
+      <View style={{ paddingRight: isPassword ? 0 : 10, ...styles.container }}>
+        <View
+          style={{
+            width: isPassword ? "86%" : "100%",
 
-          ...styles.inputContainer,
-        }}
-      >
-        <Icon name={icon} size={20} color={COLORS.dark} />
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              placeholder={placeholder}
-              keyboardType={keyboardType}
-              secureTextEntry={isPassword && isSecure}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              placeholderTextColor={COLORS.grayDark}
-              style={styles.input}
-            />
-          )}
-          name={name}
-          rules={rules}
-        />
-      </View>
-      {isPassword && (
-        <TouchableOpacity
-          style={styles.showPassword}
-          onPress={() => setIsSecure(!isSecure)}
+            ...styles.inputContainer,
+          }}
         >
-          <Icon
-            name={isSecure ? "eye-slash" : "eye"}
-            size={20}
-            color={COLORS.dark}
+          <Icon name={icon} size={20} color={COLORS.dark} />
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                placeholder={placeholder}
+                keyboardType={keyboardType}
+                secureTextEntry={isPassword && isSecure}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                placeholderTextColor={COLORS.grayDark}
+                style={styles.input}
+              />
+            )}
+            name={name}
+            rules={rules}
           />
-        </TouchableOpacity>
-      )}
-    </View>
+        </View>
+        {isPassword && (
+          <TouchableOpacity
+            style={styles.showPassword}
+            onPress={() => setIsSecure(!isSecure)}
+          >
+            <Icon
+              name={isSecure ? "eye-slash" : "eye"}
+              size={20}
+              color={COLORS.dark}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
+      {error && <Text text={error.message} error />}
+    </>
   );
 };
 

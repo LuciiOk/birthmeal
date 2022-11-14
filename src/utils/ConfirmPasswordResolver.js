@@ -27,3 +27,12 @@ export const RecoverPassword = Yup.object().shape({
     .required("La confirmación de contraseña es requerida")
     .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
 });
+
+export const LoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .required("El email es requerido")
+    .email("El correo electrónico no es válido"),
+  password: Yup.string()
+    .required("La contraseña es requerida")
+    .min(6, "La contraseña debe tener al menos 6 caracteres"),
+});

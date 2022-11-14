@@ -12,6 +12,8 @@ import { AuthContext } from "../contexts/AuthContext";
 import LoadingScreen from "./LoadingScreen";
 
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { LoginSchema } from "../utils/ConfirmPasswordResolver";
 
 const LoginScreen = () => {
   const { login, loading, error } = useContext(AuthContext);
@@ -22,7 +24,7 @@ const LoginScreen = () => {
     control,
     reset,
     formState: { errors },
-  } = useForm({ mode: "all" });
+  } = useForm({ mode: "all", resolver: yupResolver(LoginSchema) });
 
   const onSubmit = async ({ email, password }) => {
     const success = await login(email, password);
@@ -57,31 +59,17 @@ const LoginScreen = () => {
           keyboardType="email-address"
           control={control}
           name="email"
-          rules={{ required: true, pattern: /^\S+@\S+$/i }}
+          error={errors.email}
         />
-        {(errors?.email?.type === "required" && (
-          <Text text="El correo electrónico es requerido" error />
-        )) ||
-          (errors.email && errors?.email?.type === "pattern" && (
-            <Text text="El correo electrónico no es válido" error />
-          ))}
         <Input
           placeholder="Tu contraseña"
           keyboardType="default"
           isPassword
           control={control}
           name="password"
-          rules={{ required: true }}
+          error={errors.password}
         />
-        {errors.password && <Text text="La contraseña es requerida" error />}
-        {error && (
-          <View style={styles.errorContainer}>
-            <Text
-              text="Correo o contraseña incorrectos"
-              styles={styles.errorText}
-            />
-          </View>
-        )}
+        {error && <Text text={JSON.stringify(error)} error />}
         <SignUserDetails
           redirectText="Olvidaste tu contraseña?"
           to="ForgotPassword"
@@ -107,7 +95,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   linearGradient: {
     flex: 1,

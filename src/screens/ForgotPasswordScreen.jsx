@@ -69,9 +69,13 @@ const ForgotPasswordScreen = () => {
         return;
       }
       setLoading(false);
-    } catch (error) {
+    } catch (e) {
       console.log(error);
-      setError(error.response.data.message);
+      if (Array.isArray(e.response.data.message)) {
+        setError(e.response.data.message[0]);
+      } else {
+        setError(e.response.data.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -92,7 +96,11 @@ const ForgotPasswordScreen = () => {
       }
     } catch (e) {
       console.log(e.response.data);
-      setError(e.response.data.message);
+      if (Array.isArray(e.response.data.message)) {
+        setError(e.response.data.message[0]);
+      } else {
+        setError(e.response.data.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -114,7 +122,12 @@ const ForgotPasswordScreen = () => {
       }
     } catch (e) {
       console.log(e.response.data);
-      setError(e.response.data.message);
+      // if is array
+      if (Array.isArray(e.response.data.message)) {
+        setError(e.response.data.message[0]);
+      } else {
+        setError(e.response.data.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -157,9 +170,9 @@ const ForgotPasswordScreen = () => {
                 message: "Ingresa un correo electrónico válido",
               },
             }}
+            error={errors.email}
           />
-          {errors.email && <Text text={errors.email.message} error />}
-          {error && <Text text={error} error titleCase />}
+          {error && <Text text={JSON.stringify(error)} error titleCase />}
           <Button
             buttonText="Enviar"
             action={handleSubmit(onSubmit)}
@@ -205,7 +218,7 @@ const ForgotPasswordScreen = () => {
               </T>
             )}
           />
-          {error && <Text text={error} error titleCase />}
+          {error && <Text text={JSON.stringify(error)} error titleCase />}
           <Text text="Reenviar código" small bold opaque />
           <Button
             buttonText="Verificar"
@@ -232,19 +245,17 @@ const ForgotPasswordScreen = () => {
             secureTextEntry
             control={control2}
             name="password"
+            error={errors2.password}
           />
-          {errors2.password && <Text text={errors2.password.message} error />}
           <Input
             isPassword
             placeholder="Confirma tu nueva contraseña"
             secureTextEntry
             control={control2}
             name="confirmPassword"
+            error={errors2.confirmPassword}
           />
-          {errors2.confirmPassword && (
-            <Text text={errors2.confirmPassword.message} error />
-          )}
-          {error && <Text text={error} error titleCase />}
+          {error && <Text text={JSON.stringify(error)} error titleCase />}
           <Button
             buttonText="Cambiar contraseña"
             filled

@@ -25,9 +25,15 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem("token", access_token);
       await AsyncStorage.setItem("user", JSON.stringify(userData));
       ToastAndroid.show("Has iniciado sesión", ToastAndroid.SHORT);
+      setLoading(false);
+      setError(null);
       return true;
     } catch ({ response }) {
-      setError(response);
+      if (Array.isArray(response.data.message)) {
+        setError(response.data.message);
+      } else {
+        setError(response.data.message);
+      }
       return false;
     } finally {
       setLoading(false);
@@ -80,7 +86,12 @@ export const AuthProvider = ({ children }) => {
       ToastAndroid.show("Usuario registrado", ToastAndroid.SHORT);
       return true;
     } catch ({ response }) {
-      setError("Error al registrar usuario, el email ya existe.");
+      // if is array but not string
+      if (Array.isArray(response.data.message)) {
+        setError(response.data.message[0]);
+      } else {
+        setError(response.data.message);
+      }
       return false;
     } finally {
       setLoading(false);
