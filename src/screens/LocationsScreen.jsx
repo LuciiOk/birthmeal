@@ -32,15 +32,14 @@ const LocationsScreen = ({ route }) => {
         const { data } = await AxiosInstance.post(
           `location/nearests/${companyId}`,
           {
-            coordinates: [coordinates[1], coordinates[0]],
+            coordinates: [coordinates[0], coordinates[1]],
           }
         );
 
-        const sortedLocations = sortLocationsByDistance(data, coordinates);
+        // const sortedLocations = sortLocationsByDistance(data, coordinates);
 
-        setLocationsData(sortedLocations);
-        setSelectedLocation(data[0].geometry);
-        setSelectedLocationId(data[0].id);
+        setLocationsData(data);
+
         setLoading(false);
       }
     } catch (error) {
@@ -49,9 +48,22 @@ const LocationsScreen = ({ route }) => {
     }
   };
 
+  const sortLocations = () => {
+    sortLocationsByDistance(locationsData, coordinates);
+    setSelectedLocation(locationsData[0].geometry);
+    setSelectedLocationId(locationsData[0].id);
+  };
+
   useEffect(() => {
     getLocations();
   }, []);
+
+  useEffect(() => {
+    if (coordinates && locationsData.length > 0) {
+      console.log(locationsData);
+      sortLocations();
+    }
+  }, [coordinates, locationsData]);
 
   if (loading) return <LoadingScreen backgroundColor="white" />;
 
