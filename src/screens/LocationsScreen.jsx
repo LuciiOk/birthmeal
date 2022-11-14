@@ -31,9 +31,9 @@ const LocationsScreen = ({ route }) => {
       if (coordinates) {
         const { data } = await AxiosInstance.post(
           `location/nearests/${companyId}`,
-          // { 
-          //   coordinates: [coordinates[1], coordinates[0]],
-          // }
+          {
+            coordinates: [coordinates[1], coordinates[0]],
+          }
         );
 
         const sortedLocations = sortLocationsByDistance(data, coordinates);
