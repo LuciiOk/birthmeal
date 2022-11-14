@@ -31,9 +31,9 @@ const LocationsScreen = ({ route }) => {
       if (coordinates) {
         const { data } = await AxiosInstance.post(
           `location/nearests/${companyId}`,
-          {
-            coordinates,
-          }
+          // {
+          //   coordinates,
+          // }
         );
         setLocationsData(data);
 
@@ -57,9 +57,8 @@ const LocationsScreen = ({ route }) => {
 
   useEffect(() => {
     if (coordinates && locationsData.length > 0) {
-      console.log(locationsData);
       sortLocations();
-    } 
+    }
   }, [coordinates, locationsData]);
 
   if (loading) return <LoadingScreen backgroundColor="white" />;

@@ -17,19 +17,18 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180);
 }
 
-export const sortLocationsByDistance = (locations, userLocation) => {
-  console.log(locations, userLocation);
+export const sortLocationsByDistance = (locations, [lat, lng]) => {
   const sorted = locations.sort((a, b) => {
     const distanceA = getDistanceFromLatLonInKm(
-      userLocation[0],
-      userLocation[1],
+      lat,
+      lng,
       a.geometry.coordinates[0],
       a.geometry.coordinates[1]
     );
 
     const distanceB = getDistanceFromLatLonInKm(
-      userLocation[0],
-      userLocation[1],
+      lat,
+      lng,
       b.geometry.coordinates[0],
       b.geometry.coordinates[1]
     );
@@ -37,5 +36,5 @@ export const sortLocationsByDistance = (locations, userLocation) => {
     return distanceA - distanceB;
   });
 
-  return locations;
+  return sorted;
 };
