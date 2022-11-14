@@ -20,10 +20,14 @@ import {
 } from "react-native-confirmation-code-field";
 import { COLORS } from "../constants/colorSchema";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
+import { RecoverPassword } from "../utils/ConfirmPasswordResolver";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const { width: screenWidth } = Dimensions.get("window");
 
 const ForgotPasswordScreen = () => {
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: 4 });
@@ -37,7 +41,19 @@ const ForgotPasswordScreen = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({ mode: "all" });
+    getValues,
+  } = useForm({
+    mode: "all",
+  });
+
+  const {
+    handleSubmit: handleSubmit2,
+    control: control2,
+    formState: { errors: errors2 },
+  } = useForm({
+    resolver: yupResolver(RecoverPassword),
+    mode: "all",
+  });
 
   const [error, setError] = useState(null);
 
@@ -87,15 +103,18 @@ const ForgotPasswordScreen = () => {
       setLoading(true);
       setError(null);
       const response = await AxiosInstance.post("/auth/reset-password", {
-        email: data.email,
+        email: getValues("email"),
         password: data.password,
+        confirmPassword: data.confirmPassword,
       });
-      if (response.status === 200) {
+      console.log(response);
+      if (response.status === 201) {
         setStep(4);
         return;
       }
     } catch (e) {
-      setError(error.response.data);
+      console.log(e.response.data);
+      setError(e.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -132,9 +151,9 @@ const ForgotPasswordScreen = () => {
             control={control}
             name="email"
             rules={{
-              required: "El correo electrónico es requerido",
+              required: "Este campo es requerido",
               pattern: {
-                value: /^\S+@\S+$/i,
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: "Ingresa un correo electrónico válido",
               },
             }}
@@ -211,25 +230,26 @@ const ForgotPasswordScreen = () => {
             isPassword
             placeholder="Ingresa tu nueva contraseña"
             secureTextEntry
-            control={control}
+            control={control2}
             name="password"
           />
-          {errors.password && <Text text={errors.password.message} error />}
+          {errors2.password && <Text text={errors2.password.message} error />}
           <Input
             isPassword
             placeholder="Confirma tu nueva contraseña"
             secureTextEntry
-            control={control}
+            control={control2}
             name="confirmPassword"
           />
-          {errors.confirmPassword && (
-            <Text text={errors.confirmPassword.message} error />
+          {errors2.confirmPassword && (
+            <Text text={errors2.confirmPassword.message} error />
           )}
+          {error && <Text text={error} error titleCase />}
           <Button
             buttonText="Cambiar contraseña"
             filled
             buttonStyles={styles.button}
-            action={handleSubmit(onSubmitNewPassword)}
+            action={handleSubmit2(onSubmitNewPassword)}
           />
         </View>
       )}
