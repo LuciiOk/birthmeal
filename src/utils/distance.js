@@ -1,25 +1,41 @@
-const calculateDistance = ([lat1, lon1], [lat2, lon2]) => {
-  const R = 6371e3; // metres
-  const φ1 = (lat1 * Math.PI) / 180; // φ, λ in radians
-  const φ2 = (lat2 * Math.PI) / 180;
-  const Δφ = ((lat2 - lat1) * Math.PI) / 180;
-  const Δλ = ((lon2 - lon1) * Math.PI) / 180;
-
+export function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of the earth in km
+  const dLat = deg2rad(lat2 - lat1); // deg2rad below
+  const dLon = deg2rad(lon2 - lon1);
   const a =
-    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) *
+      Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const d = R * c; // Distance in km
+  return d;
+}
 
-  return R * c; // in metres
-};
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
 
 export const sortLocationsByDistance = (locations, userLocation) => {
+  console.log(locations, userLocation);
   const sorted = locations.sort((a, b) => {
-    const distanceA = calculateDistance(userLocation, a.geometry.coordinates);
-    const distanceB = calculateDistance(userLocation, b.geometry.coordinates);
+    const distanceA = getDistanceFromLatLonInKm(
+      userLocation[0],
+      userLocation[1],
+      a.geometry.coordinates[1],
+      a.geometry.coordinates[0]
+    );
+
+    const distanceB = getDistanceFromLatLonInKm(
+      userLocation[0],
+      userLocation[1],
+      b.geometry.coordinates[1],
+      b.geometry.coordinates[0]
+    );
 
     return distanceA - distanceB;
   });
 
-  return sorted;
+  return locations;
 };

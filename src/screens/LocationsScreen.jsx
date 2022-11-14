@@ -28,39 +28,30 @@ const LocationsScreen = ({ route }) => {
 
   const getLocations = async () => {
     try {
-      const { data } = await AxiosInstance.post(
-        `location/nearests/${companyId}`,
-        { coordinates }
-      );
-      setLocationsData(data);
-      setSelectedLocation(data[0].geometry);
-      setSelectedLocationId(data[0].id);
-      setLoading(false);
+      if (coordinates) {
+        const { data } = await AxiosInstance.post(
+          `location/nearests/${companyId}`,
+          // { 
+          //   coordinates: [coordinates[1], coordinates[0]],
+          // }
+        );
+
+        const sortedLocations = sortLocationsByDistance(data, coordinates);
+
+        setLocationsData(sortedLocations);
+        setSelectedLocation(data[0].geometry);
+        setSelectedLocationId(data[0].id);
+        setLoading(false);
+      }
     } catch (error) {
     } finally {
       setLoading(false);
     }
   };
 
-  const sortLocations = () => {
-    if (coordinates) {
-      const sortedLocations = sortLocationsByDistance(
-        locationsData,
-        coordinates
-      );
-      setLocationsData(sortedLocations);
-    }
-  };
-
   useEffect(() => {
     getLocations();
   }, []);
-
-  useEffect(() => {
-    if (coordinates) {
-      sortLocations();
-    }
-  }, [coordinates]);
 
   if (loading) return <LoadingScreen backgroundColor="white" />;
 
@@ -98,7 +89,9 @@ const LocationsScreen = ({ route }) => {
                 styles.marker,
                 {
                   tintColor:
-                    selectedLocationId === id ? COLORS.darkDanger : COLORS.primary,
+                    selectedLocationId === id
+                      ? COLORS.darkDanger
+                      : COLORS.primary,
                 },
               ]}
               resizeMode="contain"

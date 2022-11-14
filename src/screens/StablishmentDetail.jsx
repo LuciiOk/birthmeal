@@ -55,7 +55,7 @@ const StablishmentDetail = ({ route }) => {
 
   const getNearLocation = async () => {
     const { data } = await AxiosInstance.post(`location/nearest/${id}`, {
-      coordinates,
+      coordinates: [coordinates[1], coordinates[0]],
     });
     setLoading(false);
     setNearLocation(data);

@@ -68,8 +68,8 @@ export const LocationProvider = ({ children }) => {
 
   useEffect(() => {
     if (permission === "granted") {
-      getLocation();
       watchLocation();
+      getLocation();
     }
   }, [permission]);
 
