@@ -9,6 +9,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import Text from "../components/Text";
 import { useNavigation } from "@react-navigation/native";
 import RighButtonHeader from "../components/RighButtonHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,11 +20,13 @@ const TabIcon = ({ focused, icon }) => {
   ];
 
   return (
-    <IonicIcon
-      name={focused ? icon : icon + "-outline"}
-      size={24}
-      style={stylesT}
-    />
+    <View style={stylesT}>
+      <FontAwesomeIcon
+        icon={icon}
+        size={20}
+        color={!focused ? COLORS.dark : COLORS.light}
+      />
+    </View>
   );
 };
 
@@ -52,9 +55,7 @@ const TabNavigator = () => {
 
           headerTitleStyle: styles.headerTitle,
           headerStyle: styles.header,
-          headerRight: () => (
-            <RighButtonHeader marginRight={10}/>
-          ),
+          headerRight: () => <RighButtonHeader marginRight={10} />,
         }}
       />
       {user && token && (
@@ -73,9 +74,7 @@ const TabNavigator = () => {
               ),
               headerTitleStyle: styles.headerTitle,
               headerStyle: styles.header,
-              headerRight: () => (
-                <RighButtonHeader marginRight={10}/>
-              ),
+              headerRight: () => <RighButtonHeader marginRight={10} />,
             }}
           />
           <Tab.Screen
@@ -92,9 +91,7 @@ const TabNavigator = () => {
               ),
               headerTitleStyle: styles.headerTitle,
               headerStyle: styles.header,
-              headerRight: () => (
-                <RighButtonHeader marginRight={10}/>
-              ),
+              headerRight: () => <RighButtonHeader marginRight={10} />,
             }}
           />
         </>
@@ -113,9 +110,7 @@ const TabNavigator = () => {
           ),
           headerTitleStyle: styles.headerTitle,
           headerStyle: styles.header,
-          headerRight: () => (
-            <RighButtonHeader marginRight={10}/>
-          ),
+          headerRight: () => <RighButtonHeader marginRight={10} />,
         }}
       />
     </Tab.Navigator>
@@ -138,8 +133,8 @@ const styles = StyleSheet.create({
   tabIcon: {
     color: COLORS.dark,
     backgroundColor: COLORS.danger,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
     borderRadius: 20,
     color: COLORS.white,
   },
