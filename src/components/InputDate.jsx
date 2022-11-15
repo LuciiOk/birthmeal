@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Platform } from "react-native";
 import PropTypes from "prop-types";
-import RNDateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { Controller } from "react-hook-form";
 
 import Text from "./Text";
@@ -28,7 +28,7 @@ const InputDate = ({ placeholder, control, name, rules = null }) => {
           <>
             <Text text={getFormattedDate(field.value)} semiBold moreSmall opaque />
             {show && (
-              <RNDateTimePicker
+              <DateTimePicker
                 testID="dateTimePicker"
                 mode="date"
                 is24Hour={true}
@@ -39,6 +39,7 @@ const InputDate = ({ placeholder, control, name, rules = null }) => {
                   setShow(Platform.OS === "ios");
                   field.onChange(currentDate);
                 }}
+                maximumDate={new Date()}
               />
             )}
           </>
@@ -61,6 +62,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 2,
+  },
+  datePicker: {
+    width: "100%",
+    height: 45,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    marginVertical: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    backgroundColor: "red",
   },
 });
 
