@@ -61,7 +61,7 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
         await cancelNotification(dataEdit.notificationId);
         birthday.notificationId = await scheduleUserBirthday(
           new Date(birthdate),
-          name,
+          name
         );
         birthday.remind = true;
         birthday.notificationId = birthday.notificationId.toString();
@@ -127,12 +127,12 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
               <Text text="La fecha es requerida" styles={styles.error} />
             )}
             <View style={styles.switchContainer}>
-              <Text text="Desea recibir notificaciones?" small/>
+              <Text text="Desea recibir notificaciones?" small />
               <Controller
                 control={control}
                 render={({ field }) => (
                   <Switch
-                    trackColor={{ false: "#767577", true: COLORS.primary }}
+                    trackColor={{ false: "#767577", true: COLORS.danger }}
                     thumbColor={COLORS.white}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={field.onChange}
@@ -142,21 +142,11 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
                 name="remind"
               />
             </View>
-            {!loading && (
-              <Button
-                buttonText={dataEdit ? "Actualizar" : "Agregar"}
-                action={handleSubmit(onSubmit)}
-                outlined
-              />
-            )}
-            {loading && (
-              <LottieView
-                source={require("../../assets/loties/loader.json")}
-                autoPlay
-                loop
-                style={styles.animation}
-              />
-            )}
+            <Button
+              buttonText={dataEdit ? "Actualizar" : "Agregar"}
+              action={handleSubmit(onSubmit)}
+              loading={loading}
+            />
           </View>
         </View>
       </View>

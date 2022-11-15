@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.danger,
   },
   outlined: {
     borderWidth: 2.5,
