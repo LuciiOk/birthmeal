@@ -134,7 +134,6 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
                   <Switch
                     trackColor={{ false: "#767577", true: COLORS.danger }}
                     thumbColor={COLORS.white}
-                    ios_backgroundColor="#3e3e3e"
                     onValueChange={field.onChange}
                     value={field.value}
                   />

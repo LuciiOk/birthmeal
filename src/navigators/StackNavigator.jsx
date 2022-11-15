@@ -111,24 +111,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: COLORS.white,
-    height: 70,
+    height: 65,
     borderBottomColor: COLORS.light,
     marginRight: 10,
   },
   headerLeft: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "flex-start",
   },
   headerTitle: {
     fontFamily: "Lato-Bold",
-    fontSize: 25,
     color: COLORS.dark,
     textTransform: "capitalize",
   },
   backButton: {
     paddingLeft: 15,
-    paddingRight: 10,
-    paddingVertical: 15,
+    paddingRight: 5,
   },
 });
 
