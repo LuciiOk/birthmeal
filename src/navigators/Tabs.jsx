@@ -23,7 +23,7 @@ const TabIcon = ({ focused, icon }) => {
     <View style={stylesT}>
       <FontAwesomeIcon
         icon={icon}
-        size={20}
+        size={24}
         color={!focused ? COLORS.dark : COLORS.light}
       />
     </View>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 
 TabIcon.propTypes = {
   focused: PropTypes.bool,
-  icon: PropTypes.string,
+  icon: PropTypes.object,
 };
 
 export default TabNavigator;
