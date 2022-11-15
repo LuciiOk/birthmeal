@@ -48,7 +48,7 @@ const BirthItem = ({ id, name, birthdate, remind, notificationId = null }) => {
           onPress={() => setShowConfirmModal(true)}
           style={styles.deleteButton}
         >
-          <Icon name="close" size={24} color="red" />
+          <Icon name="close" size={24} color={COLORS.darkDanger} />
         </TouchableOpacity>
         <ConfirmModal
           show={showConfirmModal}
