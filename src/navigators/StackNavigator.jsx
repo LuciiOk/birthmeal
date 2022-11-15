@@ -25,7 +25,6 @@ const StackNavigator = () => {
   const { isFirstLaunch } = useContext(OnboardingContext);
   const navigation = useNavigation();
 
-
   return (
     isFirstLaunch !== null && (
       <Stack.Navigator
@@ -38,6 +37,11 @@ const StackNavigator = () => {
                   onPress={() => {
                     if (route.name === "Onboarding") {
                       isFirstLaunch();
+                    }
+
+                    if (!navigation.canGoBack()) {
+                      navigation.navigate("Home");
+                      return;
                     }
                     navigation.goBack();
                   }}

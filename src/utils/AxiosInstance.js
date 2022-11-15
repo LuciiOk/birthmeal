@@ -23,6 +23,9 @@ AxiosInstance.interceptors.request.use(
   }
 );
 
+// set timeout for all requests
+AxiosInstance.defaults.timeout = 10000; // 15 seconds
+
 // replace all data response _id to id
 AxiosInstance.interceptors.response.use(
   (response) => {

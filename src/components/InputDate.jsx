@@ -5,7 +5,6 @@ import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { Controller } from "react-hook-form";
 
 import Text from "./Text";
-import { COLORS } from "../constants/colorSchema";
 import { getFormattedDate } from "../utils/formatDate";
 
 const InputDate = ({ placeholder, control, name, rules = null }) => {
