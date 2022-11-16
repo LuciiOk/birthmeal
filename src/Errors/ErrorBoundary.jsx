@@ -1,7 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import Text from "../components/Text";
-import * as Sentry from "sentry-expo";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -14,14 +13,17 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, info) {
-    console.log("ErrorBoundary", error, info);
-    Sentry.Native.captureException(error);
+    console.log("el error es: ", error.message);
   }
 
   render() {
     if (this.state.hasError) {
       return (
         <View style={styles.container}>
+          <Image
+            source={require("./../../assets/images/Burger-Sleeping.png")}
+            style={styles.image}
+          />
           <Text
             text="Lo sentimos, ha ocurrido un error :("
             displayTitle
@@ -43,6 +45,11 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
+  },
+  image: {
+    width: 250,
+    height: 250,
+    borderRadius: 10,
   },
 });
 

@@ -78,7 +78,7 @@ const StackNavigator = () => {
         }}
       >
         <Stack.Group screenOptions={{ headerShown: false }}>
-          {!isFirstLaunch && (
+          {isFirstLaunch && (
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
           )}
           <Stack.Screen name="Home" component={TabNavigator} />

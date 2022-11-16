@@ -58,24 +58,11 @@
           "icon": "./assets/images/Burger-logo96x96.png",
           "color": "#A9005F"
         }
-      ],
-      "sentry-expo"
+      ]
     ],
     "notification": {
       "icon": "./assets/images/Burger-logo96x96.png",
       "color": "#A9005F"
-    },
-    "hooks": {
-      "postPublish": [
-        {
-          "file": "sentry-expo/upload-sourcemaps",
-          "config": {
-            "organization": "birthmeal",
-            "project": "birthmeal",
-            "authToken": "cab706facfc24d76bcc137c032877cbe8a88b6c00fb942a1aa3525344bc7c8be"
-          }
-        }
-      ]
     }
   }
 }
