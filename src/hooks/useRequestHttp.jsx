@@ -57,6 +57,7 @@ const useRequestHttp = (url, method, body) => {
   }, [url, method, body]);
 
   useEffect(() => {
+    // throw new Error("useRequestHttp: url is required");
     fetchData();
   }, [fetchData]);
 

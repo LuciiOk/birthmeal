@@ -66,9 +66,7 @@ const ItemSlide = ({ item }) => {
         style={{ flex: 0.6, justifyContent: "center", alignItems: "center" }}
       >
         <Image
-          source={{
-            uri: item.image,
-          }}
+          source={item.image}
           style={{ width: width / 1.2, height: height, resizeMode: "contain" }}
         />
       </View>

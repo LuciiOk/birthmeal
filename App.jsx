@@ -10,6 +10,7 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { FavoritesProvider } from "./src/contexts/FavoritesProvider";
 import { OnboardingProvider } from "./src/contexts/OnboardingProvider";
+import ErrorBoundary from "./src/Errors/ErrorBoundary";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -19,7 +20,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default function App() {
+function App() {
   const [expoPushToken, setExpoPushToken] = React.useState("");
 
   const [fontsLoaded] = useFonts({
@@ -67,14 +68,18 @@ export default function App() {
   }
 
   return (
-    <OnboardingProvider>
-      <LocationProvider>
-        <AuthProvider>
-          <FavoritesProvider>
-            <AppNav />
-          </FavoritesProvider>
-        </AuthProvider>
-      </LocationProvider>
-    </OnboardingProvider>
+    <ErrorBoundary>
+      <OnboardingProvider>
+        <LocationProvider>
+          <AuthProvider>
+            <FavoritesProvider>
+              <AppNav />
+            </FavoritesProvider>
+          </AuthProvider>
+        </LocationProvider>
+      </OnboardingProvider>
+    </ErrorBoundary>
   );
 }
+
+export default App;
