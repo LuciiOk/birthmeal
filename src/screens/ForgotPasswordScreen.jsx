@@ -23,6 +23,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import { RecoverPassword } from "../utils/ConfirmPasswordResolver";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faEnvelopeCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -184,6 +186,11 @@ const ForgotPasswordScreen = () => {
       )}
       {step === 2 && (
         <View style={styles.secondContainer}>
+          <FontAwesomeIcon
+            icon={faEnvelopeCircleCheck}
+            size={100}
+            color={COLORS.success}
+          />
           <Text
             text="Se ha enviado un correo electrónico a tu cuenta, por favor revisa tu bandeja de entrada."
             subtitle
@@ -211,7 +218,7 @@ const ForgotPasswordScreen = () => {
             renderCell={({ index, symbol, isFocused }) => (
               <T
                 key={index}
-                style={[styles.cell, isFocused && styles.focusCell]}
+                style={[styles.cell, isFocused && styles.focusCell, symbol && styles.filledCell]}
                 onLayout={getCellOnLayoutHandler(index)}
               >
                 {symbol || (isFocused ? <Cursor /> : null)}
@@ -219,7 +226,7 @@ const ForgotPasswordScreen = () => {
             )}
           />
           {error && <Text text={JSON.stringify(error)} error titleCase />}
-          <Text text="Reenviar código" small bold opaque />
+          {/* <Text text="Reenviar código" small bold opaque /> */}
           <Button
             buttonText="Verificar"
             action={handleSubmit(onSubmitCode)}
@@ -321,7 +328,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     borderWidth: 2.5,
     borderColor: COLORS.dark,
-    borderRadius: 15,
+    borderRadius: 20,
     textAlign: "center",
     paddingVertical: 16,
     marginVertical: 10,
@@ -329,7 +336,10 @@ const styles = StyleSheet.create({
     fontFamily: "Lato-Bold",
   },
   focusCell: {
-    borderColor: COLORS.info,
+    borderColor: COLORS.frost3,
+  },
+  filledCell: {
+    borderColor: COLORS.success,
   },
   thirdContainer: {
     width: "100%",
