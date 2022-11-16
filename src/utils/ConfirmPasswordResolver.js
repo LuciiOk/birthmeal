@@ -36,8 +36,8 @@ export const ConfirmPasswordResolver = Yup.object().shape({
   birthdate: Yup.date()
     .required("La fecha de nacimiento es requerida")
     .max(
-      new Date(),
-      "La fecha de nacimiento no puede ser mayor a la fecha actual"
+      new Date(new Date().setFullYear(new Date().getFullYear() - 15)),
+      "Debes ser mayor de 15 años"
     ),
   conditionTerms: Yup.boolean().oneOf(
     [true],
@@ -92,7 +92,12 @@ export const AddBirthdaySchema = Yup.object().shape({
   birthdate: Yup.date()
     .required("La fecha de nacimiento es requerida")
     .max(
-      new Date(),
+      // solo contar dia mes y año
+      new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate() + 1
+      ),
       "La fecha de nacimiento no puede ser mayor a la fecha actual"
     ),
   remind: Yup.boolean(),
