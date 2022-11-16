@@ -33,6 +33,11 @@ export const AuthProvider = ({ children }) => {
         setError(response.data.message);
       } else {
         setError(response.data.message);
+        if (response.status === 500) {
+          ToastAndroid.show("Error del servidor", ToastAndroid.SHORT);
+          return;
+        }
+        setError(response.data.message);
       }
       return false;
     } finally {
