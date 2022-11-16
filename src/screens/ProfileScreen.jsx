@@ -16,6 +16,12 @@ import { COLORS } from "../constants/colorSchema";
 import moment from "moment/moment";
 import { getTimeLeft } from "../utils/formatDate";
 import { burger } from "../data/burger";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+  faUser,
+  faBirthdayCake,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -65,26 +71,39 @@ const ProfileScreen = () => {
       </TouchableWithoutFeedback>
       <Text text="Mi perfil" displayTitle bold />
       <View style={styles.profile}>
-        <View style={{ flexDirection: "row" }}>
-          <Text text="Nombre:" bold subtitle />
-          <Text text={profile?.name} cap subtitle styles={{ marginLeft: 10 }} />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <FontAwesomeIcon icon={faUser} size={16} color={COLORS.dark} />
+          <Text text="Nombre:" bold subtitle styles={{ marginLeft: 5 }} />
+          <Text text={profile?.name} cap styles={{ marginLeft: 10 }} />
         </View>
-        <View style={{ flexDirection: "row" }}>
-          <Text text="Email:" bold subtitle />
-          <Text text={email} subtitle styles={{ marginLeft: 10 }} />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <FontAwesomeIcon icon={faEnvelope} size={16} color={COLORS.dark} />
+          <Text text="Email:" bold subtitle styles={{ marginLeft: 5 }} />
+          <Text text={email} styles={{ marginLeft: 10 }} />
         </View>
-        <View style={{ flexDirection: "row" }}>
-          <Text text="Tu cumpleaños:" bold subtitle />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <FontAwesomeIcon
+            icon={faBirthdayCake}
+            size={16}
+            color={COLORS.dark}
+          />
+          <Text
+            text="Tu cumpleaños:"
+            bold
+            subtitle
+            styles={{ marginLeft: 5 }}
+          />
           <Text
             text={moment(profile?.birthdate).format("DD/MM/YYYY")}
             cap
-            subtitle
             styles={{ marginLeft: 10 }}
           />
         </View>
         <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
           <Text
             text={getTimeLeft(profile?.birthdate) + " para tu cumpleaños"}
+            semiBold
+            small
           />
         </View>
       </View>
