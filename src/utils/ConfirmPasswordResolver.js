@@ -3,10 +3,24 @@ import * as Yup from "yup";
 export const ConfirmPasswordResolver = Yup.object().shape({
   password: Yup.string()
     .required("La contraseña es requerida")
-    .min(6, "La contraseña debe tener al menos 6 caracteres"),
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
+    .max(20, "La contraseña debe tener como máximo 20 caracteres")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
+      "La contraseña debe tener al menos una letra mayúscula, una minúscula y un número"
+    ),
   confirmPassword: Yup.string()
     .required("La confirmación de contraseña es requerida")
-    .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
+    .oneOf([Yup.ref("password")], "Las contraseñas no coinciden")
+    .min(6, "La confirmación de contraseña debe tener al menos 6 caracteres")
+    .max(
+      20,
+      "La confirmación de contraseña debe tener como máximo 20 caracteres"
+    )
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
+      "La confirmación de contraseña debe tener al menos una letra mayúscula, una minúscula y un número"
+    ),
   name: Yup.string()
     .required("El nombre es requerido")
     .min(3, "El nombre debe tener al menos 3 caracteres")
@@ -35,10 +49,24 @@ export const ConfirmPasswordResolver = Yup.object().shape({
 export const RecoverPassword = Yup.object().shape({
   password: Yup.string()
     .required("La contraseña es requerida")
-    .min(6, "La contraseña debe tener al menos 6 caracteres"),
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
+    .max(20, "La contraseña debe tener como máximo 20 caracteres")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
+      "La contraseña debe tener al menos una letra mayúscula, una minúscula y un número"
+    ),
   confirmPassword: Yup.string()
     .required("La confirmación de contraseña es requerida")
-    .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
+    .oneOf([Yup.ref("password")], "Las contraseñas no coinciden")
+    .min(6, "La confirmación de contraseña debe tener al menos 6 caracteres")
+    .max(
+      20,
+      "La confirmación de contraseña debe tener como máximo 20 caracteres"
+    )
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
+      "La confirmación de contraseña debe tener al menos una letra mayúscula, una minúscula y un número"
+    ),
 });
 
 export const LoginSchema = Yup.object().shape({
@@ -47,7 +75,12 @@ export const LoginSchema = Yup.object().shape({
     .email("El correo electrónico no es válido"),
   password: Yup.string()
     .required("La contraseña es requerida")
-    .min(6, "La contraseña debe tener al menos 6 caracteres"),
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
+    .max(20, "La contraseña debe tener como máximo 20 caracteres")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
+      "La contraseña debe tener al menos una letra mayúscula, una minúscula y un número"
+    ),
 });
 
 export const AddBirthdaySchema = Yup.object().shape({
