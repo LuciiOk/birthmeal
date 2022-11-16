@@ -8,8 +8,8 @@ import {
   Switch,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import LottieView from "lottie-react-native";
 import PropTypes from "prop-types";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { COLORS } from "../constants/colorSchema";
 import Text from "../components/Text";
@@ -24,6 +24,7 @@ import {
 
 import * as Notifications from "expo-notifications";
 import { useForm, Controller } from "react-hook-form";
+import { AddBirthdaySchema } from "../utils/ConfirmPasswordResolver";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -45,6 +46,7 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
       birthdate: dataEdit?.birthdate || new Date(),
       remind: dataEdit?.remind ? true : false,
     },
+    resolver: yupResolver(AddBirthdaySchema),
   });
   const { addBirthday, loading, updateBirthday } = useContext(BirthdayContext);
 
@@ -112,20 +114,14 @@ const AddModal = ({ onClose, visible, dataEdit = null }) => {
               keyboardType="default"
               control={control}
               name="name"
-              rules={{ required: true }}
+              error={errors.name}
             />
-            {errors.name && (
-              <Text text="El nombre es requerido" styles={styles.error} />
-            )}
             <InputDate
               placeholder="Fecha de nacimiento"
               control={control}
               name="birthdate"
-              rules={{ required: true }}
             />
-            {errors.birthdate && (
-              <Text text="La fecha es requerida" styles={styles.error} />
-            )}
+            {errors.birthdate && <Text text={errors.birthdate.message} error />}
             <View style={styles.switchContainer}>
               <Text text="Desea recibir notificaciones?" small />
               <Controller

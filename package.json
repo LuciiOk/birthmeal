@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^2.9.10",
     "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-native-community/datetimepicker": "6.2.0",
+    "@react-native-community/netinfo": "9.3.0",
     "@react-navigation/bottom-tabs": "^6.3.3",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",

@@ -22,6 +22,7 @@ Notifications.setNotificationHandler({
 
 function App() {
   const [expoPushToken, setExpoPushToken] = React.useState("");
+  const [netInfo, setNetInfo] = React.useState("");
 
   const [fontsLoaded] = useFonts({
     Lato: require("./assets/fonts/Lato-Regular.ttf"),
