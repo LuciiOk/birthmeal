@@ -13,7 +13,7 @@ import NoData from "../components/NoData";
 import LoadingScreen from "./LoadingScreen";
 import useRequestHttp from "../hooks/useRequestHttp";
 import FiltersContainer from "../containers/FiltersContainer";
-import error from "./../../assets/images/Burger-Sleeping.png";
+import error from "./../../assets/images/Error.png";
 
 const HomeScreen = () => {
   const {

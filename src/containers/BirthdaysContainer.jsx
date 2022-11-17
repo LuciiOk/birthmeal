@@ -5,7 +5,7 @@ import NoData from "../components/NoData";
 import BirthItem from "../components/BirthItem";
 import { BirthdayContext } from "../contexts/BirthdayContext";
 import LoadingScreen from "../screens/LoadingScreen";
-import error from "./../../assets/images/Burger-Sleeping.png";
+import error from "./../../assets/images/Error.png";
 
 const BirthdaysContainer = () => {
   const { birthdays, loading } = useContext(BirthdayContext);
@@ -20,8 +20,8 @@ const BirthdaysContainer = () => {
         keyExtractor={({ id }) => id.toString()}
         renderItem={({ item }) => <BirthItem {...item} key={item.id} />}
         ListEmptyComponent={
-          <NoData 
-            text="Ups... Parece que no hay nada por aquí, ¡Agrega un nuevo cumpleaños y recibe notificaciones de los cumpleaños de tus contactos! 🥳🎂" 
+          <NoData
+            text="Ups... Parece que no hay nada por aquí, ¡Agrega un nuevo cumpleaños y recibe notificaciones de los cumpleaños de tus contactos! 🥳🎂"
             image={error}
           />
         }

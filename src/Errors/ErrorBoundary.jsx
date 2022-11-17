@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import Text from "../components/Text";
+import { COLORS } from "../constants/colorSchema";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: COLORS.white,
   },
   text: {
     textAlign: "center",

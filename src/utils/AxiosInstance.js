@@ -26,14 +26,6 @@ AxiosInstance.interceptors.request.use(
 // set timeout for all requests
 AxiosInstance.defaults.timeout = 10000; // 15 seconds
 
-// verify network connection
-AxiosInstance.defaults.validateStatus = (status) => {
-  // if there is no network connection, status will be 0 throw an error
-  if (status === 0) {
-    throw new Error("Network Error");
-  }
-};
-
 // replace all data response _id to id
 AxiosInstance.interceptors.response.use(
   (response) => {
