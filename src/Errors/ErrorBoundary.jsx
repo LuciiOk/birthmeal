@@ -21,7 +21,7 @@ class ErrorBoundary extends React.Component {
       return (
         <View style={styles.container}>
           <Image
-            source={require("./../../assets/images/Burger-Sleeping.png")}
+            source={require("./../../assets/images/Error.png")}
             style={styles.image}
           />
           <Text
