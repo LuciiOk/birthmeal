@@ -7,11 +7,10 @@ import BirthdaysContainer from "../containers/BirthdaysContainer";
 import { COLORS } from "../constants/colorSchema";
 
 const BirthScreen = () => {
-  throw new Error("Error en BirthScreen");
   return (
     <BirthdayProvider>
       <View style={styles.container}>
-        <BirthdaysContainer/>
+        <BirthdaysContainer />
         <AddButton />
       </View>
     </BirthdayProvider>
