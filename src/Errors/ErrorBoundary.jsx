@@ -8,7 +8,7 @@ import Button from "../components/Button";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, message: "" };
   }
 
   static getDerivedStateFromError(error) {
@@ -17,6 +17,14 @@ class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, info) {
     console.log("el error es: ", error.message);
+
+    // verify if error is a network error
+    if (error.message === "No internet connection") {
+      this.setState({
+        message:
+          "Revisa tu conexión a internet o vuelve a intentarlo más tarde",
+      });
+    }
   }
 
   render() {
@@ -34,7 +42,7 @@ class ErrorBoundary extends React.Component {
             styles={styles.text}
           />
           <Text
-            text="Por favor, reinicia la aplicación"
+            text={this.state.message || "Vuelve a intentarlo más tarde"}
             displayTitle
             semiBold
             error
