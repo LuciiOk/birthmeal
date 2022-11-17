@@ -2,8 +2,9 @@ import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import Text from "../components/Text";
 import { COLORS } from "../constants/colorSchema";
-import { Restart } from "fiction-expo-restart";
 import Button from "../components/Button";
+// restart app on error
+import * as Updates from "expo-updates";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class ErrorBoundary extends React.Component {
           />
           <Button
             buttonText="Reiniciar"
-            action={() => Restart()}
+            action={() => Updates.reloadAsync()}
             buttonStyles={styles.button}
           />
         </View>
