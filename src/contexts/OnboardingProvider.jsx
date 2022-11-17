@@ -7,14 +7,14 @@ const OnboardingProvider = ({ children }) => {
   const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
 
   onFinished = () => {
-    AsyncStorage.setItem("alreadyLaunched", "true");
+    AsyncStorage.setItem("@first", "true");
     setIsFirstLaunch(false);
   };
 
   const checkIfFirstLaunch = async () => {
-    AsyncStorage.getItem("alreadyLaunched").then((value) => {
+    AsyncStorage.getItem("@first").then((value) => {
       if (value == null) {
-        AsyncStorage.setItem("alreadyLaunched", "true");
+        AsyncStorage.setItem("@first", "true");
         setIsFirstLaunch(true);
       } else {
         setIsFirstLaunch(false);
