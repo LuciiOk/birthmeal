@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import Text from "../components/Text";
 import { COLORS } from "../constants/colorSchema";
+import { Restart } from "fiction-expo-restart";
+import Button from "../components/Button";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -31,6 +33,18 @@ class ErrorBoundary extends React.Component {
             semiBold
             styles={styles.text}
           />
+          <Text
+            text="Por favor, reinicia la aplicación"
+            displayTitle
+            semiBold
+            error
+            styles={styles.text}
+          />
+          <Button
+            buttonText="Reiniciar"
+            action={() => Restart()}
+            buttonStyles={styles.button}
+          />
         </View>
       );
     }
@@ -52,6 +66,15 @@ const styles = StyleSheet.create({
     width: 250,
     height: 250,
     borderRadius: 10,
+  },
+  button: {
+    width: "70%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    backgroundColor: COLORS.danger,
+    marginTop: 10,
   },
 });
 
