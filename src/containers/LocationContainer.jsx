@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Text from "../components/Text";
 import LocationItem from "../components/LocationItem";
 import NoData from "../components/NoData";
+import error from "../../assets/images/Error.png";
 
 const LocationContainer = ({
   locations,
@@ -33,7 +34,9 @@ const LocationContainer = ({
           />
         )}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={<NoData text="No hay ubicaciones disponibles" />}
+        ListEmptyComponent={
+          <NoData text="No hay ubicaciones disponibles ☹️" image={error} />
+        }
       />
     </View>
   );
