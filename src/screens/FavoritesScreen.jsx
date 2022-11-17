@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 
 import NoData from "../components/NoData";
 import StablishmentCard from "../components/StablishmentCard";
 import { COLORS } from "../constants/colorSchema";
 import { FavoritesContext } from "../contexts/FavoritesProvider";
+import error from "./../../assets/images/Burger-Sleeping.png";
 
 const FavoritesScreen = () => {
   const { favorites, loading, getFavorites } =
@@ -23,7 +24,10 @@ const FavoritesScreen = () => {
             <StablishmentCard stablishment={item} favortie />
           )}
           ListEmptyComponent={
-            <NoData text="Ups... No hay establecimientos favoritos 😢💔" />
+            <NoData
+              text="Ups... No hay establecimientos favoritos 😢💔"
+              image={error}
+            />
           }
         />
       </View>

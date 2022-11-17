@@ -1,11 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import PropTypes from "prop-types";
-import image from "./../../assets/images/Burger-Sleeping.png";
 
 import Text from "./Text";
 
-const NoData = ({ text }) => {
+const NoData = ({ text, image }) => {
   return (
     <View style={styles.container}>
       <Image

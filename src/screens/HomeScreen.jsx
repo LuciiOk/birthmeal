@@ -13,6 +13,7 @@ import NoData from "../components/NoData";
 import LoadingScreen from "./LoadingScreen";
 import useRequestHttp from "../hooks/useRequestHttp";
 import FiltersContainer from "../containers/FiltersContainer";
+import error from "./../../assets/images/Burger-Sleeping.png";
 
 const HomeScreen = () => {
   const {
@@ -77,7 +78,10 @@ const HomeScreen = () => {
         renderItem={({ item }) => <StablishmentCard stablishment={item} />}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
-          <NoData text="Ups... No hay establecimientos disponibles" />
+          <NoData
+            text="Ups... No hay establecimientos disponibles"
+            image={error}
+          />
         }
         ListHeaderComponent={
           <FiltersContainer
