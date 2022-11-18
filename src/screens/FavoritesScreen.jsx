@@ -25,7 +25,7 @@ const FavoritesScreen = () => {
           )}
           ListEmptyComponent={
             <NoData
-              text="Ups... No hay establecimientos favoritos 😢💔"
+              text="Ups... No hay establecimientos favoritos, busca el que más te guste y agregalo a favoritos! 😎"
               image={error}
             />
           }
