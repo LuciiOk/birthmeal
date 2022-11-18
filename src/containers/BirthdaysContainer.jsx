@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
 import NoData from "../components/NoData";
 import BirthItem from "../components/BirthItem";

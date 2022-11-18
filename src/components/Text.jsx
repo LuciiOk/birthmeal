@@ -21,6 +21,7 @@ const Text = ({
   trunc = null,
   literal = false,
   justify = false,
+  color,
 }) => {
   const textStyles = [
     stylesT.text,
@@ -36,6 +37,7 @@ const Text = ({
     small && stylesT.small,
     moreSmall && stylesT.moreSmall,
     justify && stylesT.justify,
+    color && { color },
   ];
 
   if (titleCase) {
@@ -152,6 +154,13 @@ Text.propTypes = {
   styles: PropTypes.object,
   cap: PropTypes.bool,
   error: PropTypes.bool,
+  small: PropTypes.bool,
+  moreSmall: PropTypes.bool,
+  titleCase: PropTypes.bool,
+  trunc: PropTypes.number,
+  literal: PropTypes.bool,
+  justify: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 export default Text;

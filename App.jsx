@@ -11,6 +11,7 @@ import * as Notifications from "expo-notifications";
 import { FavoritesProvider } from "./src/contexts/FavoritesProvider";
 import { OnboardingProvider } from "./src/contexts/OnboardingProvider";
 import ErrorBoundary from "./src/Errors/ErrorBoundary";
+import { NetworkProvider } from "./src/contexts/NetworkProvider";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -22,7 +23,6 @@ Notifications.setNotificationHandler({
 
 function App() {
   const [expoPushToken, setExpoPushToken] = React.useState("");
-  const [netInfo, setNetInfo] = React.useState("");
 
   const [fontsLoaded] = useFonts({
     Lato: require("./assets/fonts/Lato-Regular.ttf"),
@@ -70,15 +70,17 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <OnboardingProvider>
-        <LocationProvider>
-          <AuthProvider>
-            <FavoritesProvider>
-              <AppNav />
-            </FavoritesProvider>
-          </AuthProvider>
-        </LocationProvider>
-      </OnboardingProvider>
+      <NetworkProvider>
+        <OnboardingProvider>
+          <LocationProvider>
+            <AuthProvider>
+              <FavoritesProvider>
+                <AppNav />
+              </FavoritesProvider>
+            </AuthProvider>
+          </LocationProvider>
+        </OnboardingProvider>
+      </NetworkProvider>
     </ErrorBoundary>
   );
 }

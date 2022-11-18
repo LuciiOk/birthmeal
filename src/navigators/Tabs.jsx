@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { StyleSheet, Image, View, TouchableOpacity } from "react-native";
-import IonicIcon from "react-native-vector-icons/Ionicons";
+import { StyleSheet, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PropTypes from "prop-types";
 import { TABS } from "../constants/tabsScreens";
 import { COLORS } from "../constants/colorSchema";
 import { AuthContext } from "../contexts/AuthContext";
 import Text from "../components/Text";
-import { useNavigation } from "@react-navigation/native";
 import RighButtonHeader from "../components/RighButtonHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { NetworkContext } from "../contexts/NetworkProvider";
+import NoNetwork from "../containers/NoNetwork";
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +32,8 @@ const TabIcon = ({ focused, icon }) => {
 
 const TabNavigator = () => {
   const { user, token } = useContext(AuthContext);
-  const navigation = useNavigation();
+  const { networkState } = useContext(NetworkContext);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -42,7 +43,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name={TABS.HOME.name}
-        component={TABS.HOME.component}
+        component={networkState.isConnected ? TABS.HOME.component : NoNetwork}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={TABS.HOME.icon} />
@@ -62,7 +63,9 @@ const TabNavigator = () => {
         <>
           <Tab.Screen
             name={TABS.FAVORITES.name}
-            component={TABS.FAVORITES.component}
+            component={
+              networkState.isConnected ? TABS.FAVORITES.component : NoNetwork
+            }
             options={{
               tabBarIcon: ({ focused }) => (
                 <TabIcon focused={focused} icon={TABS.FAVORITES.icon} />
@@ -79,7 +82,9 @@ const TabNavigator = () => {
           />
           <Tab.Screen
             name={TABS.BIRTH.name}
-            component={TABS.BIRTH.component}
+            component={
+              networkState.isConnected ? TABS.BIRTH.component : NoNetwork
+            }
             options={{
               tabBarIcon: ({ focused }) => (
                 <TabIcon focused={focused} icon={TABS.BIRTH.icon} />

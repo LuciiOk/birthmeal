@@ -55,7 +55,7 @@ const FavoriteButton = ({ company, noAnimate }) => {
             show={confirm}
             setShow={setConfirm}
             onAccept={handleFavorite}
-            message="¿Deseas agregar esta empresa a tus favoritos?"
+            message="¿Deseas quitar esta empresa de tus favoritos?"
           />
         )}
       </View>
